@@ -1,0 +1,45 @@
+.commentContainer {
+  width: 50rem;
+  /* border: 1px solid red; */
+  margin-left: 4rem;
+ margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+}
+#profile {
+  display: block;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  background-color: blue;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.metaData {
+  display: flex;
+}
+.commentImage span {
+  display: block;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+.info span {
+  display: block;
+}
+.comment p {
+  margin-top: 1rem;
+}
+
+@media only screen and (max-width: 450px) {
+  .commentContainer {
+    width: 80%;
+  }
+}

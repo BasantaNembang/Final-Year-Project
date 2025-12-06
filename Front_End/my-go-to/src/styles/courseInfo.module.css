@@ -1,0 +1,26 @@
+.courseInfoContainer {
+  /* height: 12rem; */
+  /* border: 1px solid red; */
+  width: 100%;
+}
+.infoTitle button {
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+.infoTitle ul {
+  display: flex;
+}
+.infoTitle ul li {
+  list-style: none;
+  margin: 0.7rem 4rem;
+}
+.infoTitle span {
+  display: block;
+  width: 6rem;
+  background-color: blue;
+  height: 0.3rem;
+  margin: auto;
+}

@@ -1,0 +1,260 @@
+.overViewContainer {
+  padding: 2.7rem 0 10rem;
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+}
+
+.learn ul li,
+.requirements ul li {
+  display: flex;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+}
+.descriptions,
+.requirements {
+  margin-top: 2.7rem;
+}
+#Tick {
+  color: green;
+  font-size: 1.5rem;
+  display: block;
+  width: 4rem;
+}
+
+.infoSection {
+  /* border: 1px solid red; */
+  width: 62rem;
+}
+.buySection {
+  border-radius: 4px;
+  width: 25rem;
+  box-shadow: 3px 2px 10px -1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 3px 2px 10px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 2px 10px -1px rgba(0, 0, 0, 0.75);
+  padding-bottom: 2rem;
+}
+.learn p,
+.descriptions p,
+.requirements p {
+  font-size: 2rem;
+  font-weight: bolder;
+}
+.learn ul {
+  margin-top: 2rem;
+}
+.descriptions span {
+  margin: 1rem 2rem;
+  display: block;
+  font-size: 1.1rem;
+}
+#Arrow {
+  display: block;
+  width: 4rem;
+}
+
+.buySection figure {
+  width: 92%;
+  /* border: 1px solid red; */
+  margin: 1rem auto;
+}
+.buySection figure img {
+  width: 100%;
+  height: auto;
+}
+#coursePrice {
+  display: block;
+  margin-left: 1.2rem;
+  font-weight: bolder;
+  font-size: 1.7rem;
+}
+#discountPrice {
+  margin-left: 1.4rem;
+  margin-top: 0.3rem;
+  font-size: 1.1rem;
+}
+
+.addToCart button {
+  width: 92%;
+  margin: 1rem auto;
+  display: block;
+  height: 2.5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-radius: 0.3rem;
+  border: none;
+  outline: none;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.addToCart button:hover {
+  transform: scale(0.97);
+  background-color: rgb(73, 73, 255);
+}
+.buyButton button {
+  width: 35%;
+  height: 2.5rem;
+  margin-left: 1.2rem;
+  display: block;
+  height: 2.5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-radius: 0.3rem;
+  border: 1px solid blue;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.buyButton button:hover {
+  transform: scale(0.97);
+}
+.promiess ul li {
+  list-style: none;
+  display: flex;
+  margin-top: 1rem;
+}
+#Tick {
+  color: green;
+}
+#Line {
+  width: 92%;
+  margin: 1rem auto;
+}
+.courseINFO ul li {
+  list-style: none;
+}
+.backToCcurseSPAN {
+  position: absolute;
+  bottom: 3rem;
+  left: 6rem;
+  color: blue;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+.backToCcurseSPAN:hover {
+  color: rgb(0, 0, 0);
+}
+.courseINFO h4 {
+  padding: 1rem 1.5rem;
+  font-size: 1.2rem;
+}
+.courseINFO ul {
+  padding-left: 1.5rem;
+  padding-top: 1rem;
+}
+.courseINFO ul li {
+  padding: 0.5rem 0;
+}
+.priceBOX {
+  display: flex;
+}
+.priceBOX span {
+  display: block;
+}
+
+@media only screen and (max-width: 1400px) {
+  .infoSection {
+    width: 52rem;
+  }
+  .buySection {
+    width: 22rem;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .infoSection {
+    width: 48rem;
+  }
+  .buySection {
+    width: 18rem;
+  }
+}
+
+@media only screen and (max-width: 999px) {
+  .infoSection {
+    width: 40rem;
+  }
+  .buySection {
+    width: 16rem;
+  }
+  .learn p,
+  .descriptions p,
+  .requirements p {
+    font-size: 1.4rem;
+  }
+}
+
+@media only screen and (max-width: 899px) {
+  .infoSection {
+    width: 35rem;
+  }
+  .buySection {
+    width: 14rem;
+  }
+  #coursePrice {
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .overViewContainer {
+    flex-direction: column-reverse;
+  }
+  .buySection {
+    padding-bottom: 3rem;
+  }
+  .infoSection,
+  .buySection {
+    width: 90%;
+    margin: auto;
+  }
+  .infoSection {
+    margin-top: 5rem;
+  }
+  .priceBOX {
+    margin-top: 2rem;
+  }
+  #coursePrice {
+    font-size: 1.7rem;
+    margin-left: 1.7rem;
+  }
+  #discountPrice {
+    font-size: 1.4rem;
+    margin-left: 1rem;
+  }
+  .addToCart button {
+    margin: 2.7rem auto;
+    font-size: 2rem;
+    height: 4rem;
+  }
+  .buyButton button {
+    margin-left: 1.8rem;
+    height: 3rem;
+    font-size: 1.8rem;
+  }
+  .promiess ul li {
+    margin-left: 1rem;
+    margin: 2rem;
+    font-size: 1.4rem;
+  }
+  #Tick {
+    font-size: 1.7rem;
+  }
+  .courseINFO h4 {
+    font-size: 1.7rem;
+  }
+  .courseINFO ul li {
+    padding: 0.5rem 1rem;
+    font-size: 1.3rem;
+  }
+  .learn p,
+  .descriptions p,
+  .requirements p {
+    font-size: 1.7rem;
+  }
+}

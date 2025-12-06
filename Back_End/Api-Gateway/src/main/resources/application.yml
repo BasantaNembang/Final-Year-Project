@@ -1,0 +1,66 @@
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 5000
+        response-timeout: 10s
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+
+      routes:
+        - id: enroll-service
+          uri: lb://ENROLLMENT-SERVICE
+          predicates:
+            - Path=/enroll/**
+#          filters:
+#            - AuthenticationFilter
+
+        - id: course-service
+          uri: lb://COURSE-SERVICE
+          predicates:
+            - Path=/course/**
+          filters:
+            - AuthenticationFilter
+
+
+        - id: stream-service
+          uri: lb://STREAM-SERVICE
+          predicates:
+            - Path=/video/**
+          filters:
+            - AuthenticationFilter
+
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+          filters:
+            - AuthenticationFilter
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registry-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 9090
+
+jwt:
+  secret: "MzU3NjM4NzkyRjQyM0Y0NDI4NDcyQjRCNjI1MDY1NTM2ODU2NkQ1OTcxMzM3NDM2NzczOTdBMjQ0MzI2NDYyOQ=="
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.retry: DEBUG

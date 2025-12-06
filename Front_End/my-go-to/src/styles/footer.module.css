@@ -1,0 +1,154 @@
+.footerContainer {
+  width: 100%;
+  height: 25rem;
+  border: 1px solid;
+  background-color: rgb(0, 0, 0);
+}
+.upperFotter {
+  display: flex;
+  justify-content: space-around;
+}
+.infoSection,
+.infoLearn,
+.infoTech,
+.infoSupport {
+  width: 12rem;
+  height: 11rem;
+  /* border: 1px solid; */
+  margin-top: 3.5rem;
+}
+.infoSection {
+  width: 24rem;
+}
+.logoSection {
+  display: flex;
+  align-items: center;
+}
+.logoSection span {
+  display: inline-block;
+  font-size: 1.44rem;
+  color: blue;
+}
+#logo {
+  font-size: 1.8rem;
+  color: blue;
+}
+.socialMedia ul li {
+  list-style: none;
+  color: rgb(158, 158, 158);
+}
+.infoLearn ul li,
+.infoTech ul li,
+.infoSupport ul li {
+  margin-bottom: 0.5rem;
+  list-style: none;
+  color: rgb(158, 158, 158);
+}
+.infoLearn ul,
+.infoTech ul,
+.infoSection ul {
+  margin-top: 1.4rem;
+}
+.socialMedia {
+  margin-top: 1.7rem;
+}
+.socialMedia ul {
+  display: flex;
+  gap: 2rem;
+}
+.information {
+  margin-top: 1.2rem;
+  color: rgb(158, 158, 158);
+}
+.infoLearn h3,
+.infoTech h3,
+.infoSupport h3 {
+  font-size: 1.3rem;
+  color: rgb(255, 255, 255);
+}
+.infoSupport ul {
+  margin-top: 1.3rem;
+}
+#fotterLine {
+  width: 92%;
+  margin: auto;
+  margin-top: auto;
+  margin-top: 3rem;
+  color: rgb(158, 158, 158);
+}
+.lowerFotter span {
+  /* border: 1px solid; */
+  margin: auto;
+  margin-top: auto;
+  display: flex;
+  width: 32rem;
+  margin-top: 2rem;
+  font-weight: bold;
+  color: rgb(158, 158, 158);
+}
+
+@media only screen and (max-width: 950px) {
+  .infoSection {
+    width: 16rem;
+    margin-left: 1rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .upperFotter {
+    flex-direction: column;
+  }
+  .footerContainer {
+    height: 76rem;
+  }
+
+  .infoSection,
+  .infoLearn,
+  .infoTech,
+  .infoSupport {
+    margin: auto;
+    margin-top: 2rem;
+    width: 31rem;
+    /* border: 1px solid; */
+    height: 14rem;
+  }
+  .logoSection,
+  .socialMedia ul {
+    justify-content: center;
+  }
+  .socialMedia ul li {
+    font-size: 1.3rem;
+  }
+  .infoLearn h3,
+  .infoTech h3,
+  .infoSupport h3 {
+    justify-content: center;
+    display: flex;
+    font-size: 1.8rem;
+  }
+
+  .infoLearn ul,
+  .infoTech ul,
+  .infoSupport ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .infoLearn ul li,
+  .infoTech ul li,
+  .infoSupport ul li {
+    font-size: 1.3rem;
+  }
+  .information {
+    font-size: 1.3rem;
+  }
+  .logoSection span {
+    font-size: 1.8rem;
+  }
+  #logo {
+    font-size: 2.2rem;
+  }
+  .logoSection {
+    gap: 1rem;
+  }
+}

@@ -1,0 +1,53 @@
+.readyContainer {
+  width: 100%;
+  height: 22rem;
+  background-color: blue;
+}
+.header h3 {
+  width: max-content;
+  display: flex;
+  margin: auto;
+  font-size: 2.5rem;
+  color: white;
+  padding-top: 3rem;
+}
+.info p {
+  width: max-content;
+  color: white;
+  display: flex;
+  margin: auto;
+  padding-top: 1.5rem;
+  font-size: 1.2rem;
+}
+.info span {
+  display: flex;
+  width: max-content;
+  margin: auto;
+  padding-top: 0.9rem;
+  color: white;
+  font-size: 1.1rem;
+}
+.btn{
+    display: flex;
+    width:max-content;
+    padding-top: 3rem;
+    margin: auto;
+    gap: 1rem;
+}
+.btn button {
+  display: block;
+  width: 11rem;
+  height: 3.7rem;
+  color: #1300ef;
+  font-weight: bolder;
+  border-radius: 13.6rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.btn button:nth-of-type(2) {
+  color: white;
+  border: 2px solid white;
+  background-color: blue;
+}

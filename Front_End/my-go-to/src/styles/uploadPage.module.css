@@ -1,0 +1,106 @@
+.pageWrapper {
+  font-size: 100%;
+}
+.uploadContainer {
+  width: 100%;
+  min-height: 50rem;
+  background-color: rgb(242, 236, 236);
+  padding-bottom: 2rem;
+}
+.infoUploadContainer {
+  width: 100%;
+  border: 1px solid #b0b0b0;
+  height: 16rem;
+  padding-top: 1.5rem;
+  background-color: white;
+}
+.infoUploadContainer h3 {
+  width: max-content;
+  display: flex;
+  margin: auto;
+  font-size: 2.5rem;
+}
+.infoUploadContainer p {
+  width: max-content;
+  display: flex;
+  margin: auto;
+  font-size: 1.3rem;
+  padding-top: 1rem;
+  color: #6a6a6a;
+}
+#progressBar {
+  height: 1rem;
+  border: 1px solid;
+}
+.uploadContentContiner {
+  width: 90%;
+  height: 7rem;
+  /* border: 1px solid; */
+}
+.educationINFOS {
+  display: flex;
+  max-width: max-content;
+  margin: 2rem auto;
+}
+.educationINFO {
+  width: 10rem;
+  height: 7rem;
+}
+.educationINFO span {
+  display: flex;
+  margin: auto;
+  font-weight: bold;
+  width: 4rem;
+  font-size: 2rem;
+  height: auto;
+}
+.educationINFO p {
+  font-size: 0.95rem;
+}
+.uploadContentContiner {
+  width: 92%;
+  /* min-height: 28rem; */
+  margin: 2rem auto;
+  background-color: white;
+  border-radius: 0.6rem;
+  padding-top: 7px;
+  height: auto;
+}
+.topUpLoadContentContainer {
+  width: 100%;
+  height: 2.4rem;
+  /* border: 1px solid red; */
+}
+.topUpLoadContentContainer ul {
+  list-style: none;
+  display: flex;
+}
+.topUpLoadContentContainer button {
+  cursor: pointer;
+  outline: none;
+  background-color: white;
+  font-size: 1.1rem;
+  border: none;
+  padding-left: 0.6rem;
+}
+.topUpLoadContentContainer ul li {
+  width: 11rem;
+  padding-left: 0.9rem;
+   cursor: pointer;
+}
+
+
+.topUpLoadContentContainer span {
+  display: block;
+  width: 10rem;
+  background-color: green;
+  height: 0.3rem;
+  margin: auto;
+}
+.topUpLoadContentContainer ul {
+  margin-left: 0.7rem;
+}
+/* 
+@media only screen and (max-width: 1500px) {
+  .pageWrapper { font-size: 65%; }
+} */

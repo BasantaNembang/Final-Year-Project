@@ -1,0 +1,58 @@
+.featureContainer {
+  width: 100%;
+  height: 36rem;
+  background-color: rgb(242, 236, 236);
+}
+.featureInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-top: 4rem;
+  padding-top: 3rem;
+}
+
+.featureCourses {
+  display: flex;
+  margin-top: 3rem;
+  justify-content: space-between;
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+.freatureHeaderInfo,
+.freatureHeaderBtn {
+  width: max-content;
+  /* border: 1px solid; */
+}
+.freatureHeaderInfo h3 {
+  font-size: 2rem;
+}
+.freatureHeaderInfo p {
+  font-size: 1.1rem;
+  margin-top: 0.8rem;
+  color: #6a6a6a;
+}
+.freatureHeaderBtn button {
+  width: 10rem;
+  height: 3rem;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  background-color: blue;
+  color: white;
+}
+
+@media only screen and (max-width: 450px) {
+  .featureCourses {
+  flex-direction: column;
+    gap: 3rem;
+    max-width: max-content;
+    margin: 4rem auto;
+  }
+  .featureContainer {
+    height: 120rem;
+    background-color: rgb(242, 236, 236);
+  }
+}

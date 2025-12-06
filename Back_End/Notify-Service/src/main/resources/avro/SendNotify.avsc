@@ -1,0 +1,12 @@
+{
+  "type": "record",
+  "name": "SendNotify",
+  "namespace": "com.enroll.event",
+  "fields": [
+    { "name": "email", "type": "string" },
+    { "name": "subject", "type": "string" },
+    { "name": "msg", "type": "string" }
+  ]
+}
+
+

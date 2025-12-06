@@ -1,0 +1,70 @@
+.videoUploadContainer {
+  height: 17rem;
+  box-sizing: border-box;
+}
+.videoUploadContainer input {
+  display: none;
+}
+.videoUploadContainer h4 {
+  font-size: 1.3rem;
+  margin: 1.7rem;
+}
+.videoBOX {
+  width: 96%;
+  background-color: #f4eded;
+  height: 10rem;
+  margin: auto;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  padding-top: 3rem;
+  position: relative;
+}
+.labelDIV {
+  width: 11rem;
+  height: 4rem;
+  border-radius: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  color: white;
+  margin: auto;
+  cursor: pointer;
+}
+
+.videoShowContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#removeVideo {
+  position: absolute;
+  right: 0.9rem;
+  top: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: red;
+  cursor: pointer;
+}
+.progressDIV {
+  width: max-content;
+  margin: 4rem auto;
+}
+.uploadingDIV {
+  display: block;
+  width: max-content;
+  margin: auto;
+  margin-top: 0.7rem;
+}
+.progressDIV p {
+  width: max-content;
+  margin: auto;
+}
+@media only screen and (max-width: 450px) {
+  .progressDIV {
+    margin-top: 59.7rem;
+    margin-right: 27rem;
+  }
+}

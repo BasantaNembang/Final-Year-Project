@@ -1,0 +1,16 @@
+.draftCourseContainer {
+  width: 100%;
+  background-color: #fefcfc;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+}
+
+/* responisve */
+@media only screen and (max-width: 450px) {
+  .draftCourseContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}

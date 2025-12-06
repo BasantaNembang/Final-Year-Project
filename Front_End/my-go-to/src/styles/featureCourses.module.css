@@ -1,0 +1,120 @@
+.courseItem {
+  width: 21rem;
+  min-height: 20rem;
+  box-sizing: border-box;
+  border-radius: 0.8rem;
+  background-color: white;
+}
+.courseItem figure img {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+.course h4 {
+  width: max-content;
+  margin: 0.4rem;
+  font-size: 1.2rem;
+}
+.author p {
+  width: max-content;
+  margin: 0.4rem;
+  color: #6a6a6a;
+}
+.ratings span,
+.price span {
+  display: inline-block;
+}
+.ratings {
+  margin: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.price {
+  margin: 0.4rem;
+  display: flex;
+  gap: 0.4rem;
+}
+#star {
+  color: yellow;
+}
+.price span:nth-child(2) {
+  font-size: 0.84rem;
+}
+.time {
+  margin: 0.4rem;
+  color: #6a6a6a;
+}
+
+/* Responsive */
+@media only screen and (max-width: 1500px) {
+  .courseItem {
+    width: 18rem;
+  }
+}
+@media only screen and (max-width: 1300px) {
+  .courseItem {
+    width: 16rem;
+    min-height: 18rem;
+  }
+  .course h4 {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 1100px) {
+  .courseItem {
+    width: 15rem;
+    min-height: 15rem;
+  }
+  .course h4 {
+    font-size: 0.96rem;
+  }
+}
+@media only screen and (max-width: 950px) {
+  .courseItem {
+    width: 13rem;
+  }
+  .course h4 {
+    font-size: 0.82rem;
+  }
+  .author p {
+    font-size: 0.68rem;
+  }
+  .ratings span:first-child {
+  }
+  .ratings span:nth-child(2) {
+    font-size: 0.8rem;
+  }
+  .price span:first-child {
+    font-size: 0.8rem;
+  }
+  .price span:nth-child(2) {
+    font-size: 0.6rem;
+  }
+}
+@media only screen and (max-width: 840px) {
+  .courseItem {
+    width: 12rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .courseItem {
+    width: 25rem;
+    height: 24rem;
+  }
+  .course h4 {
+    font-size: 1.3rem;
+  }
+  .author p {
+    font-size: 0.99rem;
+  }
+  .ratings span:nth-child(2) {
+    font-size: 1rem;
+  }
+  .price span:first-child {
+    font-size: 1.1rem;
+  }
+  .price span:nth-child(2) {
+    font-size: 0.86rem;
+  }
+}

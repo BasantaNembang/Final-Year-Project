@@ -1,0 +1,16 @@
+.reviewInfoContainer {
+}
+.reviewInfoContainer h3 {
+  font-size: 1.7rem;
+  margin-top: 1rem;
+  margin-left: 4rem;
+}
+.averageRating {
+  margin-left: 4rem;
+  margin-top: 1.4rem;
+  display: flex;
+  gap: 1rem;
+  font-size: 1.3rem;
+}
+.averageRating span {
+}

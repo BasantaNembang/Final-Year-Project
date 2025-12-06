@@ -1,0 +1,53 @@
+.filterContainer {
+  width: 14%;
+  height: 56rem;
+  /* border: 1px solid; */
+  margin-left: 4rem;
+}
+.categorySection {
+  /* border: 1px solid; */
+}
+.categorySection button {
+  display: block;
+  cursor: pointer;
+
+  width: 97%;
+  height: 2.2rem;
+  font-size: 0.92rem;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  margin: 0.2rem 0;
+  text-align: left;
+  padding-left: 1rem;
+
+  background-color: white;
+}
+.filterContainer header {
+  font-size: 1.6rem;
+}
+.categorySection p {
+  margin: 1.7rem 0 1rem;
+}
+.categorySection button:hover {
+  color: blue;
+  background-color: rgb(197, 197, 255);
+}
+
+@media only screen and (max-width: 450px) {
+  .filterContainer {
+    height: auto;
+    border: none;
+  }
+  .filterContainer header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    /* border: 1px solid; */
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    top: 16.7rem;
+  }
+}

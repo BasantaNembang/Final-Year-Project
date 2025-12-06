@@ -1,0 +1,98 @@
+.courseContainer {
+  width: 23rem;
+  height: 22rem;
+  border: 1px solid rgb(137, 137, 137);
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+  margin-bottom: 1.7rem;
+}
+.courseContainer:hover {
+  opacity: 0.7;
+  transform: scale(.99);
+}
+.courseContainer figure img {
+  width: 100%;
+  height: 13rem;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+.infoSections p {
+  padding: 0.7rem 1rem;
+  font-size: 1.2rem;
+}
+#author {
+  font-size: 0.9rem;
+  padding: 0.01rem 1.2rem;
+  color: rgb(140, 137, 137);
+}
+
+.metaData ul {
+  display: flex;
+  margin: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: rgb(140, 137, 137);
+}
+.metaData ul li {
+  margin: 0 1rem;
+}
+.price {
+  margin: 0.4rem;
+  display: flex;
+  gap: 0.4rem;
+  font-size: 1.1rem;
+  margin: 1rem 1.2rem;
+}
+.price span:nth-child(2) {
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media only screen and (max-width: 1420px) {
+  .courseContainer {
+    width: 21rem;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .courseContainer {
+    width: 19rem;
+  }
+}
+
+@media only screen and (max-width: 1170px) {
+  .courseContainer {
+    width: 18rem;
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  .courseContainer {
+    width: 15rem;
+    height: 19rem;
+  }
+  .courseContainer figure img {
+    height: 10rem;
+  }
+}
+
+@media only screen and (max-width: 880px) {
+  .courseContainer {
+    width: 14rem;
+    height: 18rem;
+  }
+  .courseContainer figure img {
+    height: 9rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .courseContainer {
+    width: 20rem;
+    height: 22rem;
+    margin: 2rem 0;
+  }
+  .courseContainer figure img {
+    height: 13rem;
+  }
+}

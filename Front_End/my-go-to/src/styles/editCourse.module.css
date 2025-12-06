@@ -1,0 +1,313 @@
+.MainContainer {
+  width: 100%;
+  min-height: 65rem;
+  /* border: 1px solid red; */
+}
+.MainContainer h4 {
+  margin-left: 3.5rem;
+  font-size: 1.7rem;
+  margin-top: 1rem;
+}
+.editCourseContainer {
+  display: flex;
+  margin-left: 3.5rem;
+  gap: 3rem;
+  margin-top: 1rem;
+}
+.leftContainer {
+  width: 44rem;
+}
+
+.leftContainDiv {
+  width: 96%;
+  border: 1px solid rgb(199, 189, 189);
+  position: relative;
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+  border-radius: 0.7rem;
+  padding-left: 1rem;
+}
+.leftContainDiv span {
+  position: absolute;
+  right: 0.4rem;
+  top: 0.4rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  background-color: #d0d0d0;
+  border-radius: 50%;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 0.3rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.btnSection {
+  width: max-content;
+  margin: 4rem auto;
+}
+.btnSection button {
+  cursor: pointer;
+}
+.leftContainDiv h5 {
+  display: "block";
+  font-size: 1.4rem;
+}
+.leftContainDiv p {
+  margin-top: 1rem;
+  color: #827979;
+}
+.videoContainer {
+  position: relative;
+}
+.videoContainer {
+  width: 100%;
+  position: relative;
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+  padding: 1.8rem;
+  border-radius: 0.7rem;
+}
+.videoContainer span {
+  position: absolute;
+  right: 0.4rem;
+  top: 0.4rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  background-color: #d0d0d0;
+  border-radius: 50%;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 0.3rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.btnSection button:nth-of-type(1) {
+  width: 7rem;
+  border: none;
+  height: 2rem;
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+}
+.btnSection button:nth-of-type(1):hover {
+  background-color: rgb(88, 88, 255);
+}
+.btnSection button:nth-of-type(2) {
+  width: 7rem;
+  border: none;
+  height: 2rem;
+  color: red;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  margin: 0 1rem;
+}
+.btnSection button:nth-of-type(2):hover {
+  border: 1px solid red;
+}
+.btnSection button:nth-of-type(3) {
+  width: 7rem;
+  border: none;
+  height: 2rem;
+  color: green;
+  outline: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
+}
+.btnSection button:nth-of-type(3):hover {
+  border: 1px solid green;
+}
+.leftContainCategory {
+  width: 96%;
+  border: 1px solid rgb(199, 189, 189);
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+  border-radius: 0.7rem;
+  padding-left: 1rem;
+  color: #827979;
+  display: flex;
+  height: 5rem;
+  position: relative;
+}
+.leftContainCategory span {
+  border: 1px solid rgb(199, 189, 189);
+  display: block;
+  width: 8rem;
+  text-align: center;
+  margin-top: 1.6rem;
+}
+#categorySpan {
+  position: absolute;
+  right: 0.4rem;
+  top: -1.3rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  background-color: #d0d0d0;
+  border-radius: 50%;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 0.3rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: black;
+}
+
+.rightContainer {
+  width: 33rem;
+}
+.Learn {
+  color: #827979;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  padding: 1.3rem 1rem;
+  border: 1px solid rgb(199, 189, 189);
+  border-radius: 0.7rem;
+  margin-top: 4rem;
+}
+.Requirements {
+  border: 1px solid green;
+  margin-top: 3rem;
+  color: #827979;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 1.1rem 1rem;
+  position: relative;
+  border: 1px solid rgb(199, 189, 189);
+  border-radius: 0.7rem;
+}
+.Learn span,
+.Requirements span,
+.thumnailImage span {
+  position: absolute;
+  top: -2rem;
+  right: 0.1rem;
+  background-color: #d0d0d0;
+  border-radius: 50%;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 0.3rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: black;
+  width: 3rem;
+  height: 3rem;
+}
+.Learn p,
+.Requirements p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+}
+.Learn ul li,
+.Requirements ul li {
+  margin: 0.7rem 0;
+}
+.thumnailImage {
+  position: relative;
+}
+.thumnailImage img {
+  margin-top: 2rem;
+  width: 33rem;
+}
+#imageSpan {
+  top: 0rem;
+  right: -0.9rem;
+}
+/* Responisive */
+@media only screen and (max-width: 1440px) {
+  .leftContainer {
+    width: 39rem;
+  }
+}
+@media only screen and (max-width: 1350px) {
+  .leftContainer {
+    width: 36rem;
+  }
+  .rightContainer {
+    width: 29rem;
+  }
+  .thumnailImage img {
+    width: 29rem;
+  }
+  /* #imageSpan {
+    right: 8.1rem;
+  } */
+}
+@media only screen and (max-width: 1240px) {
+  .leftContainer {
+    width: 33rem;
+  }
+  .rightContainer {
+    width: 26rem;
+  }
+}
+
+@media only screen and (max-width: 1110px) {
+  .leftContainer {
+    width: 31rem;
+  }
+  .rightContainer {
+    width: 24rem;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .leftContainer {
+    width: 29rem;
+  }
+  .rightContainer {
+    width: 22rem;
+  }
+  .thumnailImage img {
+    width: 22rem;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .leftContainer {
+    width: 26rem;
+  }
+  .rightContainer {
+    width: 21rem;
+  }
+}
+@media only screen and (max-width: 840px) {
+  .leftContainer {
+    width: 24rem;
+  }
+  .rightContainer {
+    width: 21rem;
+  }
+  .Learn ul li,
+  .Requirements ul li {
+    box-sizing: border-box;
+    padding: 0.3rem;
+    margin: 0 0;
+  }
+  .leftContainCategory span {
+    width: 5rem;
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .editCourseContainer {
+    flex-direction: column;
+  }
+  .leftContainer {
+    width: 100%;
+  }
+  .rightContainer {
+    width: 100%;
+  }
+  .thumnailImage img {
+    width: 98%;
+  }
+}

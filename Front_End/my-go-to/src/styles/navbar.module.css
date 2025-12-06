@@ -1,0 +1,127 @@
+.navbarContainer {
+  width: 100%;
+  height: 5.2rem;
+  /* border: 1px solid; */
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  background-color: white;
+  z-index: 1000;
+}
+.leftNavbar {
+  /* border: 1px solid; */
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-left: 4rem;
+}
+.rightNavbar {
+  /* border: 1px solid; */
+  width: 35rem;
+  margin-right: 4rem;
+}
+.rightNavbar ul {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  align-items: center;
+}
+.rightNavbar ul li a {
+  text-decoration: none;
+}
+#logo {
+  font-size: 2.2rem;
+  color: blue;
+}
+.leftNavbar span {
+  display: inline-block;
+  font-size: 2.2rem;
+  color: blue;
+}
+.rightNavbar button {
+  background: white;
+  font-size: 1.1rem;
+  width: 5rem;
+  height: 2rem;
+  border-radius: 0.2rem;
+  border: 1px solid rgb(139, 138, 138);
+  color: blue;
+}
+.rightNavbar span {
+  width: 3rem;
+  height: 3rem;
+  display: inline-block;
+  background: blue;
+  border-radius: 50%;
+  align-content: center;
+}
+#burgerIcon {
+  display: none;
+}
+.blue {
+  color: blue;
+  font-weight: bold;
+}
+/* for mobile */
+/* for mobile */
+@media only screen and (max-width: 480px) {
+  #burgerIcon {
+    display: block;
+    position: absolute;
+    top: 0rem;
+    right: 2rem;
+    font-size: 3rem;
+    cursor: pointer;
+  }
+  /* fixes...here */
+  .navbarContainer {
+    flex-direction: column;
+    justify-content: normal;
+    opacity: 100;
+    background-color: white;
+  }
+  .rightNavbar {
+    background-color: white;
+  }
+  .showMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .rightNavbar ul {
+    align-items: center;
+    flex-direction: column;
+    gap: 4rem;
+    font-size: 2rem;
+    margin-top: 14rem;
+    align-items: start;
+    margin-left: 10rem;
+  }
+  .rightNavbar ul li a {
+    color: white;
+  }
+  .leftNavbar {
+    /* border: 1px solid blue; */
+    height: 7rem;
+    margin-left: 2rem;
+  }
+  .rightNavbar button {
+    font-size: 1.7rem;
+    width: 10rem;
+    height: 3.5rem;
+  }
+  .removeNav {
+    display: none;
+  }
+  #crossSecction {
+    color: white;
+  }
+}

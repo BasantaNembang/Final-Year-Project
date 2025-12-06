@@ -1,0 +1,104 @@
+.draftCourseItem {
+  width: 32rem;
+  height: 20rem;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 0.7rem;
+  box-shadow: 4px 3px 24px -7px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 4px 3px 24px -7px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 3px 24px -7px rgba(0, 0, 0, 0.75);
+  margin: 1rem;
+}
+.imageSection figure img {
+  width: 95%;
+  height: 8rem;
+  object-fit: cover;
+  margin-top: 1rem;
+  border-radius: 0.7rem;
+}
+.imageSection figure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.imageSection span {
+  position: absolute;
+  background: white;
+  bottom: 1rem;
+  right: 2rem;
+  width: 4.6rem;
+  text-align: center;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+.heading h4 {
+  width: max-content;
+  margin-left: 2rem;
+  margin-top: 1rem;
+  font-size: 1.4rem;
+}
+#LINE {
+  width: 87%;
+  margin: 0.9rem auto 0.6rem;
+}
+.btn {
+  display: flex;
+  margin-left: 2rem;
+  justify-content: space-between;
+  margin-right: 2rem;
+}
+.continue_editingBTN {
+  background-color: blue;
+  width: 11rem;
+  height: 2rem;
+  font-size: 1.1rem;
+  outline: none;
+  border: none;
+  border-radius: 0.6rem;
+  color: white;
+  cursor: pointer;
+}
+
+.delete_BTN {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 5rem;
+  border: none;
+  outline: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.delete_BTN:hover {
+  background-color: red;
+  color: white;
+}
+.btn span {
+  display: inline;
+  margin-right: 1.2rem;
+  font-weight: bold;
+  color: blue;
+  cursor: pointer;
+}
+.edited {
+  margin-left: 2rem;
+  margin-top: 0.6rem;
+  display: inline-block;
+  font-size: 0.9rem;
+}
+.edited p {
+  color: #6b6363;
+}
+/* responisve */
+
+@media only screen and (max-width: 1040px) {
+  .draftCourseItem {
+    width: 27.7rem;
+  }
+}
+
+@media only screen and (max-width: 945px) {
+  .draftCourseItem {
+    width: 23.7rem;
+  }
+}

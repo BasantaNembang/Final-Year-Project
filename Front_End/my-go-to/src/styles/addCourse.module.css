@@ -1,0 +1,414 @@
+.addCourseContainer {
+  width: 100%;
+  background-color: #fefcfc;
+  padding: 1.5rem;
+  font-size: 100%;
+}
+.addCourse {
+  display: flex;
+  gap: 2rem;
+}
+.leftTop {
+  margin-top: 1rem;
+}
+.rightSection {
+  width: 42.2rem;
+  /* border: 1px solid blue; */
+}
+.leftSection {
+  width: 42.2rem;
+  min-height: 35rem;
+}
+.selectLeftDown {
+  display: flex;
+}
+.normalLeftDown {
+  display: flex;
+}
+.addCourseContainer h3 {
+  font-size: 2rem;
+}
+.leftTop input {
+  width: 41rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  outline: none;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  font-size: 1rem;
+  border: 0.1rem solid #b2b0b0;
+  margin-top: 0.5rem;
+}
+.leftTop textarea {
+  width: 41rem;
+  height: 12rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  resize: none;
+  border: 1px solid #b2b0b0;
+  margin-top: 0.5rem;
+}
+.selectLeftDown div {
+  width: 21rem;
+  height: 5rem;
+}
+.selectLeftDown select {
+  background-color: white;
+  width: 20rem;
+  height: 2.7rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  padding-left: 0.6rem;
+  outline: none;
+  border-radius: 0.6rem;
+  border: 1px solid #b2b0b0;
+  margin-top: 0.5rem;
+}
+.normalLeftDown div {
+  width: 21rem;
+  height: 5rem;
+  margin-top: 0.7rem;
+}
+.normalLeftDown input {
+  background-color: white;
+  width: 20rem;
+  height: 2.7rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  padding-left: 0.6rem;
+  outline: none;
+  border-radius: 0.6rem;
+  border: 1px solid #b2b0b0;
+  margin-top: 0.5rem;
+}
+
+/* objectives list */
+.objectiveInfo {
+  height: auto;
+  margin-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+/* Hide the actual file input */
+.hidden_input {
+  display: none;
+}
+
+/* Style the custom button (label) */
+.custom_button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block; /* Allows padding and other box model properties */
+}
+
+.custom_button:hover {
+  background-color: #0056b3;
+}
+
+/* Style for displaying the selected file name */
+.selected_file_name {
+  margin-left: 10px;
+  font-style: italic;
+  color: #555;
+}
+.custom_file_upload {
+  width: 41rem;
+  height: 12rem;
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: dotted;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  color: #b2b0b0;
+}
+
+#imageIcon {
+  font-size: 3rem;
+}
+
+.imagePlaceHolder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.imagePlaceHolder img {
+  width: 100%;
+  height: auto;
+}
+#removeImage {
+  position: absolute;
+  right: 0.9rem;
+  top: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: red;
+  cursor: pointer;
+}
+.objectiveInfo button,
+.requirementInfo button {
+  border: none;
+  outline: none;
+  background-color: white;
+  color: blue;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.objectiveInfo input {
+  width: 41rem;
+  height: 2.7rem;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  font-size: 1rem;
+  border-radius: 0.6rem;
+  outline: none;
+  border: 1px solid #b2b0b0;
+  margin: 0.7rem 0;
+  /* */
+}
+.objectiveInfo span,
+.requirementInfo span {
+  cursor: pointer;
+  margin-left: -2rem;
+  margin-top: 0.8rem;
+  font-size: 2rem;
+}
+
+.requirementInfo input {
+  width: 41rem;
+  height: 2.7rem;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  font-size: 1rem;
+  border-radius: 0.6rem;
+  outline: none;
+  border: 1px solid #b2b0b0;
+  margin: 0.7rem 0;
+}
+.leftTop div:nth-child(2) {
+  margin-top: 1.2em;
+}
+.leftDown {
+  margin-top: 1.7rem;
+}
+.thunailInfo {
+  margin-top: 1rem;
+}
+.objectiveInfo {
+  margin-top: 2rem;
+  /* border: 1px solid blue; */
+}
+.requirementInfo {
+  margin-top: 2rem;
+  height: auto;
+}
+.lastSection {
+  margin-top: 2rem;
+  /* position: relative; */
+}
+.btnSection {
+  margin-left: 69rem;
+  margin-top: 2rem;
+  gap: 1rem;
+  display: flex;
+  cursor: pointer;
+}
+.lastSection button {
+  width: 8rem;
+  height: 2.8rem;
+  font-size: 1rem;
+  outline: none;
+  border-radius: 0.7rem;
+}
+.lastSection button:nth-of-type(1) {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #b2b0b0;
+}
+.lastSection button:nth-of-type(2) {
+  background-color: green;
+  color: white;
+  border: none;
+}
+.btnSection button{
+  cursor: pointer;
+}
+/* .videoSection {
+  border: 1px solid;
+} */
+
+/* Responive */
+@media only screen and (max-width: 1500px) {
+  .leftSection {
+    width: 39rem;
+  }
+  .rightSection {
+    width: 43rem;
+  }
+  .custom_file_upload,
+  .leftTop input,
+  .leftTop textarea {
+    width: 39rem;
+  }
+  .requirementInfo input,
+  .objectiveInfo input {
+    width: 39rem;
+  }
+  .selectLeftDown select {
+    width: 17rem;
+  }
+  .selectLeftDown {
+    gap: 5rem;
+  }
+  .normalLeftDown input {
+    width: 17rem;
+  }
+  .normalLeftDown {
+    gap: 5rem;
+  }
+  .btnSection button {
+    width: 10rem;
+  }
+}
+@media only screen and (max-width: 1370px) {
+  .leftSection {
+    width: 36rem;
+  }
+  .rightSection {
+    width: 36rem;
+  }
+  .custom_file_upload,
+  .leftTop input,
+  .leftTop textarea {
+    width: 33rem;
+  }
+  .requirementInfo input,
+  .objectiveInfo input {
+    width: 33rem;
+  }
+
+  .selectLeftDown select {
+    width: 12rem;
+  }
+  .normalLeftDown input {
+    width: 12rem;
+  }
+  .btnSection {
+    margin-left: 54rem;
+  }
+}
+@media only screen and (max-width: 1240px) {
+  .leftSection {
+    width: 32rem;
+  }
+  .rightSection {
+    width: 32rem;
+  }
+  .custom_file_upload,
+  .leftTop input,
+  .leftTop textarea {
+    width: 29rem;
+  }
+  .requirementInfo input,
+  .objectiveInfo input {
+    width: 29rem;
+  }
+  .btnSection {
+    margin-left: 42rem;
+  }
+}
+@media only screen and (max-width: 980px) {
+  .leftSection {
+    width: 29rem;
+  }
+  .rightSection {
+    width: 29rem;
+  }
+}
+@media only screen and (max-width: 925px) {
+  .leftSection {
+    width: 27rem;
+  }
+  .rightSection {
+    width: 28rem;
+  }
+  .custom_file_upload,
+  .leftTop input,
+  .leftTop textarea {
+    width: 25rem;
+  }
+  .requirementInfo input,
+  .objectiveInfo input {
+    width: 25rem;
+  }
+  .selectLeftDown select {
+    width: 9rem;
+  }
+  .normalLeftDown input {
+    width: 9rem;
+  }
+}
+@media only screen and (max-width: 840px) {
+  .leftSection {
+    width: 24rem;
+  }
+  .leftSection {
+    width: 25rem;
+  }
+  .custom_file_upload,
+  .leftTop input,
+  .leftTop textarea {
+    width: 23rem;
+  }
+  .requirementInfo input,
+  .objectiveInfo input {
+    width: 23rem;
+  }
+  .btnSection {
+    margin-left: 38rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .addCourse {
+    flex-direction: column;
+  }
+  .leftSection,
+  .rightSection {
+    width: 39rem;
+  }
+  .custom_file_upload,
+  .leftTop input,
+  .leftTop textarea {
+    width: 36rem;
+  }
+  .selectLeftDown select {
+    width: 14rem;
+  }
+  .normalLeftDown input {
+    width: 14rem;
+  }
+  .requirementInfo input,
+  .objectiveInfo input {
+    width: 36rem;
+    height: 3rem;
+  }
+  .btnSection {
+    margin-left: 19rem;
+  }
+  .btnSection button {
+    cursor: pointer;
+  }
+  .imagePlaceHolder img {
+    height: 16rem;
+  }
+}

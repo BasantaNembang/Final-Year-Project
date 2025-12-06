@@ -1,0 +1,13 @@
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registry-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+jwt:
+  secret: "MzU3NjM4NzkyRjQyM0Y0NDI4NDcyQjRCNjI1MDY1NTM2ODU2NkQ1OTcxMzM3NDM2NzczOTdBMjQ0MzI2NDYyOQ=="
+

@@ -1,0 +1,45 @@
+.paymentContainer form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+.cardSection {
+  border: 1px solid red;
+  width: 37rem;
+}
+.paySection {
+  border: 1px solid blue;
+  width: 35rem;
+}
+.cardSection span {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+.cardBOX {
+  border: 1px solid;
+}
+.cardMetaData {
+  display: flex;
+}
+.cardBoxInput input {
+  width: 94%;
+  height: 2rem;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  border: 1px solid;
+}
+.cardMetaData div {
+  width: 50%;
+  border: 1px solid rgb(255, 74, 74);
+}
+
+.cardMetaData input {
+  width: 95%;
+  height: 2rem;
+}
+.errorContainer {
+  color: red;
+}

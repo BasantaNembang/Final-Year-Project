@@ -1,0 +1,169 @@
+.editModal_wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+.editModal_conatiner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 53rem;
+  height: auto;
+  background-color: rgb(255, 255, 255);
+  z-index: 1000;
+  border-radius: 6px;
+}
+.videoConatiner {
+  position: relative;
+}
+.videoConatiner label {
+  position: absolute;
+  font-size: 3rem;
+  top: 0;
+  right: 1rem;
+  color: red;
+  cursor: pointer;
+}
+.videoShowContainer input {
+  display: none;
+}
+.btnSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+.btnSection button {
+  width: 7rem;
+  height: 2rem;
+  font-size: 1.3rem;
+  border: none;
+  background-color: blue;
+  color: white;
+  border-radius: 0.7rem;
+  margin-bottom: 2rem;
+}
+.infoContainer header {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 2rem;
+}
+.titleInputDiv {
+  text-align: center;
+}
+.infoContainer input {
+  outline: none;
+}
+.titleInputDiv input {
+  text-align: center;
+  border: 1px solid #cacaca;
+  border-radius: 0.4rem;
+  margin: 1rem 0;
+  width: 37rem;
+}
+.titleInputDiv textarea {
+  width: 95%;
+  min-height: 9rem;
+  max-height: 30vh;
+  resize: none;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+}
+/*  */
+.leftDown {
+  margin-top: 1.7rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.selectLeftDown {
+  margin-top: 1rem;
+  margin-left: 5rem;
+}
+.selectLeftDown div {
+  height: 5rem;
+}
+.selectLeftDown select {
+  background-color: white;
+  width: 20rem;
+  height: 2.7rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  padding-left: 0.6rem;
+  outline: none;
+  border-radius: 0.6rem;
+  border: 1px solid #b2b0b0;
+  margin-top: 0.5rem;
+}
+.normalLeftDown div {
+  width: 21rem;
+  height: 5rem;
+  margin-top: 0.7rem;
+}
+.normalLeftDown input {
+  background-color: white;
+  width: 20rem;
+  height: 2.7rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  padding-left: 0.6rem;
+  outline: none;
+  border-radius: 0.6rem;
+  border: 1px solid #b2b0b0;
+  margin-top: 0.5rem;
+}
+.titleInputDiv img {
+  width: 52%;
+}
+.titleInputDiv figure {
+  margin: 2rem 0;
+  position: relative;
+}
+.titleInputDiv figure label {
+  position: absolute;
+  right: 14rem;
+  top: 0rem;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.learnContiner input {
+  width: 47rem;
+  height: 3rem;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+.learnContiner button {
+  border: none;
+  outline: none;
+  background-color: white;
+  color: blue;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btnSection button {
+  cursor: pointer;
+}
+.cancelObjetivies {
+  position: absolute;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/*  */
+
+@media only screen and (max-width: 440px) {
+  .editModal_conatiner {
+    width: 45rem;
+  }
+  .normalLeftDown input,
+  .selectLeftDown select {
+    width: 15rem;
+  }
+}
