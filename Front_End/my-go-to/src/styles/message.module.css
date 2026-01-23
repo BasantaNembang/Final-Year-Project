@@ -1,0 +1,215 @@
+.messageContainer {
+  display: flex;
+  margin: 2rem 0;
+  justify-content: space-between;
+}
+
+/* for MainDiv */
+.mainDivContainer {
+  width: 75%;
+  border-left: 1px solid;
+}
+.profileContainer {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  height: 5rem;
+  gap: 1rem;
+}
+.profileP {
+  height: 3rem;
+  width: 3rem;
+  background-color: blue;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+}
+.main_profileContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  gap: 1rem;
+  margin-left: 3rem;
+}
+.main_profileP {
+  height: 4rem;
+  width: 4rem;
+  background-color: blue;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+}
+
+/* for profile of dms */
+.dm_messageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 1rem;
+  background-color: #f2f2f2;
+  padding-bottom: 2rem;
+}
+.dm_messageContainer p {
+  color: #6a6a6a;
+  font-size: 0.9rem;
+}
+
+/* common */
+.sender,
+.user {
+  /* border: 1px solid; */
+  width: 12rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* LEFT */
+.sender {
+  justify-content: flex-start;
+  margin-left: 1.7rem;
+}
+
+/* RIGHT */
+.user {
+  justify-content: flex-end;
+  margin-left: auto;
+  margin-right: 1.7rem;
+}
+
+#dmPp {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.sender span {
+  background-color: blue;
+}
+.user span {
+  background-color: green;
+}
+#senderContent {
+  width: 55%;
+  margin-left: 5rem;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  padding: 1rem 0.7rem;
+  border-radius: 0.4rem;
+  border: 1px solid #999797;
+  background-color: white;
+}
+#youContent {
+  margin-left: 35%;
+  display: block;
+  width: 55%;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  padding: 1rem 0.7rem;
+  border-radius: 0.4rem;
+  border: 1px solid #999797;
+  background-color: white;
+}
+/* for list */
+.listDMContainer {
+  /* border: 1px solid rgb(0, 0, 0); */
+  width: 25%;
+}
+.listDMContainer p {
+  font-size: 1.3rem;
+  padding-bottom: 0.3rem;
+}
+#dm {
+  font-size: 0.91rem;
+  color: #595757;
+}
+#line {
+  margin-top: 1.5rem;
+  color: #c7c7c7;
+}
+#roleDM {
+  width: 8rem;
+  background-color: #d4ffbb;
+  height: 1.8rem;
+  font-size: 1rem;
+  color: #2cc00d;
+  text-align: center;
+  padding-top: 0.2rem;
+  border-radius: 0.2rem;
+  box-sizing: border-box;
+  padding-left: 2rem;
+
+  display: flex;
+  margin: 1rem auto;
+  margin-left: 28rem;
+}
+
+/* send message */
+.sendMessageContainer {
+  display: flex;
+  width: 100%;
+  border: 1px solid rgb(221, 221, 221);
+  box-sizing: border-box;
+  padding: 1.7rem 0;
+  justify-content: space-evenly;
+}
+.sendInputContainer {
+  width: 80%;
+  /* border: 1px solid rgb(0, 0, 0); */
+}
+.sendBTNContainer {
+  /* width: 20%;
+  border: 1px solid red; */
+}
+.sendInputContainer input {
+  width: 100%;
+  height: 3.8rem;
+  box-sizing: border-box;
+  padding: 1rem;
+  outline: none;
+  border: 1px solid #939393;
+  border-radius: 0.4rem;
+}
+.sendBTNContainer button {
+  width: 4rem;
+  background-color: blue;
+  height: 3.8rem;
+  font-size: 1.5rem;
+  color: white;
+  border-radius: 0.4rem;
+  border: none;
+  outline: none;
+}
+@media only screen and (max-width: 1400px) {
+  #roleDM {
+    margin-left: 22rem;
+  }
+}
+
+@media only screen and (max-width: 1060px) {
+  #roleDM {
+    margin-left: 17rem;
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  #roleDM {
+    margin-left: 10rem;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  #roleDM {
+    margin-left: 7rem;
+  }
+}

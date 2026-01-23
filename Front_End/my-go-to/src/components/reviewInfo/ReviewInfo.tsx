@@ -1,28 +1,59 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import style from "../../styles/reviewInfo.module.css";
 import Comments from "../comment/Comments";
-import { FaStar } from "react-icons/fa6";
+import { getALlCourseReview } from "@/lib/Helper-Two";
+import { ReviewDataResponse } from "@/types/reviewData";
+import StarRating from "../starRating/StarRating";
 
-const ReviewInfo = () => {
+interface reviewInfoProps {
+  courseId: string;
+}
+
+const ReviewInfo = ({ courseId }: reviewInfoProps) => {
+  const [commentData, setCommentData] = useState<ReviewDataResponse[] | null>(null);
+  const [star, setStar] = useState<number>(0);
+
+  const getAll_Ratings = async () => {
+    if (!courseId) return;
+    const data = await getALlCourseReview(courseId);
+    setCommentData(data);
+  };
+
+  useEffect(() => {
+    getAll_Ratings();
+  }, [courseId]);
+
+  useEffect(() => {
+    commentData?.map((each, _) => setStar(each.rating));
+  }, [commentData]);
+
+  const calculateAvg = () => {
+    if (!commentData) return;
+    let num = 0;
+    commentData.forEach((each, _) => {
+      num += each.rating;
+    });
+    return num / commentData.length;
+  };
+
+
   return (
     <>
       <div className={style.reviewInfoContainer}>
         <h3>Student Reviews</h3>
+        <span id={style.avg}>{calculateAvg()}</span>
         <div className={style.averageRating}>
-          <span>4.6</span>
-          <div>
-            <span style={{color:"rgb(249, 255, 59)"}}><FaStar /></span>
-            <span style={{color:"rgb(249, 255, 59)"}}><FaStar /></span>
-            <span style={{color:"rgb(249, 255, 59)"}}><FaStar /></span>
-            <span style={{color:"rgb(249, 255, 59)"}}><FaStar /></span>
+          <div style={{marginTop:'2rem'}}>
+            <StarRating rating={star} />
           </div>
         </div>
-        <div>
-          <Comments />
-          <Comments />
-          <Comments />
+        <div style={{marginTop:'4rem'}}>
+          {commentData?.map((each, i) => (
+            <Comments each={each} key={i} />
+          ))}
         </div>
-       
       </div>
     </>
   );

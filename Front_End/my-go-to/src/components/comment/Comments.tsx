@@ -1,25 +1,33 @@
 import React from "react";
 import style from "../../styles/coments.module.css";
-import { FaStar } from "react-icons/fa6";
+import { ReviewDataResponse } from "@/types/reviewData";
+import StarRating from "../starRating/StarRating";
+import TimeStamp from "../timeStamp/TimeStamp";
 
-const Comments = () => {
+interface CommenstProps{
+  each: ReviewDataResponse
+}
+
+const Comments = ({each}: CommenstProps) => {
+
+  const time = each.time;
+  
   return (
     <>
       <div className={style.commentContainer}>
         <div className={style.headerSection}>
           <div className={style.metaData}>
-            <span id={style.profile}>M</span>
+            <span id={style.profile}>{each?.userName.charAt(0).toUpperCase()}</span>
             <div className={style.info}>
-              <span>Basanta Nembang</span>
-              <span style={{marginTop:".5rem", color:"rgb(249, 255, 59)"}}><FaStar /></span>
+              <span>{each.userName}</span>
+              <StarRating rating={each.rating} />
             </div>
           </div>
-          <div className={style.time}>2 hours ago</div>
+          <div className={style.time}><TimeStamp time={time} /></div>
         </div>
         <div className={style.comment}>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-            repellat provident consequuntur.
+           {each.message}
           </p>
         </div>
         <hr />

@@ -4,14 +4,14 @@ import React from "react";
 import styles from "../../styles/overView.module.css";
 import { TiTick } from "react-icons/ti";
 import { FaArrowRight } from "react-icons/fa";
-import { dto } from "@/types/courseData";
+import { ResponseCourseDTO } from "@/types/courseData";
 import { SiTicktick } from "react-icons/si";
 import { useRouter } from "next/navigation";
 
 
 interface overViewProps { 
   Setflag: React.Dispatch<React.SetStateAction<Boolean>>;
-  selectedCourse: dto | null
+  selectedCourse: ResponseCourseDTO | null
 }
 
 
@@ -27,7 +27,6 @@ const OverViewInfo = ({Setflag, selectedCourse}: overViewProps) => {
       router.push("/payment?courseId="+encodeURIComponent(ciphertext)+"&price="+price);
   }
    
-
 
   return (
     <>

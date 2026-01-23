@@ -1,0 +1,60 @@
+.replyCommentContainer {
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  margin: 3rem 0;
+}
+.profile span {
+  width: 3.3rem;
+  height: 3.3rem;
+  background-color: green;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.comment {
+  background-color: whitesmoke;
+  width: 87%;
+  color: #776e6e;
+  box-sizing: border-box;
+  padding: 1rem 1rem;
+}
+#user {
+  font-size: 1.1rem;
+  color: black;
+  font-weight: 500;
+}
+#role {
+  display: inline-block;
+  width: 5rem;
+  background-color: #d4ffbb;
+  height: 1.6rem;
+  font-size: 0.9rem;
+  color: #2cc00d;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 0.2rem;
+  border-radius: 0.2rem;
+  margin-left: 0.7rem;
+}
+#time {
+  color: #776e6e;
+}
+
+#like {
+  position: absolute;
+  bottom: -2.4rem;
+  left: 8.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+}
+#like div {
+  display: block;
+}

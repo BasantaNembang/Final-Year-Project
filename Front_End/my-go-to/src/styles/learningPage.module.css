@@ -1,0 +1,137 @@
+.LearningConatiner {
+  width: 100%;
+}
+
+.dashBoard {
+  display: flex;
+  justify-content: space-around;
+  height: 8rem;
+  border: 1px solid #d1d1d1;
+}
+.dashBoardMetaData,
+.dashBoardBTN {
+  width: 42%;
+  /* border: 1px solid; */
+}
+.dashBoardMetaData {
+  box-sizing: border-box;
+  padding-top: 1.2rem;
+}
+.dashBoardBTN {
+  position: relative;
+  padding-top: 1.2rem;
+}
+.dashBoardMetaData h3 {
+  font-size: 2rem;
+}
+.dashBoardBTN button {
+  position: absolute;
+  right: 0;
+  outline: none;
+  width: 12rem;
+  height: 3rem;
+  font-size: 1rem;
+  background-color: blue;
+  border: none;
+  color: white;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+.metaData {
+  height: 8rem;
+  background-color: #efefef;
+}
+.metaData ul {
+  display: flex;
+  margin-left: 4rem;
+  padding-top: 1rem;
+}
+.metaData ul span {
+  display: block;
+}
+.metaData ul li {
+  height: 6rem;
+  width: 10rem;
+  /* border: 1px solid; */
+  border-radius: 0.5rem;
+
+  display: flex;
+  margin-right: 4rem;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  flex-direction: column;
+}
+.courses {
+  width: 100%;
+  /* border: 1px solid; */
+  margin: auto;
+  padding-bottom: 3rem;
+  background-color: #efefef;
+}
+.titleINFO {
+  width: 92%;
+  /* border: 1px solid; */
+  margin: auto;
+
+  background-color: #efefef;
+
+  padding-top: 2rem;
+}
+.titleINFO ul {
+  display: flex;
+
+  width: 100%;
+  /* border: 1px solid; */
+
+  background-color: white;
+}
+.titleINFO ul li {
+  list-style: none;
+  cursor: pointer;
+
+  width: 10rem;
+  /* border: 1px solid; */
+  height: 2.5rem;
+  display: flex;
+  position: relative;
+}
+.titleINFO ul li button {
+  width: 70%;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  background: transparent;
+}
+.titleINFO ul li span {
+  width: 10rem;
+  display: block;
+  border: 1px solid blue;
+  margin-top: 0.4rem;
+  position: absolute;
+  bottom: 0;
+}
+.dynamicContent {
+  width: 92%;
+  border: 1px solid white;
+  margin: auto;
+  background-color: white;
+  padding-bottom: 2rem;
+  border-radius: 0 0 0.8rem 0.8rem;
+}
+.myCourseContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-top: 5rem;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0 1.7rem;
+}
+.myCourseContainer h3 {
+  position: absolute;
+  top: -4rem;
+  font-size: 1.7rem;
+  left: 1rem;
+}

@@ -1,0 +1,25 @@
+.myNoteContainer {
+  /* border: 1px solid; */
+  margin-top: 2rem;
+}
+.myNoteContainer h3 {
+  font-size: 1.5rem;
+}
+.myNoteContainer textarea {
+  margin-top: 2rem;
+  width: 100%;
+  height: 12rem;
+  resize: none;
+  box-sizing: border-box;
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+.myNoteContainer button {
+  width: 8rem;
+  height: 2.5rem;
+  font-size: 1.2rem;
+  border-radius: 0.6rem;
+  background-color: blue;
+  color: white;
+  margin-top: 1rem;
+}

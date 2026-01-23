@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import styles from "../../../styles/authPage.module.css";
 import { useForm } from "react-hook-form";
 import { LoginDetails } from "@/types/usersData";
-import { loginStudentBackend } from "@/api/Auth-Service";
+import { loginUSER } from "@/lib/Auth-Backend";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+
 
 interface logInProps{
   SetAuthFlag: React.Dispatch<React.SetStateAction<Boolean>>
@@ -13,6 +16,7 @@ interface logInProps{
 const LogIn = ({SetAuthFlag}: logInProps) => {
 
   const form = useForm();
+  const router =  useRouter();
   
   const {register, handleSubmit} = form;
 
@@ -21,15 +25,24 @@ const LogIn = ({SetAuthFlag}: logInProps) => {
     password:''
   })
 
-  const tarckFiled = (e: React.ChangeEvent<HTMLInputElement>) =>{
+  const trackField = (e: React.ChangeEvent<HTMLInputElement>) =>{
     let {name, value} = e.target;
     SetLoginStdForm({...loginStdForm, [name]: value});
   }  
 
 
+
   const logInStudent = async() =>{
-   let response = await loginStudentBackend(loginStdForm);    
+    const response = await loginUSER(loginStdForm)
+    if(response){
+      toast.success("login successfully")
+      router.push("/learnings")
+    }else{
+     toast.error("Invalid username and password")
+    }
+    
   }
+
 
   const goToSignUp = () =>{
    SetAuthFlag((prev)=>!prev);
@@ -45,11 +58,13 @@ const LogIn = ({SetAuthFlag}: logInProps) => {
             <label htmlFor="">Email</label>
             <input type="email"  id="" 
             {...register("email", {required:{value:true, message:"Enter your Email"}})}
-            onChange={tarckFiled} />
+            onChange={trackField} />
           </div>
           <div>
             <label htmlFor="">Password</label>
-            <input type="password" id="" />
+            <input type="password" id="" 
+            {...register("password", { required:{value:true, message:"Enter your Password"}})}
+            onChange={trackField}  />
           </div>
           <button type="submit">Create</button>
         </form>     

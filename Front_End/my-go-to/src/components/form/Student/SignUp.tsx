@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import styles from "../../../styles/authPage.module.css";
 import { StudentDetails } from "@/types/usersData";
 import { useForm } from "react-hook-form";
-import { signUpStudentBackend } from "@/api/Auth-Service";
-import { useAuthContexHook } from "@/context/authContext";
+import axios from "axios";
 
 
 interface signUpProps{
@@ -14,7 +13,7 @@ interface signUpProps{
 
 const SignUp = ({SetAuthFlag} : signUpProps) => {
 
-  const { saveToken } = useAuthContexHook();
+ // const { saveToken } = useAuthContexHook();
 
   const form = useForm();
   
@@ -37,21 +36,19 @@ const SignUp = ({SetAuthFlag} : signUpProps) => {
   }
 
 
+
+
   const signUpStudent = async() =>{
      let form = new FormData();
      form.append("userDto", new Blob([JSON.stringify(stdForm)]))
-     let response = await signUpStudentBackend(form);
-
-     if(response?.httpStatus === 409){
-        console.log("User already logged in haiiiiiiiiiiiiiiiiii")
-     }else{
-     console.log("Hey there")
-     const jwtToken = response?.data?.jwtToken;
-     const refreshToken = response?.data?.refreshToken;
-     const role = response?.data?.role;
-     
-     saveToken(jwtToken, refreshToken, role)
+     try{
+      let response = await axios.post('/api/auth/signup', form)
+      console.log("success")
+      console.log(response)
+     }catch(error){
+      console.error(error)
      }
+   
   }
 
   

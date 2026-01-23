@@ -4,11 +4,18 @@ import React, { useState,ChangeEvent, useEffect } from "react";
 import styles from "../../styles/addCourse.module.css";
 import { CiImageOn } from "react-icons/ci";
 import VideoUpload from "../videoUpload/VideoUpload";
-import { saveCourse } from "@/api/Course-Backend";
+import { saveCourse } from "@/lib/Course-Backend";
 import { dto } from "@/types/courseData";
 import { toast } from 'react-toastify';
 import { useDraftContexHook } from "@/context/DraftContext";
-import { SourceTextModule } from "vm";
+import axios from "axios";
+
+
+
+interface userIdType {
+  userId: string
+}
+
 
 const AddCourse = () => {
 
@@ -28,7 +35,6 @@ const AddCourse = () => {
   let [inputValue, setinputValue] = useState<dto>({
         course_id: "",
         author: "",
-        title: "",
         description: "",
         level: "",
         time: 0,
@@ -37,13 +43,25 @@ const AddCourse = () => {
         stream_id: "",
         price: 0,
         category: "",
+        title: "",        
         objectives: [], 
         requirements: []
   });
+   
+  const getAuthorID = async ()  =>{
+    const userID  = await axios.get<userIdType>('/api/auth/getId')
+    if(userID.status === 200){
+      return userID.data;
+     }{
+      throw new Error('some thing went wrong here ')
+     }
+  }
 
-  useEffect(()=>{   //take aithoor from authContext!!!!
-   inputValue.author="Basanta Nemabng"
-  }, []);
+  useEffect(()=>{   
+   getAuthorID().then((id)=>{
+     inputValue.author = id!.userId;
+   })
+  }, [inputValue]);
   
   
   const trackField = (e:ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement  >):void =>{
@@ -123,7 +141,6 @@ const AddCourse = () => {
       setinputValue({
         course_id: "",
         author: "",
-        title: "",
         description: "",
         level: "",
         time: 0,
@@ -132,6 +149,7 @@ const AddCourse = () => {
         stream_id: "",
         price: 0,
         category: "",
+        title: "",        
         objectives: [], 
         requirements: [], 
      });
@@ -157,14 +175,15 @@ const AddCourse = () => {
       requirements: requirements,
     }
     
-    
     let formData = new FormData()
      if(selectedFile!=null){
         formData.append("video", selectedFile);}
      if(imageFile!=null){
         formData.append("image", imageFile); }
+
      //new Blob(JSON.stringify(dto) make json data is converted to String before sending
      formData.append("dto", new Blob([JSON.stringify(dto)], {  type:"application/json"} ))
+
      let response = await saveCourse(formData, setProgress);
      if(response === true){
         setinputValue({
@@ -183,7 +202,6 @@ const AddCourse = () => {
         requirements: [], 
      });
 
-
     setObjectives(["", "", ""])
     setRequirements(["", ""])
     setSelectedFile(null)
@@ -192,7 +210,7 @@ const AddCourse = () => {
     toast.success("Course Uploaded Successfully...")
 
     }else{
-      toast.info("Something went wrong try agian...")
+      toast.info(response.msg)
     }
        
 

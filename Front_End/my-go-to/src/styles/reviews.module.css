@@ -1,0 +1,23 @@
+.ReviewContainer {
+  /* border: 1px solid rgb(187, 246, 51); */
+  width: 100%;
+  /* height: 22rem; */
+  margin-top: 2rem;
+}
+.avgDiv {
+  width: 30%;
+  display: flex;
+}
+.avgDiv p {
+  border: 1px solid #dbdbdb;
+  width: 50%;
+  box-sizing: border-box;
+  padding: 1rem;
+  background-color: #eee;
+}
+.avgDiv span {
+  display: block;
+  margin: auto;
+  max-width: max-content;
+  padding-top: 1rem;
+}

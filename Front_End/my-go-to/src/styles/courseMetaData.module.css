@@ -1,0 +1,22 @@
+.courseMetaDataContainer {
+  /* border: 1px solid; */
+  margin-top: 2rem;
+}
+.courseMetaDataContainer h3 {
+  font-size: 1.5rem;
+}
+.courseMetaDataContainer p {
+  margin-top: 1rem;
+  color: #614a4a;
+}
+#noteHeader, #objHeader {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.courseMetaDataContainer ul {
+  margin-left: 2rem;
+}
+.courseMetaDataContainer ul li {
+  padding: 0.6rem 0;
+  color: #614a4a;
+}

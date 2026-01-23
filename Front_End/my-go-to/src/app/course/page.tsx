@@ -1,15 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/coursePage.module.css";
 import FilterSection from "@/components/filter/FilterSection";
 import CourseContainer from "@/components/courseContainer/CourseContainer";
 import CourseInfo from "@/components/courseInfo/CourseInfo";
-import { dto } from "@/types/courseData";
+import { ResponseCourseDTO } from "@/types/courseData";
+import { useHelperContexHook } from "@/context/helperContext";
+
 
 const CoursePage = () => {
-  let [flag, Setflag] = useState<Boolean>(true);
-  let [selectedCourse, SetSelectedCourse] = useState<dto | null>(null);
+  const [flag, Setflag] = useState<Boolean>(true);
+  const [Courses, SetCourses] = useState<ResponseCourseDTO[] | null>(null);
+  const [selectedCourse, SetSelectedCourse] = useState<ResponseCourseDTO | null>(null);
+
+  const { setIsPrivate } = useHelperContexHook();
+
+  useEffect(()=>{  //to make the navbar normal created by payment.........
+   setIsPrivate(false)
+  }, []);
 
 
   return (
@@ -20,10 +29,10 @@ const CoursePage = () => {
         </div>
         {flag ? (
           <div className={styles.container}>
-            <FilterSection />
-            <CourseContainer Setflag={Setflag} SetSelectedCourse={SetSelectedCourse}/>
+            <FilterSection SetCourses={SetCourses}/>
+            <CourseContainer Setflag={Setflag} SetSelectedCourse={SetSelectedCourse} Courses={Courses} SetCourses={SetCourses}/>
           </div>
-        ) : (  //details 
+        ) : (  //details of courses
             <CourseInfo Setflag={Setflag} selectedCourse={selectedCourse}/>
         )}
       </div>

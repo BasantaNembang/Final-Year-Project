@@ -4,18 +4,16 @@ import React, { useEffect, useState } from "react";
 import styles from "../../styles/paymentPage.module.css";
 import { useSearchParams } from "next/navigation";
 import CountryInputField from "@/helper/CountryInputField";
-import { enrollCourse } from "@/api/Enrollment-Backend";
 import { useForm } from "react-hook-form";
 import { CountryNameDTO, PaymentDTO } from "@/types/enrollmentData";
 import { toast } from "react-toastify";
-import { useAuthContexHook } from "@/context/authContext";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
+import axios from "axios";
+import { useHelperContexHook } from "@/context/helperContext";
 
 const PaymentPage = () => {
 
-  const { jwtToken, role } = useAuthContexHook();
-
-  const router = useRouter()
+  const { setIsPrivate } = useHelperContexHook();
 
   var CryptoJS = require("crypto-js");
 
@@ -23,7 +21,11 @@ const PaymentPage = () => {
   const CourseId = searchParams.get("courseId");
   const price = searchParams.get("price");
 
+  const[user_id, SetUser_id] = useState<string | null>(null);
+
   const secretKEY = process.env.NEXT_PUBLIC_MY_SECRECT_KEY;
+
+  const router = useRouter();
 
   
   const form = useForm<PaymentDTO>();
@@ -34,7 +36,7 @@ const PaymentPage = () => {
 
   const [paymentForm, SetpaymentForm] = useState<PaymentDTO>({
     courseId: '',
-    userId: 'a64fba40-854f-4897-9262-82980ab4415b', //fix it by context API
+    userId: '', 
     price: 0,
     paymentMethod: "VISA_CARD",
     countryName: undefined,
@@ -47,20 +49,26 @@ const PaymentPage = () => {
   //for countyName
   const [countryName, SetCountyName] = useState<CountryNameDTO>();
 
- 
   useEffect(()=>{
-   if(!jwtToken){
-     router.push("/auth")  //show signup page for student
-   }
-   //check the roles as well
-   if(role !== 'STUDENT'){
-     return
-   }
-
-  }, [jwtToken]);
-
+      setIsPrivate(true)
+  }, []);
   
+ 
 
+  const getUserID = async() =>{
+    try{
+      let respones = await axios.get('/api/auth/getId');
+      SetUser_id(respones?.data?.userId)
+    }catch(error){
+      console.error(error)
+    }
+  }
+
+
+  useEffect(()=>{
+    getUserID()
+  }, []);
+ 
 
   const handelInputField = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> ) =>{
    const {name, value} = e.target;
@@ -72,14 +80,18 @@ const PaymentPage = () => {
     if(CourseId!==null){
     var bytes  = CryptoJS.AES.decrypt(CourseId, secretKEY);
     var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    paymentForm.userId=user_id!
     paymentForm.courseId=decryptedData;
     paymentForm.price=Number(price);
     paymentForm.countryName=countryName?.countryName
+
     //call the backend-API (Enrollment-Service)
-    const responseEnroll = await enrollCourse(paymentForm);
-    console.log("console in page.....")
-    console.log(responseEnroll)
-    if(responseEnroll?.msg === "ENROLL-SUCCESS"){
+    try{
+    let response = await axios.post('/api/backend/enroll', paymentForm)
+    console.log('response')
+    console.log(response)
+    if(response?.data.msg === "ENROLL-SUCCESS"){     
+
       toast.success("Course purchase sucessfully")
       //remove all the fields
       SetpaymentForm({
@@ -93,8 +105,13 @@ const PaymentPage = () => {
           cvNumber: '',
           accountName: '' 
       })
+      //go to course section
+      router.push('/course')
     }else{
-      toast.info(responseEnroll?.msg);
+      toast.info(response?.data.msg);
+    }
+    }catch(error){
+      console.error(error)
     }
     }
   };
@@ -182,7 +199,7 @@ const PaymentPage = () => {
 
         <div className={styles.paySection}>
           pay section
-          <button type="submit">Pay</button>     
+          <button type="submit" >Pay</button>     
         </div>
       </form>    
       </div>

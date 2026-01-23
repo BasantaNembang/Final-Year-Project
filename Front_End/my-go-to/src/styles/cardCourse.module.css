@@ -1,7 +1,8 @@
 .courseContainer {
   width: 23rem;
   height: 22rem;
-  border: 1px solid rgb(137, 137, 137);
+  /* border: 1px solid rgb(137, 137, 137); */
+  border: 1px solid rgb(200, 200, 200);
   border-radius: 0.6rem;
   cursor: pointer;
   transition: transform 0.5s ease;
@@ -9,13 +10,30 @@
 }
 .courseContainer:hover {
   opacity: 0.7;
-  transform: scale(.99);
+  transform: scale(0.99);
 }
 .courseContainer figure img {
   width: 100%;
   height: 13rem;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
+}
+.courseContainer {
+  position: relative;
+}
+#category {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background-color: white;
+  width: 7rem;
+  color: #0533ec;
+  text-align: center;
+  height: 1.5rem;
+  border-radius: 0.2rem;
+  box-sizing: border-box;
+  padding-top: 0.1rem;
+  border: 1px solid;
 }
 .infoSections p {
   padding: 0.7rem 1rem;

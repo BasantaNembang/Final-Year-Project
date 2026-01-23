@@ -1,8 +1,7 @@
 .commentContainer {
   width: 50rem;
-  /* border: 1px solid red; */
   margin-left: 4rem;
- margin-top: 3rem;
+  margin-top: 3rem;
   margin-bottom: 3rem;
 }
 .headerSection {
@@ -37,6 +36,16 @@
 .comment p {
   margin-top: 1rem;
 }
+
+
+@media only screen and (max-width: 990px) {
+  .commentContainer{
+    width: 35rem;
+  }
+
+}
+
+
 
 @media only screen and (max-width: 450px) {
   .commentContainer {

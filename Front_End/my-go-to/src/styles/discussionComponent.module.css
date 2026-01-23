@@ -1,0 +1,138 @@
+.discussionContainer {
+  /* border: 1px solid red; */
+  margin: 2rem 0;
+  width: 77%;
+}
+.discussionContainer_header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.discussionContainer button {
+  width: 11rem;
+  height: 2.5rem;
+  font-size: 1.2rem;
+  background-color: blue;
+  color: white;
+  border-radius: 0.7rem;
+}
+
+/* for each container */
+.eachContainerDIV {
+  border: 1px solid rgb(185, 185, 185);
+  display: flex;
+  box-sizing: border-box;
+  padding: 0.9rem 0;
+  border-radius: 0.6rem;
+  margin: 1rem 0;
+}
+.eachContainerDIV:hover {
+  border: 1px solid blue;
+}
+.profile span {
+  width: 3.6rem;
+  height: 3.6rem;
+  background-color: rgb(204, 204, 204);
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+.containSection {
+  margin-left: 1.2rem;
+}
+.InfoContainer {
+  padding: 0.3rem 0;
+}
+
+/* reply discussion */
+.replyDissContainer {
+  border: 1px solid rgb(255, 255, 255);
+  margin-top: 1.7rem;
+}
+
+.comment button {
+  background: transparent;
+  padding-top: 1.5rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  color: #777;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.replyContainerDIV {
+  /* border: 1px solid rgb(185, 185, 185); */
+  display: flex;
+  box-sizing: border-box;
+  padding: 0.9rem 0;
+  border-radius: 0.6rem;
+  height: 8rem;
+}
+.reply_profile span {
+  width: 4.2rem;
+  height: 4.2rem;
+  background-color: rgb(204, 204, 204);
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+.reply_InfoContainer {
+  padding: 0.4rem 0;
+}
+#role {
+  display: inline-block;
+  width: 5rem;
+  background-color: #d9d9ff;
+  height: 1.6rem;
+  font-size: 0.9rem;
+  color: #1400ff;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 0.2rem;
+  border-radius: 0.2rem;
+  margin-left: 1rem;
+}
+#backICON {
+  font-size: 1.7rem;
+  color: black;
+}
+.replyMainCommentContainer {
+  /* border: 2px solid yellow; */
+}
+.hearder {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.hearder div {
+  /* border: 1px solid; */
+  width: 9rem;
+  height: 2rem;
+  margin: 0 1.8rem;
+}
+.hearder button {
+  background: blue;
+  /* width: 100%; */
+  color: white;
+  font-weight: bold;
+  box-sizing: border-box;
+  padding: 1rem;
+  height: 2.5rem;
+  border-radius: 0.4rem;
+}

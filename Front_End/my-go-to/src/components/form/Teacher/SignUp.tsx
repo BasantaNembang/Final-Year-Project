@@ -3,10 +3,9 @@
 import React, { useState } from "react";
 import { TeacherDetails } from "@/types/usersData";
 import { useForm } from "react-hook-form";
-import { signUpTeacher } from "@/api/Auth-Service";
 import styles from "../../../styles/teacherAuthModel.module.css";
-import { useAuthContexHook } from "@/context/authContext";
-
+import axios from "axios";
+import { useRouter } from 'next/navigation';
 
 interface singUpProps{
   SetFlag: React.Dispatch<React.SetStateAction<Boolean>>
@@ -17,13 +16,14 @@ interface singUpProps{
 
 const SignUp = ({SetFlag, SetAuthFlag } : singUpProps) => {
 
-  const { saveToken } = useAuthContexHook();
 
   const form = useForm<TeacherDetails>();
 
   const { register, handleSubmit, formState } = form;
 
   const { errors } = formState;
+
+  const router = useRouter();
 
   const [teacherData, SetTeacherData] = useState<TeacherDetails>({
     email: "",
@@ -40,9 +40,6 @@ const SignUp = ({SetFlag, SetAuthFlag } : singUpProps) => {
   const [customError, SetcustomError] = useState<string | null>(null);
 
   const trackFiled = ( e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> ) => {
-    if (teacherData.role === "") {
-      teacherData.role = "TEACHER";
-    }
     const { name, value } = e.target;
     SetTeacherData({ ...teacherData, [name]: value });
   };
@@ -55,30 +52,35 @@ const SignUp = ({SetFlag, SetAuthFlag } : singUpProps) => {
 
 
   const createAccount = async () => {
+    const formdata = new FormData();
 
-    let formdata = new FormData();
     if (teacherData.password !== teacherData.conformPassword) {
-      SetcustomError("Password did`t match");
+      SetcustomError("Password didn’t match");
       return;
     }
-    if (imageFile != null) {
+
+    if (imageFile) {
       formdata.append("image", imageFile);
     }
-    if (teacherData != null) {
-      delete teacherData.conformPassword;
-      formdata.append("userDto", new Blob([JSON.stringify(teacherData)], { type: "application/json" })
-      );
-    }
-    let response = await signUpTeacher(formdata);
-    const jwtToken = response?.data?.jwtToken;
-    const refreshToken = response?.data?.refreshToken;
-    const role = response?.data?.role;
-    
-    saveToken(jwtToken, refreshToken, role)
 
+    const payload = {
+      ...teacherData,
+      role: "TEACHER",
+    };
+
+    delete payload.conformPassword;
+
+    formdata.append("userDto",new Blob([JSON.stringify(payload)], { type: "application/json" }));
+
+    try {
+      const response = await axios.post("/api/auth/signup", formdata);
+      console.log("successfully");
+      console.log(response)
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  
   
   const showLogInTeaher = () =>{
     SetAuthFlag((prev)=>!prev);

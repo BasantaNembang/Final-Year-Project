@@ -1,0 +1,146 @@
+.streamContainer {
+  background-color: whitesmoke;
+  padding-bottom: 4rem;
+}
+.streamContainer video {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem 2rem;
+}
+.streamContainer button {
+  border: none;
+  outline: none;
+  background-color: whitesmoke;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.streamContainer a {
+  text-decoration: none;
+}
+.videoContainer {
+  width: 60rem;
+  background: white;
+  margin: 2rem 6rem;
+  padding-bottom: 2rem;
+}
+.topSection {
+  padding-top: 2rem;
+  width: 12rem;
+  margin-left: 5.5rem;
+  display: flex;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+}
+.courseMetaData {
+  width: 80rem;
+  background: rgb(255, 255, 255);
+  margin-left: 6rem;
+  margin-top: -2rem;
+}
+.videoMetaData ul {
+  display: flex;
+  margin-top: 1.5rem;
+  list-style: none;
+  margin-left: 1rem;
+}
+.videoMetaData ul li {
+  margin: 0 1rem;
+}
+.videoContainer h3 {
+  margin-left: 2rem;
+  font-size: 2rem;
+}
+.videoContainer p {
+  margin-left: 2rem;
+  margin-top: 1rem;
+  color: #614a4a;
+}
+
+.courses {
+  width: 100%;
+  margin: auto;
+  padding-bottom: 3rem;
+}
+
+.dynamicContent {
+  width: 92%;
+  border: 1px solid white;
+  margin: auto;
+  background-color: white;
+  padding-bottom: 2rem;
+  border-radius: 0 0 0.8rem 0.8rem;
+}
+.titleINFO ul {
+  list-style: none;
+  display: flex;
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+.titleINFO ul li button {
+  background-color: transparent;
+}
+.titleINFO ul li {
+  margin: 0 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+@media only screen and (max-width: 1400px) {
+  .videoContainer {
+    width: 55rem;
+  }
+  .courseMetaData {
+    width: 75rem;
+  }
+}
+@media only screen and (max-width: 1300px) {
+  .videoContainer {
+    width: 52rem;
+    margin: 2rem 4rem;
+  }
+  .courseMetaData {
+    width: 70rem;
+    margin-left: 4rem;
+  }
+  .topSection {
+    margin-left: 4.5rem;
+  }
+}
+@media only screen and (max-width: 1050px) {
+  .videoContainer {
+    /* width: 52rem;
+    margin: 2rem 4rem; */
+  }
+  .courseMetaData {
+    width: 65rem;
+  }
+  .topSection {
+    /* margin-left: 4.5rem; */
+  }
+}
+@media only screen and (max-width: 990px) {
+  .videoContainer {
+    width: 48rem;
+  }
+  .courseMetaData {
+    width: 56rem;
+  }
+  .topSection {
+    /* margin-left: 4.5rem; */
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .videoContainer {
+    width: 45rem;
+  }
+  .courseMetaData {
+    width: 50rem;
+  }
+  .topSection {
+    /* margin-left: 4.5rem; */
+  }
+}

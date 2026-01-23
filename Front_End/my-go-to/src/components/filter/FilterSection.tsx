@@ -4,12 +4,17 @@ import React, { useEffect, useState } from "react";
 import styles from "../../styles/filterSection.module.css";
 import { CiFilter } from "react-icons/ci";
 import FilterModal from "@/modal/FilterModal";
+import { ResponseCourseDTO } from "@/types/courseData";
+import { getCourses, getCoursesByCategory, getCoursesByLevel, getCoursesByPrice } from "@/lib/Course-Backend";
 
+interface filterSectionProps {
+  SetCourses: React.Dispatch<React.SetStateAction<ResponseCourseDTO[] | null>>
+}
 
-const FilterSection = () => {
+const FilterSection = ({ SetCourses }: filterSectionProps) => {
 
- let [isMobile, SetMobile] = useState<Boolean>(false);
- let [flag, Setflag] = useState<Boolean>(false);
+ const [isMobile, SetMobile] = useState<Boolean>(false);
+ const [flag, Setflag] = useState<Boolean>(false);
 
 
   useEffect(() => {
@@ -21,37 +26,56 @@ const FilterSection = () => {
   const showFilter = () =>{
     Setflag((prev)=>!prev);
   }
+
+  const getALLCourse = async() =>{
+    const data = await getCourses();
+    SetCourses(data)  
+  }
+
+  const filterCategory = async(category: string) =>{
+    const data = await getCoursesByCategory(category);
+    SetCourses(data)
+  }
  
- 
+  const filterLevel = async(level: string) =>{
+    const data = await getCoursesByLevel(level);
+    SetCourses(data)
+  }
+
+  const filterPrice = async(price: number) =>{
+    const data = await getCoursesByPrice(price);
+    SetCourses(data)
+  }
+
   return <>
      <div className={styles.filterContainer}>
       {/* <CiFilter/> */}
         <header onClick={showFilter}>Filters { isMobile && (<CiFilter />) }   </header>
         <div className={styles.categorySection} style={{ display: isMobile ? 'none' : undefined }}>
           <p>Category</p>
-          <button>All Categories</button>
-          <button>BUSINESS</button>
-          <button>IT</button>
-          <button>MEDICINE</button>
-          <button>DESIGN</button>
-          <button>MARKETING</button>
-          <button>MUSIC</button>
-          <button>PHOTO</button>
+          <button onClick={getALLCourse}>All Categories</button>
+          <button onClick={()=>filterCategory("bussiness")}>BUSINESS</button>
+          <button onClick={()=>filterCategory("it")}>IT</button>
+          <button onClick={()=>filterCategory("medicine")}>MEDICINE</button>
+          <button onClick={()=>filterCategory("design")}>DESIGN</button>
+          <button onClick={()=>filterCategory("marketing")}>MARKETING</button>
+          <button onClick={()=>filterCategory("music")}>MUSIC</button>
+          <button onClick={()=>filterCategory("photo")}>PHOTO</button>
         </div>
         <div className={styles.categorySection} style={{ display: isMobile ? 'none' : undefined }}>
           <p>Level</p>
-          <button>All Level</button>
-          <button>EASY</button>
-          <button>MEDUIM</button>
-          <button>HARD</button>
+          <button onClick={getALLCourse}>All Level</button>
+          <button onClick={()=>filterLevel("EASY")}>EASY</button>
+          <button onClick={()=>filterLevel("MEDIUM")}>MEDIUM</button>
+          <button onClick={()=>filterLevel("HARD")}>HARD</button>
         </div>
         <div className={styles.categorySection} style={{ display: isMobile ? 'none' : undefined }} >
           <p>Price</p>
-          <button>All Price</button>
-          <button>FREE</button>
-          <button>Below 1000</button>
-          <button>Between 1000 & 50000</button>
-          <button>Above 50000</button>
+          <button onClick={getALLCourse}>All Price</button>
+          <button onClick={()=>filterPrice(0)}>FREE</button>
+          <button onClick={()=>filterPrice(999)}>Below 1000</button>
+          <button onClick={()=>filterPrice(4999)}>Between 1000 & 5000</button>
+          <button onClick={()=>filterPrice(5001)}>Above 5000</button>
         </div>        
      </div>
      {/*  */}

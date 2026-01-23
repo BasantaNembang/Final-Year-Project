@@ -4,42 +4,60 @@ import React, { useEffect, useState } from "react";
 import styles from "../../styles/courseContainer.module.css";
 import CardCourse from "../cardCourse/CardCourse";
 import { CiSearch } from "react-icons/ci";
-import { getCourses } from "@/api/Course-Backend";
-import { dto } from "@/types/courseData";
-import { useAuthContexHook } from "@/context/authContext";
+import { ResponseCourseDTO } from "@/types/courseData";
+import { getCourses, getCoursesByName } from "@/lib/Course-Backend";
 
 interface courseContainerProps {
   Setflag: React.Dispatch<React.SetStateAction<Boolean>>;
-  SetSelectedCourse: React.Dispatch<React.SetStateAction<dto | null>>
+  SetSelectedCourse: React.Dispatch<React.SetStateAction<ResponseCourseDTO | null>>,
+  Courses: ResponseCourseDTO[] | null
+  SetCourses: React.Dispatch<React.SetStateAction<ResponseCourseDTO[] | null>>
 }
 
-const CourseContainer = ({ Setflag, SetSelectedCourse }: courseContainerProps) => {
-  let [Courses, SetCourses] = useState<dto[] | null>(null);
+const CourseContainer = ({ Setflag, SetSelectedCourse, Courses, SetCourses }: courseContainerProps) => {
 
-   
-  //send the jwtToken as well for TESTING PURPOSE
-  const  { refreshToken } = useAuthContexHook();
+  const [seacrhQuery, setSeacrhQuery ] = useState<string>('');
 
-  useEffect(() => {
-    const fecthAllCourses = async () => {
-      const data = await getCourses();
-      SetCourses(data);
-    };
-    fecthAllCourses();
-  }, []);
-
-  const showCourseINFO = (data: dto) => {
+  const showCourseINFO = (data: ResponseCourseDTO) => {
     Setflag((prev) => !prev)
     SetSelectedCourse(data);   //set the selected data here
+  }
+  
+  const fecthAllCourses = async () => {
+    const data = await getCourses();
+    SetCourses(data);
   };
 
+  useEffect(() => {
+    fecthAllCourses();
+   }, []);
+
+  const getBySearch = (e: React.ChangeEvent<HTMLInputElement> ) =>{
+    if(e.target.value){
+      setSeacrhQuery(e.target.value);
+    }
+    else if(e.target.value === ''){
+       fecthAllCourses();
+    }
+  }
+
+  const getCourse = async() =>{
+   if(!seacrhQuery) return;
+    const data = await getCoursesByName(seacrhQuery);
+    SetCourses(data)
+  }
+
+  useEffect(()=>{
+    getCourse();
+  }, [seacrhQuery]);
   
+
   return (
     <>
       <div className={styles.courseContainer}>
         <div className={styles.filterText}>
-          <CiSearch id={styles.FilterICON} />{" "}
-          <input type="text" name="" id="" placeholder="Place for anything" />
+          <CiSearch id={styles.FilterICON} />
+          <input type="text" name="" id="" placeholder="Place for anything" onChange={getBySearch}/>
         </div>
         <div className={styles.courseList} >
           {

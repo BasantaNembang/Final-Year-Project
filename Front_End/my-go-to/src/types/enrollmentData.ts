@@ -15,3 +15,34 @@ export interface CountryNameDTO {
 }
 
 
+//for enrollment response 
+export interface EnrollmentResponse {
+     enroll_id: string;
+     userId: string;
+     courseDto: ResponseCourseDTO;
+}
+
+export interface ResponseCourseDTO {
+     course_id: string;
+     author: string;
+     description: string;
+     level: string;
+     time: number; 
+     thumbnail_url: string;
+     create_at: string; 
+     stream_id: string;
+     price: number; 
+     objectives: string[];
+     requirements: string[];
+     authorId: string,
+     categoryResponseDTO: CategoryResponseDTO;
+}
+
+export interface CategoryResponseDTO {
+     sub_c_id: string;
+     category: string;
+     subcategory: string;
+     course_id: string
+}
+
+

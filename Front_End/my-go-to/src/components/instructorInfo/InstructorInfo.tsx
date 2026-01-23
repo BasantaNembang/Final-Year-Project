@@ -1,21 +1,41 @@
-import React from 'react'
+"use client";
+
+import React, { useState, useEffect } from "react";
 import style from '../../styles/instructor.module.css'
+import { TeacherDto } from "@/types/usersData";
+import { getTeacherDetails } from "@/lib/Auth-Service";
+
+interface instructorInfoProps{
+  teacherID: string
+}
+
+const InstructorInfo = ({teacherID}: instructorInfoProps) => {
+
+  const [teacherDetails, SetTeacherDetails] = useState<TeacherDto | null>(null);
+   
+  const getTeacherInfo = async(userId: string) =>{
+      const response = await getTeacherDetails(userId)
+      SetTeacherDetails(response)
+  }
+     
+  useEffect(()=>{
+     getTeacherInfo(teacherID);
+  }, [teacherID]);
 
 
-const InstructorInfo = () => {
   return (
     <div className={style.instructorContainer}>
       <h3>Your Instructor</h3>
       <div className={style.instuctorBOX}>
         <div className={style.imageSectoin}>
          <figure>
-          <img src="https://www.kaashivinfotech.com/wp-content/uploads/2024/10/fs-java.png" alt="" />
+          <img src={teacherDetails?.imageUrl} alt="" />
          </figure>
         </div>
         <div className={style.informationSection}>
-          <span >Basanta Nembang</span>
-          <span>Software Enginner</span>
-          <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem at placeat vitae totam, accusantium dolor dolorum ducimus molestiae, doloremque tempore ipsa? Minima cupiditate eos qui similique, numquam adipisci in. Natus distinctio error commodi.</span>
+          <span >{teacherDetails?.username}</span>
+          <span>{teacherDetails?.job}</span>
+          <span>{teacherDetails?.background}</span>
         </div>
       </div>
     </div>

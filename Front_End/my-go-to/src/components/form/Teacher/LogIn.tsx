@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styles from "../../../styles/teacherAuthModel.module.css";
 import { LoginDetails } from "@/types/usersData";
 import { useForm } from "react-hook-form";
-import { loginTeacherBackend } from "@/api/Auth-Service";
+import axios from "axios";
+import { useRouter } from 'next/navigation';
 
 interface logInProps{
   SetFlag: React.Dispatch<React.SetStateAction<Boolean>>
@@ -13,6 +14,8 @@ const LogIn = ({SetFlag, SetAuthFlag}: logInProps) => {
   const form = useForm();
 
   const { register, handleSubmit } = form;
+
+  const router = useRouter();
 
   const [loginForm, SetLoginForm] = useState<LoginDetails>({
     email: "",
@@ -27,7 +30,14 @@ const LogIn = ({SetFlag, SetAuthFlag}: logInProps) => {
 
   
   const loginTeacher = async() => {
-     let response = await loginTeacherBackend(loginForm);
+    try{
+    let response = await axios.post('/api/auth/login', loginForm)
+    console.log("successfully")
+    console.log(response)
+    router.push("/upload")
+    }catch(error){
+      console.error(error)
+    }
   };
 
   const showSinUPTeaher = () =>{

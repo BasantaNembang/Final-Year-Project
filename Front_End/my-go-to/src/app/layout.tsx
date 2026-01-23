@@ -5,7 +5,7 @@ import { Roboto } from "next/font/google";
 import Fotter from "@/components/fotter/Fotter";
 import { ToastContainer } from "react-toastify";
 import { DraftContextProvider } from "../context/DraftContext";
-import { AuthContextProvider } from "@/context/authContext";
+import { PrivateContextProvider } from "@/context/helperContext";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -24,14 +24,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <AuthContextProvider>
-          <DraftContextProvider>
+        <DraftContextProvider>
+          <PrivateContextProvider>
             <Navbar />
             {children}
             <Fotter />
             <ToastContainer />
-          </DraftContextProvider>
-        </AuthContextProvider>
+          </PrivateContextProvider>
+        </DraftContextProvider>
       </body>
     </html>
   );

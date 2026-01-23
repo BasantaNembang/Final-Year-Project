@@ -1,4 +1,11 @@
-.reviewInfoContainer {
+.reviewInfoContainer{
+  position: relative;
+}
+#avg{
+  position: absolute;
+  left: 7rem;
+  top: 3rem;
+  font-size: 2rem;
 }
 .reviewInfoContainer h3 {
   font-size: 1.7rem;
@@ -11,6 +18,4 @@
   display: flex;
   gap: 1rem;
   font-size: 1.3rem;
-}
-.averageRating span {
 }
