@@ -1,7 +1,7 @@
 package com.category.service;
 
 import com.category.dto.CategoryDTO;
-import com.category.dto.ResponseDTO;
+import com.category.dto.CategoryResponseDTO;
 import com.category.entity.Category;
 import com.category.entity.SubCategory;
 import com.category.reposistory.CategoryRepo;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class SubCategoryServiceImp implements SubCategoryService {
@@ -24,12 +25,13 @@ public class SubCategoryServiceImp implements SubCategoryService {
 
     @Override
     @Transactional
-    public boolean saveCategoryInfo(CategoryDTO dto) {
+    public String saveCategoryInfo(CategoryDTO dto) {
        Category category =  categoryRepo.findByName(dto.category())
                .orElseGet(()-> Category.builder()
                        .name(dto.category())
                        .build());
        SubCategory subCategory = SubCategory.builder()
+               .sub_c_id(UUID.randomUUID().toString())
                .name(dto.subcategory())
                .course_id(dto.courseID())
                .build();
@@ -38,19 +40,31 @@ public class SubCategoryServiceImp implements SubCategoryService {
        category.getSubCategory().add(subCategory);
 
        categoryRepo.save(category);
-       return true;
+       return subCategory.getSub_c_id();
     }
 
 
     @Override
-    public ResponseDTO getSubCategoryInfo(int subCId) {
+    public CategoryResponseDTO getSubCategoryInfo(String subCId) {
         Optional<SubCategory> subCategory = subCategoryRepo.findById(subCId);
         if(subCategory.isEmpty()){
             throw new RuntimeException("No Info Founded !");
         }
-        ResponseDTO response =  new ResponseDTO(subCId, subCategory.get().getCategory(),
-                subCategory.get().getName(), "OIO-OOP");
-        return response;
+        return new CategoryResponseDTO(subCId, subCategory.get().getCategory().getName(),
+                subCategory.get().getName(), subCategory.get().getCourse_id());
+    }
+
+
+
+    @Override
+    public Boolean deleteSUBCategory(String cid) {
+        Optional<SubCategory> subCategory =  subCategoryRepo.findById(cid);
+        if(subCategory.isPresent()){
+            subCategoryRepo.deleteById(cid);
+            return true;
+        }else{
+           throw new RuntimeException("failed to delete.......");
+        }
     }
 
 

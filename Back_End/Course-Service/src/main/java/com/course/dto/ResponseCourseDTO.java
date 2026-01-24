@@ -10,6 +10,6 @@ import java.util.List;
 public record ResponseCourseDTO(String course_id, String author, String description, Difficulty level,
                                 int time, String thumbnail_url, Instant create_at, String stream_id,
                                 Double price, List<String> objectives, List<String> requirements,
-                                CategoryResponseDTO categoryResponseDTO) {
+                                String authorId, CategoryResponseDTO categoryResponseDTO) {
 
 }

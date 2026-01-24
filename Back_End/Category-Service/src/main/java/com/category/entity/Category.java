@@ -20,7 +20,8 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int cid;
+    private Long cid;
+
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")

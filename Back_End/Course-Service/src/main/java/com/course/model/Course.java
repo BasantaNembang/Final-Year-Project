@@ -24,19 +24,21 @@ public class Course {
     private String course_id;
 
     private String author;   //should be the person having role : MENTOR
-    private String title;
+    //private String title;  //name in sub category-service :: i think, i can remove this
     private String description;
 
     private Difficulty level;
     private int time;
     private String thumbnail_url;
     private Instant create_at;
-    private String stream_id;  //content-service
+    private String stream_id;  //content-service -> get the video content
     private Double price;
-    private String category; //category-service
 
     private List<String> objectives;
     private List<String> requirements;
+
+    private String category; //id of sub_category -> get category , title and so on............
+
 
 
 }

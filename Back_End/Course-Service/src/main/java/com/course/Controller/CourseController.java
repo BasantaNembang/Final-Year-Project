@@ -1,7 +1,7 @@
 package com.course.Controller;
 
 
-import com.course.dto.CourseDTO;
+import com.course.dto.ResponseCourseDTO;
 import com.course.service.CourseServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.UrlResource;
@@ -22,26 +22,24 @@ public class CourseController {
     private CourseServiceImp repo;
 
 
-    //token having role : MENTOR
+    //token having role : TEACHER
     @PostMapping("/save")
-    //@PreAuthorize("hasAnyRole('MENTOR')")
-    public ResponseEntity<CourseDTO> saveCourse(@RequestPart(value = "video", required = false) MultipartFile video,
-                                                @RequestPart(value ="image", required = false) MultipartFile image,
-                                                @RequestPart("dto") String dto){
+    @PreAuthorize("hasAnyRole('TEACHER')")
+    public ResponseEntity<ResponseCourseDTO> saveCourse(@RequestPart(value = "video", required = false) MultipartFile video,
+                                                        @RequestPart(value ="image", required = false) MultipartFile image,
+                                                        @RequestPart("dto") String dto){
         return ResponseEntity.status(HttpStatus.OK).body(repo.saveCourse(video, image, dto));
     }
 
     //get all courses
     @GetMapping("/get-all")
-//    @PreAuthorize("hasAnyRole('STUDENT') || hasAnyRole('Admin')") TEACHER
-//    @PreAuthorize("hasAnyRole('STUDENT')")
-    public ResponseEntity<List<CourseDTO>> getALlCourses(){
+    public ResponseEntity<List<ResponseCourseDTO>> getALlCourses(){
         return ResponseEntity.status(HttpStatus.OK).body(repo.getAllCourses());
     }
 
     //get courses by ID
     @GetMapping("/get/{courseId}")
-    public CourseDTO getCourseINFO(@PathVariable("courseId") String courseId){
+    public ResponseCourseDTO getCourseINFO(@PathVariable("courseId") String courseId){
         return repo.getCourseInfo(courseId);
     }
 
@@ -56,23 +54,56 @@ public class CourseController {
 
 
     //for updating the course
-    @PutMapping("/update")
-    public ResponseEntity<CourseDTO>  updateCourse(@RequestPart(value = "video", required = false) MultipartFile video,
-                                                @RequestPart(value ="image", required = false) MultipartFile image,
-                                                @RequestPart("dto") String dto){
-        return ResponseEntity.status(HttpStatus.OK).body(repo.updateCourse(video, image, dto));
+    @PutMapping("/update/{cid}")
+    @PreAuthorize("hasAnyRole('TEACHER')")
+    public ResponseEntity<String>  updateCourse(@RequestPart(value = "video", required = false) MultipartFile video,
+                                                           @RequestPart(value ="image", required = false) MultipartFile image,
+                                                           @RequestPart("dto") String dto,
+                                                           @PathVariable("cid") String cid,
+                                                           @RequestParam("uid") String uid){
+        return ResponseEntity.status(HttpStatus.OK).body(repo.updateCourse(video, image, dto, cid, uid));
     }
+
 
 
     @DeleteMapping("/delete/{cid}")
-   // @PreAuthorize("hasAnyRole('MENTOR')")
-    public ResponseEntity<String> deleteCourse(@PathVariable("cid") String cid){
-        return ResponseEntity.status(HttpStatus.OK).body(repo.deleteCourse(cid));
+    @PreAuthorize("hasAnyRole('TEACHER')")
+    public ResponseEntity<String> deleteCourse(@PathVariable("cid") String cid,
+                                               @RequestParam("uid") String uid){
+        return ResponseEntity.status(HttpStatus.OK).body(repo.deleteCourse(cid, uid));
     }
 
+
     @GetMapping("/check/{courseId}")
+    @PreAuthorize("hasAnyRole('STUDENT') || hasAnyRole('TEACHER')")
     public Boolean checkCourse(@PathVariable("courseId") String courseId){
         return repo.checkCourse(courseId);
+    }
+
+
+    @GetMapping("/get/category/{category}")
+    public ResponseEntity<List<ResponseCourseDTO>> getAllCourseByCategory(@PathVariable("category")
+                                                                          String category){
+        return ResponseEntity.status(HttpStatus.OK).body(repo.getAllCourseByCategory(category));
+    }
+
+
+    @GetMapping("/get/level/{level}")
+    public ResponseEntity<List<ResponseCourseDTO>> getAllCourseByLevel(@PathVariable("level")
+                                                                          String level){
+        return ResponseEntity.status(HttpStatus.OK).body(repo.getAllCourseByLevel(level));
+    }
+
+    @GetMapping("/get/price/{range}")
+    public ResponseEntity<List<ResponseCourseDTO>> getAllCourseByPriceRange(@PathVariable("range")
+                                                                       int range){
+        return ResponseEntity.status(HttpStatus.OK).body(repo.getAllCourseByPriceRange(range));
+    }
+
+    @GetMapping("/get/query/{name}")
+    public ResponseEntity<List<ResponseCourseDTO>> searchByCourse(@PathVariable("name")
+                                                                            String name){
+        return ResponseEntity.status(HttpStatus.OK).body(repo.searchByCourse(name));
     }
 
 

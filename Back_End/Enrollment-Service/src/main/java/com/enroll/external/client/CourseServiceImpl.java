@@ -1,6 +1,7 @@
 package com.enroll.external.client;
 
 
+import com.enroll.external.others.ResponseCourseDTO;
 import org.springframework.stereotype.Service;
 
 
@@ -23,7 +24,9 @@ public class CourseServiceImpl {
 //        throw new EnrollmentException(throwable.getMessage());
 //    }
 
-
+  public ResponseCourseDTO getCourseInfo(String courseId){
+        return courseService.getCourseINFO(courseId);
+  }
 
 
 }

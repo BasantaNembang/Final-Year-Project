@@ -14,3 +14,16 @@ spring:
     name: Eureka-Server
 
 
+    # fix-up
+    lease-renewal-interval-in-seconds: 30
+
+    lease-expiration-duration-in-seconds: 90
+
+  server:
+    eviction-interval-timer-in-ms: 60000
+
+    renewal-percent-threshold: 0.85
+
+    renewal-threshold-update-interval-ms: 900000
+
+    enable-self-preservation: true

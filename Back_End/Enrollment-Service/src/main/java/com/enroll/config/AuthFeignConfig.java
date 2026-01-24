@@ -15,6 +15,12 @@ public class AuthFeignConfig {
     @Bean
     public RequestInterceptor requestInterceptor(){
        return requestTemplate -> {
+
+           String URL = requestTemplate.path();
+           if(URL.startsWith("/course/get")){
+               return;
+           }
+
            ServletRequestAttributes requestAttributes =
                    (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
            if(requestAttributes!=null){

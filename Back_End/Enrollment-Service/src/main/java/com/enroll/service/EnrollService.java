@@ -13,6 +13,5 @@ public interface EnrollService {
 
     List<EnrollmentDTO> getAllEnrollmentCourse();
 
-    EnrollmentResponse getEnrollmentInfo(String enrollId);
-
+    List<EnrollmentResponse> getEnrolledCourseByUSER(String userId);
 }

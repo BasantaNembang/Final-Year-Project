@@ -9,7 +9,6 @@ import com.auth.reposistory.AccountRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Function;
 
@@ -58,10 +58,8 @@ public class JwtService {
 
 
     private SecretKey getSecretKey() {
-        byte [] byteKey = Decoders.BASE64.decode(theKEY);
-        return Keys.hmacShaKeyFor(byteKey);
+         return Keys.hmacShaKeyFor(theKEY.getBytes(StandardCharsets.UTF_8));
     }
-
 
     public Date extractExpiration(String token){
         return extractClaim(token, Claims::getExpiration);
@@ -88,13 +86,13 @@ public class JwtService {
 
 
         Map<String, Object> cls = new HashMap<>();
-        cls.put("roles", account instanceof Teacher ? "MENTOR" : "STUDENT");
+        cls.put("roles", account instanceof Teacher ? "TEACHER" : "STUDENT");
          return Jwts.builder()
                  .claims()
                  .add(cls)
                  .setSubject(username)
                  .issuedAt(new Date(System.currentTimeMillis()))
-                 .expiration(new Date(System.currentTimeMillis() + 180000 )) // 3 mins
+                 .expiration(new Date(System.currentTimeMillis() +  3600000)) // 60 mins
                  .and()
                  .signWith(getSecretKey(),  SignatureAlgorithm.HS256).compact();
     }

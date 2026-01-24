@@ -23,15 +23,12 @@ public class Review {
     @Column(name = "course_id")
     private String courseId;
 
-    @Column(name = "user_id")
-    private String userId;
+    private String username;
 
     private Instant time;
 
     private int rating;
 
-    private int message;
-
-
+    private String message;
 
 }

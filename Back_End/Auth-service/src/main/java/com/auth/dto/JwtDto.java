@@ -6,6 +6,7 @@ import lombok.Builder;
 public record JwtDto(
         String jwtToken,
         String refreshToken,
-        String role
+        //String role,
+        String userId
         ) {
 }

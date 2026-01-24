@@ -1,0 +1,23 @@
+
+spring:
+  application:
+    name: ENROLLMENT-SERVICE
+
+eureka:
+  client:
+    enabled: false
+
+
+server:
+  port: 0
+
+logging:
+  level:
+    org.testcontainers: DEBUG
+    com.github.dockerjava: DEBUG
+
+jwt:
+  secret: 12345678901234567890123456789012  # 32 chars = 256 bits
+
+
+

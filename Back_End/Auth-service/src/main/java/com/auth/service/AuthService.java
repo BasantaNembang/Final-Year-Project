@@ -1,12 +1,15 @@
 package com.auth.service;
 
 
+import com.auth.dto.TeacherDto;
 import com.auth.dto.UserRequest;
 import com.auth.entity.Account;
 import com.auth.entity.Teacher;
 import com.auth.entity.User;
 import com.auth.error.AuthException;
 import com.auth.reposistory.AccountRepository;
+import com.auth.reposistory.TeacherRepository;
+import com.auth.reposistory.UserRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +25,12 @@ public class AuthService {
     @Autowired
     private HelperService helperService;
 
+    @Autowired
+    private TeacherRepository teacherRepository;
+
+    @Autowired
+    private UserRepo userRepo;
+
     private final AccountRepository accountRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -36,6 +45,7 @@ public class AuthService {
         if(accountRepository.findByEmail(email).isPresent()){
             throw new AuthException("User already logged-IN", 409);}
     }
+
 
     @Transactional
     public String signupUser(MultipartFile file, String userDto){
@@ -74,23 +84,49 @@ public class AuthService {
         account.setPassword(passwordEncoder.encode(userRequest.password()));
         account.setRole(userRequest.role());
         accountRepository.save(account);
+
+        System.out.println("user created successfully  " + account);
         return account.getEmail();
 
     }
 
-//    public UserRequest getUserInfo(String userId) {
-//        Optional<User> user = userRepo.findById(userId);
-//        if(user.isEmpty()){
-//            throw new AuthException("No user found having Id " + userId);
-//        }else{
-//            return UserRequest.builder()
-//                    .uid(user.get().getUid())
-//                    .username(user.get().getUsername())
-//                    .address(user.get().getAddress())
-//                    .phone_num(user.get().getPhone_num())
-//                    .roles(new HashSet<>(user.get().getRoles()))
-//                    .email(user.get().getEmail())
-//                    .build();
-//        }
-//    }
+    public String isPresentUser(String userId) {
+        return  accountRepository.findById(userId)
+                .map(Account::getEmail)
+                .orElseThrow(()->new AuthException("No such user Found"));
+    }
+
+
+    //for nested statement we generally use flatmap
+    public TeacherDto getTeacherDetail(String userId) {
+         return accountRepository.findById(userId)
+                .flatMap(m->teacherRepository.findById(m.getAid()))
+                .map(m->new TeacherDto(m.getUsername(),
+                        m.getJob(), m.getPhoneNumber(), m.getAddress(),
+                       m.getBackground(), m.getImageUrl()))
+                .orElseThrow(()->new AuthException("No such user is present"));
+    }
+
+
+    //filter fot condition
+    //flatmap for optional value
+    //map for value
+    public String getUserName(String userId) {
+          return accountRepository.findById(userId)
+                .filter(m -> m.getRole().equals("TEACHER"))
+                .flatMap(m->teacherRepository.findById(userId))
+                .map(Teacher::getUsername)
+                .orElseGet(()->userRepo.findById(userId).map(User::getUsername)
+                        .orElseThrow(()->new AuthException("No such user is present")));
+    }
+
+
+    public String getEmailName(String userId) {
+        return accountRepository.findById(userId)
+                .map(Account::getEmail)
+                .orElseThrow(()->new AuthException("No such user is found"));
+    }
+
+
+
 }

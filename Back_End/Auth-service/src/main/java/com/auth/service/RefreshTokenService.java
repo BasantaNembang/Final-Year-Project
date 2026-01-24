@@ -44,7 +44,7 @@ public class RefreshTokenService {
         }
 
 
-        refreshToken.setExpiry_time(Instant.now().plusSeconds(300)); //5 mis
+        refreshToken.setExpiry_time(Instant.now().plusSeconds(18000)); //5hrs
         refreshToken.setToken(UUID.randomUUID().toString());
         //refreshToken.setUser();
         refreshToken.setAccount(account);

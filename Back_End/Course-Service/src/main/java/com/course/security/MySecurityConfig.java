@@ -1,8 +1,8 @@
 package com.course.security;
 
 
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtGra
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -30,23 +31,29 @@ public class MySecurityConfig {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
+    @Autowired
+    private CustomAccessDeniedHandler accessDeniedHandler;
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-         http
+        return http
                 .authorizeHttpRequests(auth->
                         auth
-                                .requestMatchers("/course/get-all", "/course/Images/**").permitAll()
+                                .requestMatchers("/course/get-all", "/course/get/**", "/course/Images/**")
+                                .permitAll()
                                 .anyRequest().authenticated())
+                .exceptionHandling(exc->exc
+                        .accessDeniedHandler(accessDeniedHandler))
                 .oauth2ResourceServer(server->
-                        server.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter())));
-         return http.build();
+                        server.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter())))
+         .build();
 
     }
 
     @Bean
     public JwtDecoder jwtDecoder(){  //used to validate the token.............
-        byte[] bytes = Decoders.BASE64.decode(jwtSecret);
-        SecretKey key = Keys.hmacShaKeyFor(bytes);
+        SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
         return NimbusJwtDecoder.withSecretKey(key).build();
     }
 

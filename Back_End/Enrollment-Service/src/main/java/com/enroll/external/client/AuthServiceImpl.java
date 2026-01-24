@@ -1,6 +1,5 @@
 package com.enroll.external.client;
 
-import com.enroll.external.others.UserDto;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,8 +11,8 @@ public class AuthServiceImpl {
         this.authService = authService;
     }
 
-    public UserDto userINFO(String userId){
-        return authService.userINFO(userId);
+    public String isPresent(String userId){
+        return authService.isPresent(userId);
     }
 
 

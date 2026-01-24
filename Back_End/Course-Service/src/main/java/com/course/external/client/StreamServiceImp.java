@@ -14,13 +14,19 @@ public class StreamServiceImp {
     }
 
     //save Video
-    public String saveVideo(MultipartFile video) {
-       return   streamService.saveVideo(video);
+    public String uploadVideo(MultipartFile video) {
+       return  streamService.uploadVideo(video);
     }
 
     //update Video
     public Boolean updateVideo(MultipartFile video, String OldVid) {
         return streamService.updateVideo(video, OldVid);
     }
+
+    //delete video
+    public Boolean deleteVideo(String stream_id){
+        return streamService.deleteVideo(stream_id);
+    }
+
 
 }
