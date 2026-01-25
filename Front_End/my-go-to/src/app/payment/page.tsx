@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/paymentPage.module.css";
 import { useSearchParams } from "next/navigation";
@@ -12,14 +14,25 @@ import axios from "axios";
 import { useHelperContexHook } from "@/context/helperContext";
 
 const PaymentPage = () => {
-
+  const [CourseId, setCourseId] = useState<string | null>(null);
+  const [price, setPrice] = useState<string | null>(null);
   const { setIsPrivate } = useHelperContexHook();
 
   var CryptoJS = require("crypto-js");
 
-  const searchParams = useSearchParams();
-  const CourseId = searchParams.get("courseId");
-  const price = searchParams.get("price");
+  // const searchParams = useSearchParams();
+  // const CourseId = searchParams.get("courseId");
+  // const price = searchParams.get("price");
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    setCourseId(searchParams.get("courseId"));
+    setPrice(searchParams.get("price"));
+  }, []);
+
+
+
+
 
   const[user_id, SetUser_id] = useState<string | null>(null);
 
@@ -87,9 +100,7 @@ const PaymentPage = () => {
 
     //call the backend-API (Enrollment-Service)
     try{
-    let response = await axios.post('/api/backend/enroll', paymentForm)
-    console.log('response')
-    console.log(response)
+    const response = await axios.post('/api/backend/enroll', paymentForm)
     if(response?.data.msg === "ENROLL-SUCCESS"){     
 
       toast.success("Course purchase sucessfully")
@@ -117,7 +128,6 @@ const PaymentPage = () => {
   };
 
 
-  
 
 
   return (

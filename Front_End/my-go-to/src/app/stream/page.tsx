@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic"; 
+
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../../styles/streampage.module.css";
 import Link from "next/link";
@@ -38,6 +40,11 @@ const StreamPage = () => {
   const [streamURL, setStreamURL] = useState<string>('');
 
   const didRun = useRef(false);
+
+
+  if (!streamData || !streamData.courseDto) {
+    return <div>Loading...</div>;
+  }
 
 
   const roomId = streamData?.courseDto.course_id as string;
@@ -87,8 +94,11 @@ const StreamPage = () => {
   }
   
   useEffect(()=>{
-    //get_STREAM_URL(stream_ID);
+    get_STREAM_URL(stream_ID);
   }, [stream_ID]);
+
+  
+
 
     
   const openDashBoard = (text: string) =>{
@@ -125,8 +135,6 @@ const StreamPage = () => {
       SetFlagReview(false)
     }   
   }
-  
-  
 
 
   return (
@@ -136,7 +144,7 @@ const StreamPage = () => {
           <span className={styles.topSection}><IoChevronBackOutline /> <button onClick={()=>setIsPrivate(false)}>Back to my Learning</button> </span>
         </Link>
 
-        {/* <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div>Loading...</div>}>
           <div className={styles.videoContainer}>
             <VideoPlayer streamURL={streamURL} />
             <h3>{streamData?.courseDto.categoryResponseDTO.subcategory}</h3>
@@ -149,7 +157,7 @@ const StreamPage = () => {
               </ul>
             </div>
           </div>
-        </Suspense> */}
+        </Suspense>
        <div className={styles.courseMetaData}>
        <hr style={{color:'whitesmoke'}}/>
        <div className={styles.courses}>
