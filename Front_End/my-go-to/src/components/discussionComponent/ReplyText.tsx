@@ -11,23 +11,21 @@ import { Client, Stomp } from "@stomp/stompjs";
 interface replyTextProps{
    SetshowReplyComTXT: React.Dispatch<React.SetStateAction<Boolean>>,
    destination: string
-   setMessage ?: React.Dispatch<React.SetStateAction<Messages | null>>
+   setMessage ?: React.Dispatch<React.SetStateAction<Messages | null>>,
+   token?: string
 }
 
-const ReplyText = ({SetshowReplyComTXT, destination, setMessage}: replyTextProps) => {
-
+const ReplyText = ({SetshowReplyComTXT, destination, setMessage, token}: replyTextProps) => {
 
   const { connected, cuurentUser } = useHelperContexHook();
-  let [disscussNote, setDiscussNote] = useState<string>('');
-  let[stompClient, setStompClient] = useState<Client | null>(null);  
-  
+  const [disscussNote, setDiscussNote] = useState<string>('');
+  const[stompClient, setStompClient] = useState<Client | null>(null);  
 
-  let[disscussData, setDisscussData] = useState<Disscuss>({
+  const[disscussData, setDisscussData] = useState<Disscuss>({
       sender: cuurentUser,
       content: disscussNote,
   }); 
-
-
+  
   const trackComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
     if (text !== "") {
@@ -35,13 +33,34 @@ const ReplyText = ({SetshowReplyComTXT, destination, setMessage}: replyTextProps
     }      
   }
 
+  //for chat
+  useEffect(() => {
+    const connectWebSocket = () => {
+      if(!token) return;
+      const client = Stomp.over(() => new SockJS("http://localhost:8090/ws"));
+        client.connect(
+        { Authorization : `Bearer ${token}` }, 
+        () => {
+         setStompClient(client);
+        },
+
+        ()=>{
+         throw new Error("unable to communicate invalid jwtToken")
+        }
+      
+      );
+    };
+    connectWebSocket();
+  }, [setMessage]);
+
+
   const removeTHIS = () =>{
     SetshowReplyComTXT(false)
   }  
 
 
   const postComment = () => {
-    if(stompClient!==null && connected){
+    if(stompClient!==null){
         stompClient.publish({
           destination: destination,
           body: JSON.stringify(disscussData)
@@ -50,19 +69,6 @@ const ReplyText = ({SetshowReplyComTXT, destination, setMessage}: replyTextProps
        removeTHIS();
     }
   }
-
-
-  //for chat
-  useEffect(() => {
-    const connectWebSocket = () => {
-      const client = Stomp.over(() => new SockJS("http://localhost:8090/ws"));
-        client.connect({}, () => {
-         setStompClient(client);
-        });
-    };
-    connectWebSocket();
-  }, [setMessage]);
-
 
 
 

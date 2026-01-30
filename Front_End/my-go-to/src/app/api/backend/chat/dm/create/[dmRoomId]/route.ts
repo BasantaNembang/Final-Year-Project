@@ -5,8 +5,20 @@ export async function POST(req: NextRequest, context: any) {
 
     const { dmRoomId } = await context.params;
 
+    const jwt = 'jwtToken';
+
+    const jwtToken = req.cookies.get(jwt)?.value;
+
+
     try {
-        const response = await API.post(`/room/dm-create/${dmRoomId}`)
+        const response = await API.post(`/room/dm-create/${dmRoomId}`, {},
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${jwtToken}`,
+                }
+            }
+        )
         return NextResponse.json({
             msg: "success",
             data: response.data

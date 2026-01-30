@@ -6,8 +6,18 @@ export async function GET(req: NextRequest, context: any) {
 
     const { dmRoomId } = await context.params;
 
+    const JWT = "jwtToken";
+
+    const jwtToken = req.cookies.get(JWT)?.value;
+
     try {
-        await API.get(`/room/dm-join/${dmRoomId}`);
+        await API.get(`/room/dm-join/${dmRoomId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${jwtToken}`,
+                }
+            }
+        );
         return NextResponse.json({
             msg: "success",
         })

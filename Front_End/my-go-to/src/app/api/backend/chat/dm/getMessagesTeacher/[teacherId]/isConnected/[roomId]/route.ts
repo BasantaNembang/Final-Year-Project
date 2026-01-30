@@ -1,14 +1,23 @@
 import API from "@/lib/axiosClient";
-import axios from "axios";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(req: NextRequest, context: any) {
 
-
     const { roomId } = await context.params;
 
+    const JWT = "jwtToken";
+
+    const jwtToken = req.cookies.get(JWT)?.value;
+
+
     try {
-        await axios.get(`http://localhost:8090/room/join/${roomId}`);
+        await API.get(`/room/join/${roomId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${jwtToken}`,
+                }
+            }
+        );
         return NextResponse.json({
             msg: "success",
         })

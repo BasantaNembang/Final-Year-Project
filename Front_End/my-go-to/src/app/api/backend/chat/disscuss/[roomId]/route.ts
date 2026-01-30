@@ -1,5 +1,4 @@
 import API from "@/lib/axiosClient";
-import axios from "axios";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(req: NextRequest, context: any) {
@@ -10,8 +9,18 @@ export async function GET(req: NextRequest, context: any) {
     const page = searchParams.get("page")
     const size = searchParams.get("size")
 
+    const jwt = 'jwtToken';
+
+    const jwtToken = req.cookies.get(jwt)?.value
+
     try {
-        const response = await axios.get(`http://localhost:8090/room/messages/${roomId}?page=${page}&size=${size}`);
+        const response = await API.get(`/room/messages/${roomId}?page=${page}&size=${size}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${jwtToken}`
+                }
+            }
+        );
         return NextResponse.json({
             msg: "success",
             data: response.data

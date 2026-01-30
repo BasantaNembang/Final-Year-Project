@@ -11,14 +11,13 @@ interface messageProps{
   teacherId: string,
 }
 
+
 const Message = ({ teacherId }: messageProps) => {
+  
   const [chatData, setChatData] = useState<dmMessages | null>(null);
-  const [dmRoomId, setDmRoomId] = useState<string | null>(null);
-  const [courseId, setCourseId] = useState<string | null>(null);
   const [teacherMsg, setTeacherMsg] = useState<TeacherDmMSG[] | null>(null);
   const [listOfSTD, setListOfSTD] = useState<dmMessages[] | []>([]);
   const [dmContent, setDmContent] = useState<DmSubMessages[] | null>(null);
-  const [flag, setflag] = useState<boolean>(false);
 
   const hasRun = useRef(false);
 
@@ -29,54 +28,51 @@ const Message = ({ teacherId }: messageProps) => {
     setTeacherMsg(response.data)
   }  
 
-  useEffect(()=>{
-     setflag(false)
-  }, [chatData]);
-
-  //initial rendering.........
-  useEffect(()=>{
-  if (hasRun.current) return; 
-     hasRun.current = true;   
-   getAllTeacherMsg();
-  }, [teacherId]);
-
-
-  useEffect(()=>{
-    if(flag === true){
+ 
+  useEffect(()=>{  //initial rendering.........
+    if (hasRun.current) return; 
+      hasRun.current = true;   
       getAllTeacherMsg();
-    }
-  }, [flag]);
+   }, [teacherId]);
 
+  
+  useEffect(()=>{
+    if(!dmContent) return;
+    getAllTeacherMsg();
+  }, [dmContent]);
 
-  const getTheRoomID = () =>{
-    if(!teacherMsg) return;  //setting the roomId and Course Id 
-    setCourseId(teacherMsg[0].roomId.slice(0, 8))
-    setDmRoomId(teacherMsg[0].roomId.slice(0, 8) + "_" + teacherId)
-  }
 
   const defSetLISTData = () =>{
      if(!listOfSTD) return; 
+     setListOfSTD([]);
+
      teacherMsg?.map((each, _)=>{
-     setListOfSTD(prev=> [...prev, ...each.dmMessages])})
+     setListOfSTD(prev=> [...prev, ...each.dmMessages])}
+    )
   }
 
 
   useEffect(()=>{
     if(!teacherMsg) return;
-    defSetLISTData();
-    getTheRoomID();
+     defSetLISTData();
   }, [teacherMsg]);
+
 
     
   return (
     <>
       <div className={styles.messageContainer}>
         <ListStudent listOfSTD={listOfSTD} setChatData={setChatData} />
-        <Chat chatData={chatData} dmRoomId={dmRoomId!}  flag={flag} setflag={setflag}
-         courseId={courseId!} teacherId={teacherId} dmContent={dmContent} setDmContent={setDmContent}/> 
+        {
+          chatData &&  teacherId && (
+          <Chat chatData={chatData} teacherMsg={teacherMsg}
+           teacherId={teacherId} dmContent={dmContent} setDmContent={setDmContent}/> 
+          )
+        }
       </div>
     </>
   );
 };
 
 export default Message;
+

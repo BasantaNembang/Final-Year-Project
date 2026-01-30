@@ -3,16 +3,16 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/discussionComponent.module.css";
 import { IoArrowBackSharp } from "react-icons/io5";
-import EachDiscussion from "./EachDiscussion";
 import { FaRegComment } from "react-icons/fa6";
 import ReplyText from "./ReplyText";
 import ReplyComment from "./ReplyComment";
 import { useHelperContexHook } from "@/context/helperContext";
-import { getALlDisscussionMessage, getALlReplyDisscssMessage } from "@/lib/Chat-Service";
-import { Messages, SubMessage } from "@/types/chatData";
+import {  getALlReplyDisscssMessage } from "@/lib/Chat-Service";
+import { Messages } from "@/types/chatData";
 import TimeStamp from "../timeStamp/TimeStamp";
 import SockJS from "sockjs-client";
-import { Client, Stomp } from "@stomp/stompjs";
+import { Stomp } from "@stomp/stompjs";
+import { getJwtToken } from "@/lib/Helper-Two";
 
 interface replyDiscussionProps {
   SetshowReplyMessage: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,9 +22,10 @@ const ReplyDiscussion = ({ SetshowReplyMessage }: replyDiscussionProps) => {
 
   const {messageId } = useHelperContexHook();
  
-  let[showReplyComTXT, SetshowReplyComTXT] = useState<Boolean>(false);  
+  const [showReplyComTXT, SetshowReplyComTXT] = useState<Boolean>(false);  
 
-  let [message, setMessage] = useState<Messages | null>(null);
+  const [message, setMessage] = useState<Messages | null>(null);
+  const[token, setToken] = useState<string | null>(null);  
 
 
   const getReplyMesage = async() =>{
@@ -34,7 +35,7 @@ const ReplyDiscussion = ({ SetshowReplyMessage }: replyDiscussionProps) => {
 
   //send the API     
   useEffect(()=>{
-     getReplyMesage();
+    getReplyMesage();
   }, [messageId]);
 
 
@@ -42,12 +43,21 @@ const ReplyDiscussion = ({ SetshowReplyMessage }: replyDiscussionProps) => {
 
   const roomId = messageId[0];
 
+  const getTheToken = async() =>{
+    const token = await getJwtToken()
+    setToken(token.jwtToken)
+  }
+  
+  useEffect(()=>{
+   getTheToken()  
+  }, []);
+
 
   //for real-time
   useEffect(() => {
       const connectWebSocket = () => {
         const client = Stomp.over(() => new SockJS("http://localhost:8090/ws"));
-        client.connect({}, () => {
+        client.connect({Authorization : `Bearer ${token}`}, () => {
           try {
           client.subscribe(`/topic/sub_room/${roomId}`, (message) => {
             const newMessage  = JSON.parse(message.body);
@@ -58,7 +68,7 @@ const ReplyDiscussion = ({ SetshowReplyMessage }: replyDiscussionProps) => {
         });
       };
       connectWebSocket();
-    }, []);
+    }, [token]);
   
 
   const backToDiscussions = () => {

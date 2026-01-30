@@ -8,6 +8,20 @@ interface countyProps{
 
 const CountryInputField = ({SetCountyName}: countyProps) => {
 
+
+const myStyle: React.CSSProperties = {
+  marginTop: '.7rem',
+  width: '95%',
+  backgroundColor: 'transparent',
+  height: '2.6rem',
+  outline: 'none',
+  border: '1px solid #bdbdbd',
+  borderRadius: '.5rem',
+  boxSizing: 'border-box',
+  padding: '0 1.4rem',
+};
+
+
   
  const trackCountryField = (e: React.ChangeEvent<HTMLSelectElement> ) => {
   const {value} = e.target;
@@ -20,7 +34,7 @@ const CountryInputField = ({SetCountyName}: countyProps) => {
   return (
     <>
       <label htmlFor="country">Country</label> <br />
-      <select id="country" name="country" style={{marginTop:".7rem"}} onChange={trackCountryField} required>
+      <select id="country" name="country" style={myStyle} onChange={trackCountryField} required>
         <option value="">-- Select a country --</option>
         <option value="Afghanistan">Afghanistan</option>
         <option value="Albania">Albania</option>

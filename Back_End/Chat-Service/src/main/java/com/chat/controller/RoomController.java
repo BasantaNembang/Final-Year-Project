@@ -8,6 +8,7 @@ import com.chat.service.RoomServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,18 +25,21 @@ public class RoomController {
 
     //for the discussion API
     @PostMapping("/create/{roomId}")
+    @PreAuthorize("hasAnyRole('STUDENT')")
     public ResponseEntity<?> createRoom(@PathVariable("roomId") String roomId){
         return ResponseEntity.status(HttpStatus.OK).body(serviceImple.createRoom(roomId));
     }
 
 
     @GetMapping("/join/{roomId}")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER')")
     public ResponseEntity<?> joinRoom(@PathVariable("roomId") String roomId){
         return ResponseEntity.status(HttpStatus.OK).body(serviceImple.joinRoom(roomId));
     }
 
 
     @GetMapping("/messages/{roomId}")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER')")
     public ResponseEntity<List<Message>> getMessages(@PathVariable("roomId") String roomId,
                                                       @RequestParam(defaultValue = "0") int page,
                                                       @RequestParam(defaultValue = "3") int size
@@ -47,6 +51,7 @@ public class RoomController {
 
     //to view the reply message
     @GetMapping("/messages")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER')")
     public ResponseEntity<Message> getReplyMessages(@RequestParam("roomId") String roomId,
                                                      @RequestParam("mId") String mId
     ){
@@ -57,6 +62,7 @@ public class RoomController {
 
     //like in a reply
     @PostMapping("/like")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER')")
     public ResponseEntity<String> likeTheMessage(@RequestParam("roomId") String roomId,
                                                   @RequestParam("mId") String mId,
                                                   @RequestParam("sMId") String sMId,
@@ -69,12 +75,14 @@ public class RoomController {
 
     //for the dm APIS
     @PostMapping("/dm-create/{roomId}")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER')")
     public ResponseEntity<String> createDMRoom(@PathVariable("roomId") String roomId){
        return ResponseEntity.status(HttpStatus.OK).body(dmRoomServiceImple.createRoom(roomId));
     }
 
 
     @GetMapping("/dm-join/{roomId}")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER')")
     public ResponseEntity<?> joinDMRoom(@PathVariable("roomId") String roomId){
         return ResponseEntity.status(HttpStatus.OK).body(dmRoomServiceImple.joinRoom(roomId));
     }
@@ -82,6 +90,7 @@ public class RoomController {
 
     //student
     @GetMapping("/dm-messages/student/{roomId}")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER')")
     public ResponseEntity<List<DmSubMessages>> getMessagesCourseSTD(@PathVariable("roomId") String roomId,
                                                                     @RequestParam("studentId") String studentId){
         return ResponseEntity.status(HttpStatus.OK)
@@ -90,6 +99,7 @@ public class RoomController {
 
     //get the list of message received by teacher
     @GetMapping("/dm-messages/teacher/{teacherId}")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER')")
     public ResponseEntity<List<DmRoom>> getTeacherMessages(@PathVariable("teacherId") String teacherId){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(dmRoomServiceImple.getTeacherMessages(teacherId));

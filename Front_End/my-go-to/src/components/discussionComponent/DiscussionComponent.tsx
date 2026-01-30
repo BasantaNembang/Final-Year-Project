@@ -9,10 +9,9 @@ import { getALlDisscussionMessage } from "@/lib/Chat-Service";
 import { Messages } from "@/types/chatData";
 import { Stomp } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
+import { getJwtToken } from "@/lib/Helper-Two";
 
 //after the login, in a context make value connected?? so that easy for commication
-
-
 interface discussionComponentProps {
   SetshowReplyMessage: React.Dispatch<React.SetStateAction<boolean>>,
   roomId: string
@@ -27,38 +26,43 @@ export interface totalHelper{
 
 const DiscussionComponent = ({ SetshowReplyMessage, roomId }: discussionComponentProps) => {
 
-  let[showReplyComTXT, SetshowReplyComTXT] = useState<Boolean>(false);  
-  let[message, setMessages] = useState<Messages[]>([]);  
+  const[showReplyComTXT, SetshowReplyComTXT] = useState<Boolean>(false);  
+  const[message, setMessages] = useState<Messages[]>([]);  
+  const[token, setToken] = useState<string | null>(null);  
 
-  let[helper, sethelper] = useState<Messages | null>(null);  
-  let[fix, setfix] = useState<totalHelper>({
+  const[helper, sethelper] = useState<Messages | null>(null);  
+  const[fix, setfix] = useState<totalHelper>({
     id:'',
     total:0
   });  
 
-
-
-  let [page, setPage] = useState<number>(0);
-  let [currentPageSize, setcurrentPageSize] = useState<number>(0);
+  const [page, setPage] = useState<number>(0);
+  const [currentPageSize, setcurrentPageSize] = useState<number>(0);
   const size = 3;
 
-
   const destination  = `/app/message/${roomId}`;
-
 
   const askQuestion = () => {
    SetshowReplyComTXT(true)
   }
-
 
   //for chat-service
   const getOldMessages = async() =>{
      const response = await getALlDisscussionMessage(roomId, page, size);
      setMessages(response.data)
   }
+
+  const getTheToken = async() =>{
+    const token = await getJwtToken()
+    setToken(token.jwtToken)
+  }
+
+  useEffect(()=>{
+    getTheToken()  
+  }, []);
   
   useEffect(()=>{
-     getOldMessages();  
+    getOldMessages();  
   }, [page]);
 
   useEffect(()=>{
@@ -69,45 +73,51 @@ const DiscussionComponent = ({ SetshowReplyMessage, roomId }: discussionComponen
   const updateMessage = (messages: Messages[]) =>{
     setMessages(messages)
   }
- 
-  //for real-time
+
+  
+
   useEffect(() => {
     const connectWebSocket = () => {
+
+      if(!token) return;
+    
       const client = Stomp.over(() => new SockJS("http://localhost:8090/ws"));
-      client.connect({}, () => {
-        try {
-        client.subscribe(`/topic/room/${roomId}`, (message) => {
-          const newMessage  = JSON.parse(message.body);
-          updateMessage(newMessage)
-        });
-        } catch (error) {
-          console.error(error);}
+      
+      client.connect( {Authorization : `Bearer ${token}`}, 
+          () => {
+          try {
+          client.subscribe(`/topic/room/${roomId}`, (message) => {
+            const newMessage  = JSON.parse(message.body);
+            updateMessage(newMessage)
+          });
+          } catch (error) {
+            console.error(error);}
 
-        // added
-        try {
-        client.subscribe(`/topic/sub_room/${roomId}`, (message) => {
-          const newMessage  = JSON.parse(message.body);
-          sethelper(newMessage)
-        });
-        } catch (error) {
-          console.error(error);}          
-      });
-    };
+          try {
+          client.subscribe(`/topic/sub_room/${roomId}`, (message) => {
+            const newMessage  = JSON.parse(message.body);
+            sethelper(newMessage)
+          });
+          } catch (error) {
+            console.error(error)
+          }          
+      },
+      (error : any) =>{
+        throw new Error("Authentication fail in web-socket")
+      }
+    );    
+   };
     connectWebSocket();
-  }, [roomId]);
-
+  }, [roomId, token]);
 
 
   useEffect(()=>{
     if(!helper) return;
-
       setfix({
         id: helper?.mid,
         total: helper?.subMessages.length
       })
-
   }, [helper]);
-
 
 
   return (
@@ -118,7 +128,7 @@ const DiscussionComponent = ({ SetshowReplyMessage, roomId }: discussionComponen
           <button onClick={askQuestion}>Ask a Questions</button>
         </div>
         
-        { showReplyComTXT && ( <ReplyText SetshowReplyComTXT={SetshowReplyComTXT} destination={destination}/> )  }
+        { showReplyComTXT && ( <ReplyText SetshowReplyComTXT={SetshowReplyComTXT} destination={destination} token={token!}/> )  }
         
         <div style={{ marginTop: "1rem" }}>
           {

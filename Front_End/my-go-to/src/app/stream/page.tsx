@@ -69,7 +69,7 @@ const StreamPage = () => {
     if (didRun.current) return;
     didRun.current = true;    
     createRoomDM()     // for dms
-    checkForTheConnection();  //for the disscussion
+    //checkForTheConnection();  //for the disscussion :: remove of now
     setIsPrivate(true)   //to remove the stuffs of navbar
   }, [ ]);
 
@@ -94,12 +94,10 @@ const StreamPage = () => {
   }
   
   useEffect(()=>{
-    get_STREAM_URL(stream_ID);
+    //get_STREAM_URL(stream_ID);
   }, [stream_ID]);
 
   
-
-
     
   const openDashBoard = (text: string) =>{
     if (text === "courseInfo") {
@@ -144,7 +142,7 @@ const StreamPage = () => {
           <span className={styles.topSection}><IoChevronBackOutline /> <button onClick={()=>setIsPrivate(false)}>Back to my Learning</button> </span>
         </Link>
 
-        <Suspense fallback={<div>Loading...</div>}>
+        {/* <Suspense fallback={<div>Loading...</div>}>
           <div className={styles.videoContainer}>
             <VideoPlayer streamURL={streamURL} />
             <h3>{streamData?.courseDto.categoryResponseDTO.subcategory}</h3>
@@ -157,7 +155,7 @@ const StreamPage = () => {
               </ul>
             </div>
           </div>
-        </Suspense>
+        </Suspense> */}
        <div className={styles.courseMetaData}>
        <hr style={{color:'whitesmoke'}}/>
        <div className={styles.courses}>

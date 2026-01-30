@@ -46,7 +46,7 @@ export interface TeacherDmMSG {
 }
 
 export interface dmMessages {
-    mId: string,
+    mid: string,
     studentId: string,
     courseName: string,
     subMessages: DmSubMessages[]

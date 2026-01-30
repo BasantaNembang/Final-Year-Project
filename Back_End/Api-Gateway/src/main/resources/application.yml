@@ -71,6 +71,10 @@ spring:
           uri: lb://CHAT-SERVICE
           predicates:
             - Path=/room/**
+          filters:
+            - AuthenticationFilter
+
+
 
 server:
   port: 9090

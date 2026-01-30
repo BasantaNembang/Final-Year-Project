@@ -8,18 +8,13 @@ interface backendResponse {
     httpStatus?: number
 }
 
-
 export async function POST(req: Request) {
 
     const data = await req.json();
 
-
     let api_response = null;
     try {
         api_response = await API.post('/auth/login', data);
-        console.log("hi hendsome")
-        console.log(api_response.data)
-
         const res = NextResponse.json({
             message: "user logIn successfully",
             bool: true,

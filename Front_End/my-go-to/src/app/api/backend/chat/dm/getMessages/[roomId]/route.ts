@@ -16,10 +16,19 @@ export async function GET(req: NextRequest, context: any) {
     const { roomId } = await context.params;
 
     const studentId = searchParams.get("studentId")
+    
+    const JWT = "jwtToken"
 
+    const jwtToken = req.cookies.get(JWT)?.value;
 
     try {
-        const response = await API.get(`/room/dm-messages/student/${roomId}?studentId=${studentId}`)
+        const response = await API.get(`/room/dm-messages/student/${roomId}?studentId=${studentId}`,
+            {
+                headers : {
+                    Authorization : `Bearer ${jwtToken}`
+                }
+            }
+        )
         return NextResponse.json({
             msg: "success",
             data: response.data

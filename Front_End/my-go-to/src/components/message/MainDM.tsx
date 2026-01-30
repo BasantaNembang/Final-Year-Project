@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "../../styles/message.module.css";
 import { DmSubMessages } from "@/types/chatData";
 import SendMessage from "./SendMessage";
 import { useHelperContexHook } from "@/context/helperContext";
 import { Stomp } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
+import { getJwtToken } from "@/lib/Helper-Two";
 
 
 interface mainDMProps{
@@ -24,14 +25,28 @@ const MainDM = ({ dmMessage, setDmmessage, author, dmRoomId, authorID }: mainDMP
  const courseId = streamData?.courseDto.course_id as string;
  const userId = streamData?.userId as string;
  const courseName = streamData?.courseDto.categoryResponseDTO.subcategory as string;
-
+ const[token, setToken] = useState<string | null>(null); 
  const chatRef = useRef<HTMLDivElement | null>(null);
  
 
+  const getTheToken = async() =>{
+    const token = await getJwtToken()
+    setToken(token.jwtToken)
+  }
+
+  useEffect(()=>{
+    getTheToken()  
+  }, []); 
+
+
+
    useEffect(() => {
       const connectWebSocket = () => {
+        if(!token) return;
+
         const client = Stomp.over(() => new SockJS("http://localhost:8090/ws"));
-        client.connect({}, () => {
+        client.connect(
+          { Authorization: `Bearer ${token}`}, () => {
           try {
           client.subscribe(`/topic/dm-room/${dmRoomId}`, (message) => {
             const newMessage  = JSON.parse(message.body);
@@ -40,9 +55,13 @@ const MainDM = ({ dmMessage, setDmmessage, author, dmRoomId, authorID }: mainDMP
           } catch (error) {
             console.error(error);}        
         });
+
+        ()=>{
+         throw new Error("Fail jwtToken")
+        }
        };
        connectWebSocket();
-     }, []);
+     }, [token]);
 
 
   useEffect(() => {

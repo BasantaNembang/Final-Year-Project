@@ -1,45 +1,275 @@
-.paymentContainer form{
+.paymentContainer form {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
+  gap: 2rem;
 }
+
 .cardSection {
-  border: 1px solid red;
-  width: 37rem;
+  width: 50rem;
+  margin-bottom: 3rem;
 }
+
 .paySection {
-  border: 1px solid blue;
-  width: 35rem;
+  border: 1px solid #cbcbcc;
+  width: 25rem;
+  box-sizing: border-box;
+  padding: 1.2rem;
+  border-radius: .4rem;
 }
+
 .cardSection span {
   display: block;
   margin-bottom: 1rem;
   font-weight: bold;
 }
-.cardBOX {
-  border: 1px solid;
-}
-.cardMetaData {
-  display: flex;
-}
-.cardBoxInput input {
-  width: 94%;
-  height: 2rem;
-  font-size: 0.9rem;
-  box-sizing: border-box;
-  padding-left: 1rem;
-  border: 1px solid;
-}
-.cardMetaData div {
-  width: 50%;
-  border: 1px solid rgb(255, 74, 74);
-}
+
 
 .cardMetaData input {
   width: 95%;
   height: 2rem;
 }
+
 .errorContainer {
   color: red;
 }
+
+.cardSection h2 {
+  font-size: 2.2rem;
+}
+
+.billingSection {
+  border: 1px solid #b9b9b9;
+  box-sizing: border-box;
+  padding: 2rem 1rem;
+  border-radius: .5rem;
+  margin-top: 2rem;
+}
+
+.billingSection span {
+  font-size: 1.3rem;
+}
+
+.cardBOX {
+  border: 1px solid #ccc;
+  margin: 2rem 0;
+  border-radius: .4rem;
+}
+
+.left_paymentInfo img {
+  width: 3rem;
+}
+
+.paymentInfo {
+  /* border: 1px solid rgb(67, 23, 179); */
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1.3rem;
+}
+
+.left_paymentInfo,
+.rigth_paymentInfo {
+  /* border: 1px solid; */
+  padding: 1rem 0;
+}
+
+.card_ImageSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.7rem;
+  padding-top: .8rem;
+}
+
+.rigth_paymentInfo {
+  display: flex;
+  gap: .4rem;
+}
+
+.rigth_paymentInfo p {
+  color: #888585;
+}
+
+.cardBOX select {
+  margin-left: 1.3rem;
+  width: 17rem;
+  height: 2rem;
+  box-sizing: border-box;
+  padding: 0 1.1rem;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: .3rem;
+}
+
+.cardBoxInput {
+  margin-top: 1rem;
+  margin-left: 1.3rem;
+  position: relative;
+}
+
+#BOX {
+  position: absolute;
+  right: 4rem;
+  top: 2.6rem;
+  font-size: 1.4rem;
+  color: #847e7e;
+}
+
+.outer {
+  border: 1px solid #999;
+  width: 94%;
+  margin-top: 1rem;
+}
+
+.cardBoxInput input {
+  height: 2.3rem;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  border: none;
+  outline: none;
+}
+
+.cardMetaData {
+  display: flex;
+  margin: 1.2rem 1.3rem;
+}
+
+.cardMetaData div {
+  width: 50%;
+}
+
+.cardMetaData input {
+  margin-top: 1rem;
+  box-sizing: border-box;
+  padding: 0 1rem;
+}
+
+.cardBoxInput_name {
+  margin-left: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+.cardBoxInput_name input {
+  height: 2.3rem;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  outline: none;
+  width: 94%;
+  border: 1px solid rgb(183, 177, 177);
+  margin-top: 1rem;
+}
+
+.orderDetails {
+  border: 1px solid rgb(223, 218, 218);
+  display: flex;
+  box-sizing: border-box;
+  padding: 1rem 1.7rem;
+  gap: 2rem;
+  border-radius: .4rem;
+}
+
+.orderDetails figure img {
+  width: 10rem;
+  margin-top: 1rem;
+  border-radius: .4rem;
+}
+
+.left_orderDetails p {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.txt_orderDetails {
+  margin-top: .5rem;
+  color: #6a6a6a;
+}
+
+.priceInfo {
+  margin-top: 1.5rem;
+}
+
+.paySection h3 {
+  font-size: 1.3rem;
+}
+
+.priceInfo_original,
+.priceInfo_discount {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .8rem;
+  color: #6e6e6e;
+  font-size: .99rem;
+}
+
+.priceInfo_original span,
+.priceInfo_discount span {
+  display: block;
+}
+
+.totalPrice {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.1rem 0;
+}
+
+.totalPrice span {
+  display: block;
+}
+
+.btnSection button {
+  width: 100%;
+  height: 3.2rem;
+  border: none;
+  border-radius: .4rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+
+.btnSection span {
+  display: block;
+  margin: .9rem auto;
+  width: max-content;
+  font-size: .8rem;
+  color: #888;
+}
+
+
+
+@media only screen and (max-width: 1300px) {
+  .cardSection {
+    width: 45rem;
+  }
+
+  .paySection {
+    width: 20rem;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .cardSection {
+    width: 40rem;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .cardSection {
+    width: 33rem;
+  }
+
+  .paySection {
+    width: 17rem;
+  }
+}
+
+
+
+
+
+
+

@@ -8,12 +8,13 @@ import {  DmSubMessages } from "@/types/chatData";
 import { getAllDmMessagesSTD, isConnectedDM } from "@/lib/Chat-Service";
 import { useHelperContexHook } from "@/context/helperContext";
 
+//used in teacher-------------------
 
 const Message = () => {
 
   const [dmMessage, setDmmessage] = useState<DmSubMessages[] | null>(null);
 
-  const { streamData, dmConnected, setDmConnected } = useHelperContexHook();  
+  const { streamData, setDmConnected } = useHelperContexHook();  
  
   const roomId = streamData?.courseDto.course_id as string;
   const authorID = streamData?.courseDto.authorId as string;
@@ -27,8 +28,6 @@ const Message = () => {
 
   const getALlDM_Message = async() =>{
    const response = await getAllDmMessagesSTD(dmRoomId, studentId);
-   console.log('response')
-   console.log(response.data)
    setDmmessage(response.data)
   }
 

@@ -3,38 +3,93 @@
 import React, {useState, useEffect, useRef} from "react";
 import styles from "../../styles/teacherMessage.module.css";
 import SendMessage from "../message/SendMessage";
-import { dmMessages, DmSubMessages } from "@/types/chatData";
+import { dmMessages, DmSubMessages, TeacherDmMSG } from "@/types/chatData";
 import { getEmailByID, getUserNameByID } from "@/lib/Auth-Service";
 import SockJS from "sockjs-client";
 import { Stomp } from "@stomp/stompjs";
+import { getJwtToken } from "@/lib/Helper-Two";
 
 interface chatInterface{
   chatData: dmMessages | null,
-  dmRoomId: string,
-  courseId: string,
-  teacherId: string,
+  teacherId: string | null,
   dmContent: DmSubMessages[] | null,
   setDmContent: React.Dispatch<React.SetStateAction<DmSubMessages[] | null>>,
-  setflag?: React.Dispatch<React.SetStateAction<boolean>>
-  flag: boolean
+  teacherMsg: TeacherDmMSG[] | null
 }
 
-
-const Chat = ({chatData, dmRoomId, courseId, teacherId, dmContent, setDmContent, flag, setflag }: chatInterface) => {
+//used in teacher-------------------
+const Chat = ({chatData, teacherId, dmContent, setDmContent, teacherMsg }: chatInterface) => {
 
  const [studentName, setStudentName] = useState<string>(''); 
  const [currentUser, setCurrentUser] = useState<string>(''); 
  const [studentEmail, setStudentEmail] = useState<string>('');
  const [userId, setUserId] = useState<string | null>(null);
+ const [token, setToken] = useState<string>('');
+
+ //added.....
+ const [courseId, setCourseId] = useState<string | null>(null);
+ const [dmRoomId, setDmRoomId] = useState<string | null>(null);
+
 
  const chatRef = useRef<HTMLDivElement | null>(null);
 
+
+ const getTheToken = async() =>{
+    const token = await getJwtToken()
+    setToken(token.jwtToken)
+  }
+
+ useEffect(()=>{
+  getTheToken()  
+ }, []);
+
+
+  const getTheRoomID = () =>{
+    if(!chatData) return;  //setting the roomId and Course Id 
+
+    const id = chatData.mid;
+
+    const data = teacherMsg?.filter(each =>
+      each.dmMessages.some(f => f.mid === id)
+    );
+
+    if(data){
+      setCourseId(data[0]?.roomId?.slice(0, 8))
+      setDmRoomId(data[0]?.roomId?.slice(0, 8) + "_" + teacherId)
+    }
+  }
+
+
+  
+ useEffect(() => {
+     if (!dmRoomId || !token) return;
+     const connectWebSocket = () => {
+      const client = Stomp.over(() => new SockJS("http://localhost:8090/ws"));
+       client.connect(
+        { Authorization: `Bearer ${token}` }, () => {
+        try {
+         client.subscribe(`/topic/dm-room/${dmRoomId}`, (message) => {
+         const newMessage  = JSON.parse(message.body);
+         setDmContent(newMessage)
+        });
+       } catch (error) {
+        console.error(error);}        
+       },
+
+      ()=>{
+      throw new Error("unable to communicate please check the jwtToken")
+      });    
+   }; 
+    connectWebSocket();
+  }, [ dmRoomId, token ]);
+
+
   const getMetaINFO = async () =>{
-      if(!chatData) return;
-      const data = await getUserNameByID(chatData?.studentId);
-      const email = await getEmailByID(chatData?.studentId)      
-      setStudentName(data);
-      setStudentEmail(email);
+    if(!chatData) return;
+    const data = await getUserNameByID(chatData?.studentId);
+    const email = await getEmailByID(chatData?.studentId)      
+    setStudentName(data);
+    setStudentEmail(email);
   }
 
   const setTheDmContent = () =>{
@@ -43,11 +98,13 @@ const Chat = ({chatData, dmRoomId, courseId, teacherId, dmContent, setDmContent,
     setUserId(chatData.studentId);
   }
 
+
   useEffect(()=>{
     getMetaINFO();
     setTheDmContent();
-  }, [chatData]);
 
+    getTheRoomID();
+  }, [chatData]);
 
 
   useEffect(()=>{
@@ -61,43 +118,11 @@ const Chat = ({chatData, dmRoomId, courseId, teacherId, dmContent, setDmContent,
 
 
 
-   useEffect(() => {
-     if (!dmRoomId) return;
-     const connectWebSocket = () => {
-      const client = Stomp.over(() => new SockJS("http://localhost:8090/ws"));
-       client.connect({}, () => {
-        try {
-         client.subscribe(`/topic/dm-room/${dmRoomId}`, (message) => {
-         const newMessage  = JSON.parse(message.body);
-         setDmContent(newMessage)
-
-        });
-       } catch (error) {
-        console.error(error);}        
-       }); 
-
-      return () => {
-       client.disconnect();
-      };        
-    };
-
-    connectWebSocket();
-   }, [ dmRoomId ]);
-
-
   useEffect(() => {
     if (chatRef.current) {
       chatRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [dmContent]);
-
-
-  
-  if(!chatData){
-    return <>
-     <div style={{margin:'auto'}}>No messages</div>
-    </>
-  }
 
 
   return (
@@ -143,7 +168,13 @@ const Chat = ({chatData, dmRoomId, courseId, teacherId, dmContent, setDmContent,
       }      
     <div  ref={chatRef} />  {/* for scroll */}
     </div>
-     <SendMessage dmRoomId={dmRoomId!}  courseId={courseId!} userId={userId!}  currentUser={currentUser} flag={flag} setflag={setflag}/>
+
+    {
+      dmRoomId && courseId && userId && currentUser && (
+       <SendMessage dmRoomId={dmRoomId}  courseId={courseId} userId={userId} currentUser={currentUser}/>
+      ) 
+    }
+
     </div> 
     </>
   );

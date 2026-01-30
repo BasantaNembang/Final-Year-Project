@@ -25,3 +25,17 @@ export async function getALlCourseReview(courseId: string) {
         }
     }
 }
+
+
+//get the jwtToken
+export async function getJwtToken() {
+    try{
+    const token = await axios.get(`/api/auth/getToken`);
+    return token.data;
+    }catch(error){
+        console.error(error)
+    }
+    
+}
+
+

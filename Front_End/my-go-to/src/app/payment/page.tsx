@@ -4,7 +4,6 @@ export const dynamic = "force-dynamic";
 
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/paymentPage.module.css";
-import { useSearchParams } from "next/navigation";
 import CountryInputField from "@/helper/CountryInputField";
 import { useForm } from "react-hook-form";
 import { CountryNameDTO, PaymentDTO } from "@/types/enrollmentData";
@@ -12,6 +11,11 @@ import { toast } from "react-toastify";
 import { useRouter } from 'next/navigation';
 import axios from "axios";
 import { useHelperContexHook } from "@/context/helperContext";
+import { getUserID } from "@/lib/Helper-Service";
+import { CiLock } from "react-icons/ci";
+import { RiInboxLine } from "react-icons/ri";
+import { CiClock2 } from "react-icons/ci";
+import { PiCertificate } from "react-icons/pi";
 
 const PaymentPage = () => {
   const [CourseId, setCourseId] = useState<string | null>(null);
@@ -20,16 +24,12 @@ const PaymentPage = () => {
 
   var CryptoJS = require("crypto-js");
 
-  // const searchParams = useSearchParams();
-  // const CourseId = searchParams.get("courseId");
-  // const price = searchParams.get("price");
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     setCourseId(searchParams.get("courseId"));
     setPrice(searchParams.get("price"));
   }, []);
-
 
 
 
@@ -63,15 +63,14 @@ const PaymentPage = () => {
   const [countryName, SetCountyName] = useState<CountryNameDTO>();
 
   useEffect(()=>{
-      setIsPrivate(true)
+    setIsPrivate(true)
   }, []);
-  
- 
+   
 
-  const getUserID = async() =>{
+  const getUserId = async() =>{
     try{
-      let respones = await axios.get('/api/auth/getId');
-      SetUser_id(respones?.data?.userId)
+      const id = await getUserID()
+      SetUser_id(id)
     }catch(error){
       console.error(error)
     }
@@ -79,7 +78,7 @@ const PaymentPage = () => {
 
 
   useEffect(()=>{
-    getUserID()
+    getUserId()
   }, []);
  
 
@@ -128,19 +127,27 @@ const PaymentPage = () => {
   };
 
 
-
-
   return (
     <>
       <div className={styles.paymentContainer}>
 
         <form action="#" onSubmit={handleSubmit(paymentForCourse)}>
         <div className={styles.cardSection}>
-          <span>Check Out</span>
-          <span>Billing address</span>
-          <CountryInputField  SetCountyName={SetCountyName}/>
+          <h2>Check Out</h2>
+          <div className={styles.billingSection}>
+            <span>Billing address</span>
+            <CountryInputField  SetCountyName={SetCountyName}/>
+          </div>
           <div className={styles.cardBOX}>
-            <label htmlFor="payment">Payment</label>
+            <div className={styles.paymentInfo}>
+              <div className={styles.left_paymentInfo}>
+                <div style={{fontSize:'1.2rem', fontWeight:'bold'}}>Payment Method</div>
+                <div className={styles.card_ImageSection}>Credit / Debit Card <figure> <img src="./visaCard.jpg" alt="" /> <img src="./mastercard.png" alt="" /> </figure>  </div> 
+              </div>
+             <div className={styles.rigth_paymentInfo}>
+               <p> <CiLock style={{fontSize:'1.3rem', color:'#888585'}}/></p> <p>Secured connection</p>
+             </div>
+            </div>
             <select id="paymentMethod" 
               {...register("paymentMethod", {required: {value:true, message:"Select Payment Method"}
               })}
@@ -159,12 +166,16 @@ const PaymentPage = () => {
              }
             <div className={styles.cardBoxInput}>
               <label htmlFor="cardNumber">Card Number</label> <br />
-              <input type="text"  id="cardNumber" placeholder="1234 5678 5566 9911" value={paymentForm.cardNumber}
-              {...register("cardNumber", {required: {value:true, message:"Must enter your Card Number"},
-              minLength: {value:16, message:"Must Enter all 16 digits"},
-              maxLength: {value:17, message:"Number Exceed"},
-              })}
-              onChange={handelInputField} />
+              <div className={styles.outer}>
+                <input type="text"  id="cardNumber" placeholder="1234 5678 5566 9911" value={paymentForm.cardNumber}
+                {...register("cardNumber", {required: {value:true, message:"Must enter your Card Number"},
+                minLength: {value:16, message:"Must Enter all 16 digits"},
+                maxLength: {value:17, message:"Number Exceed"},
+                })}
+                
+                onChange={handelInputField} />
+                <RiInboxLine id={styles.BOX}/>
+              </div>
              {
               errors.cardNumber && (
                 <span className={styles.errorContainer}>{errors.cardNumber.message}</span>
@@ -192,7 +203,7 @@ const PaymentPage = () => {
                 }
               </div>
             </div>
-            <div className={styles.cardBoxInput}>
+            <div className={styles.cardBoxInput_name}>
               <label htmlFor="nameCard">Name on card</label>  <br />
               <input type="text" id="nameCard" placeholder="Name on card" 
                 {...register("accountName", {required: {value:true, message:"Must enter account holder name"}
@@ -203,13 +214,61 @@ const PaymentPage = () => {
                 <span className={styles.errorContainer}>{errors.accountName.message}</span>
               )
              }              
-            </div>
+            </div>            
           </div>
+
+
+          <div className={styles.orderDetails}>
+            <div className={styles.left_orderDetails}>
+              <p>Order details</p>
+              <figure>
+                <img src="https://sakshamdigitaltechnology.com/uploads/blogs/5401deab2bdeaf83e6836de91a9b870c.png" alt="" />
+              </figure>
+            </div>
+            <div className={styles.right_orderDetails}>
+               <p>Java with devops (AWS) </p>
+               <p className={styles.txt_orderDetails}>By Basanta Nembang</p>
+               <div className={styles.orderdetails_metaData}>
+                 <div className={styles.txt_orderDetails}> <CiClock2 /> 65 hrs </div>
+                 <div className={styles.txt_orderDetails}> <PiCertificate /> Certificate</div>
+               </div>
+            </div>
+           </div>
+
         </div>
 
         <div className={styles.paySection}>
-          pay section
-          <button type="submit" >Pay</button>     
+          <h3>Summary</h3>
+          <div className={styles.priceInfo}>
+            <div className={styles.priceInfo_original}>
+              <span>Original Price</span>
+              <span>Rs 1900</span>
+            </div>
+            <div className={styles.priceInfo_discount}>
+              <span>Discount Percentage</span>
+              <span>12%</span>
+            </div>
+          </div>
+          <hr />
+          <div className={styles.totalPrice}>
+            <span>Total:</span>
+            <span style={{fontWeight:'bold'}}>Rs 89999</span>
+          </div>
+
+          <div className={styles.btnSection}>
+            <button type="submit">Complete CheckOut</button>   
+            <span>30-Day Money-Back Guarantee</span>  
+          </div>
+
+          <div className={styles.outComes}>
+            <ul>
+              <li>Lifetime access to course content</li>
+              <li>Certificate of completion</li>
+              <li>Access on mobile and desktop</li>
+              <li>Downloadable resources</li>
+            </ul>
+          </div>
+
         </div>
       </form>    
       </div>

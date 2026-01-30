@@ -111,9 +111,8 @@ export async function getAllDmMessagesSTD(roomId: string, studentId: string) {
 
 //for dm messages
 export async function getAllDmMessagesTeacher(teacherId: string) {
-    let response = null;
     try {
-        response = await axios.get(`/api/backend/chat/dm/getMessagesTeacher/${teacherId}`);
+       const response = await axios.get(`/api/backend/chat/dm/getMessagesTeacher/${teacherId}`);
         if (response.status === 200) {
             return response.data;
         }

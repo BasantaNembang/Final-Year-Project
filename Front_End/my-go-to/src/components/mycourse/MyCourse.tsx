@@ -14,8 +14,8 @@ interface MyCourseProps{
 
 const MyCourse = ({course}: MyCourseProps) => {
   //set in context and get in stream page............
-  const {setStreamData} = useHelperContexHook();
-    const didRun = useRef(false);
+  const { setStreamData } = useHelperContexHook();
+  const didRun = useRef(false);
 
   //stuffs for the communications
   const roomId = course.courseDto.course_id;
