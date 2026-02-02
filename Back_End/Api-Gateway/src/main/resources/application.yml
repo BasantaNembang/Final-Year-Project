@@ -1,13 +1,4 @@
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    registry-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-
 spring:
   application:
     name: API-GATEWAY
@@ -26,54 +17,53 @@ spring:
 
       routes:
         - id: enroll-service
-          uri: lb://ENROLLMENT-SERVICE
+          uri: http://enrollment-service-svc:8085
           predicates:
             - Path=/enroll/**
           filters:
             - AuthenticationFilter
 
         - id: course-service
-          uri: lb://COURSE-SERVICE
+          uri: http://course-service-svc:8084
           predicates:
             - Path=/course/**
           filters:
             - AuthenticationFilter
 
         - id: stream-service
-          uri: lb://STREAM-SERVICE
+          uri: http://stream-service-svc:8080
           predicates:
             - Path=/video/**
           filters:
             - AuthenticationFilter
 
         - id: auth-service
-          uri: lb://AUTH-SERVICE
+          uri: http://auth-service-svc:8081
           predicates:
             - Path=/auth/**
           filters:
             - AuthenticationFilter
 
         - id: category-service
-          uri: lb://CATEGORY-SERVICE
+          uri: http://category-service-svc:8082
           predicates:
             - Path=/category/**
           filters:
             - AuthenticationFilter
 
         - id: review-service
-          uri: lb://REVIEW-SERVICE
+          uri: http://review-service-svc:8091
           predicates:
             - Path=/review/**
           filters:
             - AuthenticationFilter
 
         - id: chat-service
-          uri: lb://CHAT-SERVICE
+          uri: http://chat-service-svc:8090
           predicates:
             - Path=/room/**
           filters:
             - AuthenticationFilter
-
 
 
 server:

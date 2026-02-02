@@ -1,0 +1,46 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-service
+spec:
+  selector:
+    matchLabels:
+      app: chat-service
+  template:
+    metadata:
+      labels:
+        app: chat-service
+    spec:
+      containers:
+      - name: chat-service
+        image: basantanembang10/chat-service:latest
+
+        ports:
+        - containerPort: 8090
+
+        env:
+          - name: MONGODB_URL
+            valueFrom:
+              secretKeyRef:
+                key: mongodb_uri
+                name: mongo-atlas-secret
+
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-service-svc
+spec:
+  selector:
+    app: chat-service
+  ports:
+  - port: 8090
+    targetPort: 8090
+
+
+
+

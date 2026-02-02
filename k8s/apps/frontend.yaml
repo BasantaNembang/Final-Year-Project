@@ -1,0 +1,44 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-go-to
+spec:
+  selector:
+    matchLabels:
+      app: my-go-to
+  template:
+    metadata:
+      labels:
+        app: my-go-to
+    spec:
+      containers:
+      - name: my-go-to
+        image: basantanembang10/my-go-to:latest
+
+        ports:
+        - containerPort: 3000
+
+        env:
+        - name: NEXT_PUBLIC_BACKEND_URL
+          value: "http://api-gateway-svc:9090"
+
+        - name: NEXT_PUBLIC_MY_SECRECT_KEY
+          value: "gwakjgbaUklsdw99/dhoiadWWW"
+
+        - name: JWT_SECRET_KEY
+          value: "ThisIsMyJwtSecretKey123456789ABCDEF"
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-go-to
+spec:
+  selector:
+    app: my-go-to
+  ports:
+  - port: 3000
+    targetPort: 3000

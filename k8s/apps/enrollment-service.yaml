@@ -1,0 +1,62 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enrollment-service
+spec:
+  selector:
+    matchLabels:
+      app: enrollment-service
+  template:
+    metadata:
+      labels:
+        app: enrollment-service
+    spec:
+      containers:
+      - name: enrollment-service
+        image: basantanembang10/enrollment-service:latest
+
+        ports:
+        - containerPort: 8085
+
+        env:
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                key: db_host
+                name: common-db-cmap
+
+          - name: PAYMENT_URL
+            valueFrom:
+              configMapKeyRef:
+                key: payment_url
+                name: services-name-cmap
+
+          - name: SPRING_BOOTSTRAP_SERVERS
+            valueFrom:
+              configMapKeyRef:
+                key: spring_bootstrap_servers
+                name: kafka-cmap
+
+          - name: SPRING_SCHEMA_REGISTRY_URL
+            valueFrom:
+              configMapKeyRef:
+                key: spring_schema_registry_uri
+                name: kafka-cmap
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: enrollment-service-svc
+spec:
+  selector:
+    app: enrollment-service
+  ports:
+  - port: 8085
+    targetPort: 8085
+
+    
+
+

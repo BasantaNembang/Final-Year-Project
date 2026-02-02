@@ -7,7 +7,7 @@ import com.course.external.others.CategoryResponseDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "CATEGORY-SERVICE", configuration = AuthFeignConfig.class)
+@FeignClient(name = "category-service", url = "${category-service.url}", configuration = AuthFeignConfig.class)
 public interface CategoryService {
 
     @PostMapping("/category/save/category")

@@ -1,0 +1,49 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: review-service
+spec:
+  selector:
+    matchLabels:
+      app: review-service
+  template:
+    metadata:
+      labels:
+        app: review-service
+    spec:
+      containers:
+      - name: review-service
+        image: basantanembang10/review-service:latest
+
+        ports:
+        - containerPort: 8091
+
+        env:
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                key: db_host
+                name: common-db-cmap
+
+          - name: AUTH_SERVICE_URL
+            valueFrom:
+              configMapKeyRef:
+                key: auth_service_url
+                name: services-name-cmap
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: review-service-svc
+spec:
+  selector:
+    app: review-service
+  ports:
+  - port: 8091
+    targetPort: 8091
+
+    

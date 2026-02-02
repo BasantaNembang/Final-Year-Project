@@ -22,7 +22,7 @@ const OverViewInfo = ({Setflag, selectedCourse}: overViewProps) => {
 
   const secretKEY = process.env.NEXT_PUBLIC_MY_SECRECT_KEY;
 
-    const goToPayment = (courseId : string | undefined, price : number | undefined) =>{
+    const goToPayment = (courseId : string | null, price : number | null) =>{
       var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(courseId), secretKEY).toString();
       router.push("/payment?courseId="+encodeURIComponent(ciphertext)+"&price="+price);
   }
@@ -77,7 +77,7 @@ const OverViewInfo = ({Setflag, selectedCourse}: overViewProps) => {
           </div>
           <div className={styles.buyButton}>
             {/* buy section */}
-            <button onClick={()=>goToPayment(selectedCourse?.course_id, selectedCourse?.price)}>Buy</button>
+            <button onClick={()=>goToPayment(selectedCourse?.course_id as string, selectedCourse?.price as number)}>Buy</button>
           </div>
           <div className={styles.promiess}>
             <ul>

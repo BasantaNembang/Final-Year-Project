@@ -19,7 +19,7 @@ import { PiCertificate } from "react-icons/pi";
 
 const PaymentPage = () => {
   const [CourseId, setCourseId] = useState<string | null>(null);
-  const [price, setPrice] = useState<string | null>(null);
+  const [price, setPrice] = useState<number | null>(null);
   const { setIsPrivate } = useHelperContexHook();
 
   var CryptoJS = require("crypto-js");
@@ -28,7 +28,8 @@ const PaymentPage = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     setCourseId(searchParams.get("courseId"));
-    setPrice(searchParams.get("price"));
+    const num = (searchParams.get("price"));
+    setPrice(Number(num))
   }, []);
 
 

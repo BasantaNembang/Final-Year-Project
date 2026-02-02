@@ -1,0 +1,47 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: category-service
+spec:
+  selector:
+    matchLabels:
+      app: category-service
+  template:
+    metadata:
+      labels:
+        app: category-service
+    spec:
+      containers:
+      - name: category-service
+        image: basantanembang10/category-service:latest
+
+        ports:
+        - containerPort: 8082
+
+        env:
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                key: db_host
+                name: common-db-cmap
+
+                
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: category-service-svc
+spec:
+  selector:
+    app: category-service
+  ports:
+  - port: 8082
+    targetPort: 8082
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notify-service
+spec:
+  selector:
+    matchLabels:
+      app: notify-service
+  template:
+    metadata:
+      labels:
+        app: notify-service
+    spec:
+      containers:
+      - name: enotify-service
+        image: basantanembang10/notify-service:latest
+
+        ports:
+        - containerPort: 8089
+
+        env:
+          - name: SPRING_BOOTSTRAP_SERVERS
+            valueFrom:
+              configMapKeyRef:
+                key: spring_bootstrap_servers
+                name: kafka-cmap
+
+          - name: SPRING_SCHEMA_REGISTRY_URL
+            valueFrom:
+              configMapKeyRef:
+                key: spring_schema_registry_uri
+                name: kafka-cmap
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: notify-service-svc
+spec:
+  selector:
+    app: notify-service
+  ports:
+  - port: 8089
+    targetPort: 8089
+
+    
+
+    
+
+

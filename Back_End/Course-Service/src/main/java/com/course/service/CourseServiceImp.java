@@ -193,7 +193,6 @@ public class CourseServiceImp implements CourseService {
                         m.getCreate_at(),
                         m.getStream_id(),
                         m.getPrice(),
-                        // m.getCategory(),
                         m.getObjectives(),
                         m.getRequirements(),
                         m.getAuthor(),

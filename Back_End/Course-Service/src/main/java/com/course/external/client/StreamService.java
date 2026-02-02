@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@FeignClient(name = "STREAM-SERVICE", configuration= FeignClientFileConfig.class)
+@FeignClient(name = "stream-service", url = "${stream-service.url}", configuration= FeignClientFileConfig.class)
 public interface StreamService {
 
     //save Video

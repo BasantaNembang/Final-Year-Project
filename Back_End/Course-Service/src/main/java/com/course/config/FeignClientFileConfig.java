@@ -1,6 +1,5 @@
 package com.course.config;
 
-
 import feign.RequestInterceptor;
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;

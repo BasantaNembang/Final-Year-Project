@@ -1,0 +1,13 @@
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongo-atlas-secret
+type: Opaque
+stringData:
+  mongodb_uri: mongodb+srv://java1212:devopsguy1212@cluster0.kurss.mongodb.net/?appName=Cluster0
+
+
+
+

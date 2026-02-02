@@ -1,0 +1,48 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-service
+spec:
+  selector:
+    matchLabels:
+      app: payment-service
+  template:
+    metadata:
+      labels:
+        app: payment-service
+    spec:
+      containers:
+      - name: payment-service
+        image: basantanembang10/payment-service:latest
+
+        ports:
+        - containerPort: 8088
+
+        env:
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                key: db_host
+                name: common-db-cmap
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-service-svc
+spec:
+  selector:
+    app: payment-service
+  ports:
+  - port: 8088
+    targetPort: 8088
+
+
+
+    
+
+    
+
+

@@ -1,13 +1,4 @@
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-
 management:
   health:
     circuitbreakers:
@@ -22,23 +13,4 @@ management:
 
 jwt:
   secret: ThisIsMyJwtSecretKey123456789ABCDEF
-
-#resilience4j:
-#  circuitbreaker:
-#    instances:
-#      external:
-#        registerHealthIndicator: true
-#        eventConsumerBufferSize: 10
-#        failureRateThreshold: 50
-#        minimumNumberOfCalls: 5
-#        automaticTransitionFromOpenToHalfOpenEnabled: true
-#        waitDurationInOpenState: 5s
-#        permittedNumberOfCallsInHalfOpenState: 3
-#        slidingWindowSize: 10
-#        slidingWindowType: COUNT_BASED
-#  retry:
-#    instances:
-#      external:
-#        maxRetryAttempts: 3
-#        waitDuration: 3s
 
