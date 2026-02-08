@@ -1,0 +1,9 @@
+
+eureka:
+  instance:
+    prefer-ip-address: false
+  client:
+    registry-with-eureka: false
+    fetch-registry: false
+
+

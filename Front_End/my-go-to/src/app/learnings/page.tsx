@@ -8,6 +8,7 @@ import MyCourse from "@/components/mycourse/MyCourse";
 import Link from 'next/link';
 import { getAllEnrollCourse, getUserID } from "@/lib/Helper-Service";
 import { EnrollmentResponse } from "@/types/enrollmentData";
+import ShoppingCart from "@/components/shoppingCart/ShoppingCart";
 
 const LearningsPage = () => {
   const [flagMyCourse, setFlagMyCourse] = useState<boolean>(true);
@@ -22,9 +23,9 @@ const LearningsPage = () => {
       setFlagMyCourse(true);
       SetFlagMyCardCourse(false);
     }
-    if(text === 'myCardCourse'){
-      setFlagMyCourse(false);
+    if(text === "myCardCourse"){
       SetFlagMyCardCourse(true);      
+      setFlagMyCourse(false);
     }
   };
 
@@ -48,7 +49,7 @@ const LearningsPage = () => {
 
   //get the enroll course 
   useEffect(()=>{
-     getAllEnrolledCourse()
+    getAllEnrolledCourse()
   }, [currentUserId]);
 
   
@@ -92,7 +93,7 @@ const LearningsPage = () => {
               <div className={styles.myCourseContainer}>
                 <h3>Continue Learning</h3>
                 {
-                  enrollCourseData?.length === 0 ?( <span>You do`t have done enroll course yet</span>) : undefined
+                 enrollCourseData?.length === 0 ?( <span>You do`t have done enroll course yet</span>) : undefined
                 }                
                 {
                   enrollCourseData?.map((course, i)=>(
@@ -100,6 +101,9 @@ const LearningsPage = () => {
                   ))
                 }
               </div> )
+             }
+             {
+              flagMyCardCourse && currentUserId && (<ShoppingCart currentUserId={currentUserId}/> )
              }
           </div>
         </div>

@@ -1,32 +1,76 @@
 "use client";
 
-import React from "react";
+import React, {useEffect, useState } from "react";
 import styles from "../../styles/overView.module.css";
 import { TiTick } from "react-icons/ti";
 import { FaArrowRight } from "react-icons/fa";
 import { ResponseCourseDTO } from "@/types/courseData";
 import { SiTicktick } from "react-icons/si";
 import { useRouter } from "next/navigation";
-
+import { getUserID } from "@/lib/Helper-Service";
+import { CartRequest } from "@/types/cartData";
+import { saveCart } from "@/lib/Helper-Two";
+import { toast } from "react-toastify";
 
 interface overViewProps { 
   Setflag: React.Dispatch<React.SetStateAction<Boolean>>;
   selectedCourse: ResponseCourseDTO | null
 }
 
-
 const OverViewInfo = ({Setflag, selectedCourse}: overViewProps) => {
 
   const router =  useRouter();
   var CryptoJS = require("crypto-js");
 
+  const [cartData, setCartData] = useState<CartRequest>({
+    courseId:'',
+    studentId:'',
+  })
+
   const secretKEY = process.env.NEXT_PUBLIC_MY_SECRECT_KEY;
 
-    const goToPayment = (courseId : string | undefined, price : number | undefined) =>{
+    const goToPayment = (courseId : string | undefined) =>{
       var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(courseId), secretKEY).toString();
-      router.push("/payment?courseId="+encodeURIComponent(ciphertext)+"&price="+price);
+      router.push("/payment?courseId="+encodeURIComponent(ciphertext));
   }
-   
+
+  const saveCartData = () =>{
+    if(selectedCourse === null) return; 
+    setCartData(prev=>({...prev, courseId: selectedCourse?.course_id}))
+  }
+
+  const isLogedIn = async () =>{
+    try{
+     const id = await getUserID();
+      setCartData(prev=>({...prev, studentId: id})) //save for add to cartSection
+      return id;
+    }catch(error){
+       return null;
+    }
+  }
+
+  useEffect(()=>{
+   isLogedIn();
+   saveCartData();
+  }, []);
+  
+  
+  const addToCard = async() =>{
+    const studentId = await isLogedIn();
+
+    if(!studentId) router.push("/auth");
+
+     const response = await saveCart(cartData)
+     if(response === true){
+       toast.success("added to cart successfully")
+     }else{
+      toast.info(response)
+      router.push("/learnings");
+     }
+     
+  }
+
+
 
   return (
     <>
@@ -73,11 +117,11 @@ const OverViewInfo = ({Setflag, selectedCourse}: overViewProps) => {
           </div>
           <div className={styles.addToCart}>
             {/* add to card */}
-            <button>Add to Cart</button>
+            <button onClick={addToCard}>Add to Cart</button>
           </div>
           <div className={styles.buyButton}>
             {/* buy section */}
-            <button onClick={()=>goToPayment(selectedCourse?.course_id, selectedCourse?.price)}>Buy</button>
+            <button onClick={()=>goToPayment(selectedCourse?.course_id)}>Buy</button>
           </div>
           <div className={styles.promiess}>
             <ul>

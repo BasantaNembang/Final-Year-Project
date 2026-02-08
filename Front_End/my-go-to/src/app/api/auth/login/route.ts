@@ -43,7 +43,6 @@ export async function POST(req: Request) {
 
         return res;
     } catch (error: any) {
-        console.log(error.response.data)
         if (error instanceof AxiosError) {
             const response = error.response?.data as backendResponse
             return NextResponse.json(

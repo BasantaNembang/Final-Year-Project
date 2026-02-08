@@ -74,6 +74,12 @@ spring:
           filters:
             - AuthenticationFilter
 
+        - id: chat-service
+          uri: lb://CART-SERVICE
+          predicates:
+            - Path=/cart/**
+          filters:
+            - AuthenticationFilter
 
 
 server:
@@ -86,3 +92,4 @@ logging:
   level:
     org.springframework.cloud.gateway: DEBUG
     org.springframework.retry: DEBUG
+

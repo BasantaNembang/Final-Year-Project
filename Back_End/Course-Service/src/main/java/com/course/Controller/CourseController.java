@@ -1,6 +1,7 @@
 package com.course.Controller;
 
 
+import com.course.dto.CartResponse;
 import com.course.dto.ResponseCourseDTO;
 import com.course.service.CourseServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,12 @@ public class CourseController {
     @GetMapping("/get/{courseId}")
     public ResponseCourseDTO getCourseINFO(@PathVariable("courseId") String courseId){
         return repo.getCourseInfo(courseId);
+    }
+
+    //get courses by ID  for cart-service
+    @GetMapping("/get/cart/{courseId}")
+    public CartResponse getCourseINFOCard(@PathVariable("courseId") String courseId){
+        return repo.getCourseInfoCard(courseId);
     }
 
     //for image

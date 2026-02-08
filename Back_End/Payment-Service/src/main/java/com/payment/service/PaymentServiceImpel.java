@@ -21,7 +21,7 @@ public class PaymentServiceImpel implements PaymentService {
     PaymentRepo repo;
 
     @Override
-    public  String processPayment(PaymentRequestDto dto){
+    public String processPayment(PaymentRequestDto dto){
 
         PaymentEntity payment = new PaymentEntity();
 
@@ -54,7 +54,7 @@ public class PaymentServiceImpel implements PaymentService {
                 map(m->new PaymentDto(m.getPid(), m.getAmount(), m.getPaymentDate(),
                         m.getStatus(), m.getMethod(), m.getCountyName(), m.getCardNumber(), m.getMonthYear(),
                         m.getCvNumber(), m.getAccountName()))
-                .orElseThrow(()->new PaymentException("No such payment is found having the Id  "+ pid));
+                .orElseThrow(()->new PaymentException("No such payment is found having the Id"));
     }
 
 

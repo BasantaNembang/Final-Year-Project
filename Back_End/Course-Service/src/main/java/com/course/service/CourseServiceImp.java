@@ -1,5 +1,6 @@
 package com.course.service;
 
+import com.course.dto.CartResponse;
 import com.course.dto.Difficulty;
 import com.course.dto.RequestCourseDTO;
 import com.course.dto.ResponseCourseDTO;
@@ -8,6 +9,7 @@ import com.course.event.StreamDTO;
 import com.course.external.client.CategoryServiceImp;
 import com.course.external.client.StreamServiceImp;
 import com.course.external.others.CategoryDTO;
+import com.course.external.others.CategoryResponseDTO;
 import com.course.external.others.TeacherDto;
 import com.course.model.Course;
 import com.course.reposistory.CourseRepo;
@@ -519,6 +521,28 @@ public class CourseServiceImp implements CourseService {
                 .filter(f->f.categoryResponseDTO().subcategory()
                         .toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
+    }
+
+
+
+    @Override
+    public CartResponse getCourseInfoCard(String courseId) {
+        Course course =  repo.findById(courseId)
+                .orElseThrow(()->new CourseException("no such course is present having the id  :: " + courseId));
+        TeacherDto dto;
+        try{
+            dto = restTemplate.getForObject(authServiceURL+"/get-info/"+course.getAuthor(), TeacherDto.class); }
+        catch (Exception e){
+            throw new CourseException(e.getMessage());
+        }
+        CategoryResponseDTO subCategoryInfo = categoryServiceImp.getSubCategoryInfo(course.getCategory());
+        return CartResponse.builder()
+              .courseName(subCategoryInfo.subcategory())
+              .duration(course.getTime())
+              .imageUrl(course.getThumbnail_url())
+              .teacherName(dto.username())
+              .price(course.getPrice())
+              .build();
     }
 
 

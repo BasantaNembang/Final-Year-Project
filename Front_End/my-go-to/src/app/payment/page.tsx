@@ -16,10 +16,14 @@ import { CiLock } from "react-icons/ci";
 import { RiInboxLine } from "react-icons/ri";
 import { CiClock2 } from "react-icons/ci";
 import { PiCertificate } from "react-icons/pi";
+import { TiTick } from "react-icons/ti";
+import { getCourseById } from "@/lib/Helper-Two";
+import { ResponseCourseDTO } from "@/types/courseData";
 
 const PaymentPage = () => {
   const [CourseId, setCourseId] = useState<string | null>(null);
-  const [price, setPrice] = useState<string | null>(null);
+  const [courseDTO, setCourseDto] = useState<ResponseCourseDTO | null>(null);
+  //const [price, setPrice] = useState<string | null>(null);
   const { setIsPrivate } = useHelperContexHook();
 
   var CryptoJS = require("crypto-js");
@@ -28,7 +32,7 @@ const PaymentPage = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     setCourseId(searchParams.get("courseId"));
-    setPrice(searchParams.get("price"));
+    //setPrice(searchParams.get("price"));
   }, []);
 
 
@@ -62,9 +66,22 @@ const PaymentPage = () => {
   //for countyName
   const [countryName, SetCountyName] = useState<CountryNameDTO>();
 
+
+  const getCourseInfo = async() =>{
+    if(!CourseId) return;
+    var bytes  = CryptoJS.AES.decrypt(CourseId, secretKEY);
+    var courseID = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    const response = await getCourseById(courseID);
+    setCourseDto(response)
+  }
+
   useEffect(()=>{
     setIsPrivate(true)
   }, []);
+
+  useEffect(()=>{
+   if(CourseId) getCourseInfo()
+  }, [CourseId]);
    
 
   const getUserId = async() =>{
@@ -94,7 +111,7 @@ const PaymentPage = () => {
     var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     paymentForm.userId=user_id!
     paymentForm.courseId=decryptedData;
-    paymentForm.price=Number(price);
+    //paymentForm.price=Number(price);
     paymentForm.countryName=countryName?.countryName
 
     //call the backend-API (Enrollment-Service)
@@ -125,6 +142,15 @@ const PaymentPage = () => {
     }
     }
   };
+
+
+  const back = () =>{
+    router.push("/course")
+  }
+
+
+
+  if(!courseDTO) return;
 
 
   return (
@@ -222,37 +248,37 @@ const PaymentPage = () => {
             <div className={styles.left_orderDetails}>
               <p>Order details</p>
               <figure>
-                <img src="https://sakshamdigitaltechnology.com/uploads/blogs/5401deab2bdeaf83e6836de91a9b870c.png" alt="" />
+                <img src={courseDTO?.thumbnail_url} alt="" />
               </figure>
             </div>
             <div className={styles.right_orderDetails}>
-               <p>Java with devops (AWS) </p>
-               <p className={styles.txt_orderDetails}>By Basanta Nembang</p>
+               <p>{courseDTO?.categoryResponseDTO.subcategory}</p>
+               <p className={styles.txt_orderDetails}>By {courseDTO?.author}</p>
                <div className={styles.orderdetails_metaData}>
-                 <div className={styles.txt_orderDetails}> <CiClock2 /> 65 hrs </div>
+                 <div className={styles.txt_orderDetails}> <CiClock2 /> {courseDTO?.time} hrs </div>
                  <div className={styles.txt_orderDetails}> <PiCertificate /> Certificate</div>
                </div>
             </div>
            </div>
-
         </div>
 
+        <button id={styles.backBTN} onClick={back}>Back</button>
         <div className={styles.paySection}>
           <h3>Summary</h3>
           <div className={styles.priceInfo}>
             <div className={styles.priceInfo_original}>
               <span>Original Price</span>
-              <span>Rs 1900</span>
+              <span>Rs {courseDTO.price + 1000}</span>
             </div>
             <div className={styles.priceInfo_discount}>
               <span>Discount Percentage</span>
-              <span>12%</span>
+              <span>10%</span>
             </div>
           </div>
           <hr />
           <div className={styles.totalPrice}>
             <span>Total:</span>
-            <span style={{fontWeight:'bold'}}>Rs 89999</span>
+            <span style={{fontWeight:'bold'}}>Rs {courseDTO.price}</span>
           </div>
 
           <div className={styles.btnSection}>
@@ -262,10 +288,10 @@ const PaymentPage = () => {
 
           <div className={styles.outComes}>
             <ul>
-              <li>Lifetime access to course content</li>
-              <li>Certificate of completion</li>
-              <li>Access on mobile and desktop</li>
-              <li>Downloadable resources</li>
+              <li><TiTick id={styles.tick}/>  Lifetime access to course content</li>
+              <li><TiTick id={styles.tick}/>  Certificate of completion</li>
+              <li><TiTick id={styles.tick}/>  Access on mobile and desktop</li>
+              <li><TiTick id={styles.tick}/>  Downloadable resources</li>
             </ul>
           </div>
 

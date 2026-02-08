@@ -1,7 +1,7 @@
+import { CartRequest } from "@/types/cartData";
 import { ReviewData } from "@/types/reviewData";
 import axios from "axios";
 
-//requred the security
 
 //to get cuurent user-ID
 export async function getUserID() {
@@ -12,7 +12,7 @@ export async function getUserID() {
         return response.data.userId;
 
     } catch (err) {
-        throw new Error("Please logIN")
+        throw new Error("Please log_In")
     }
 }
 
@@ -22,7 +22,7 @@ export async function getAllEnrollCourse(userId: string) {
     let response = null;
     try {
         response = await axios.get(`/api/backend/enrollget/${userId}`);
-        
+
         if (response.status === 200) {
             return response.data;
         }
@@ -52,8 +52,6 @@ export async function getAllRatings(courseId: string) {
     let response = null;
     try {
         response = await axios.get(`/api/backend/rating/${courseId}`);
-        console.log('response')
-        console.log(response)
         if (response.status === 200) {
             return response.data.data;
         }

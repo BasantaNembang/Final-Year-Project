@@ -1,5 +1,6 @@
 package com.course.service;
 
+import com.course.dto.CartResponse;
 import com.course.dto.ResponseCourseDTO;
 import org.springframework.core.io.UrlResource;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,4 +32,6 @@ public interface CourseService {
     List<ResponseCourseDTO> getAllCourseByPriceRange(int range);
 
     List<ResponseCourseDTO> searchByCourse(String name);
+
+    CartResponse getCourseInfoCard(String courseId);
 }
