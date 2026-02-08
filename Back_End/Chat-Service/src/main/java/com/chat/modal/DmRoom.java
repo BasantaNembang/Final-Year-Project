@@ -22,7 +22,7 @@ public class DmRoom {
     @Id
     private String id;
 
-    //courseId + authorID
+    //courseId + teacherId
     private String roomId;//particular to teacher gets the list of all the message of teacher regarding the course
 
     private String teacherId;
