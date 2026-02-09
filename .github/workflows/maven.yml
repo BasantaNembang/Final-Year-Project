@@ -22,7 +22,6 @@ jobs:
           - Back_End/Chat-Service
           - Back_End/Course-Service
           - Back_End/Enrollment-Service
-          - Back_End/Eureka-Server
           - Back_End/Notify-Service
           - Back_End/Payment-Service
           - Back_End/Review-Service
