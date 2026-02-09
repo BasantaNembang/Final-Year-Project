@@ -21,6 +21,7 @@ metadata:
 data:
   auth_service_url: http://auth-service-svc.default.svc.cluster.local:8081/auth
   payment_url: http://payment-service-svc.default.svc.cluster.local:8088
+  course_service_url: http://course-service-svc.default.svc.cluster.local:8084/course
 
 
 

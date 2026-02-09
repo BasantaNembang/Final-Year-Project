@@ -3,7 +3,7 @@ name: CI/CD for backend & frontend docker images
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "adding_k8s" ]
   pull_request:
     branches: [ "main" ]
 
@@ -17,6 +17,7 @@ jobs:
         service:
           - Back_End/Api-Gateway
           - Back_End/Auth-service
+          - Back_End/Cart-Service
           - Back_End/Category-Service
           - Back_End/Chat-Service
           - Back_End/Course-Service

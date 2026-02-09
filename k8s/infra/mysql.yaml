@@ -88,6 +88,7 @@ data:
     CREATE DATABASE IF NOT EXISTS paymentdb;
     CREATE DATABASE IF NOT EXISTS streamdb;
     CREATE DATABASE IF NOT EXISTS reviewdb;
+    CREATE DATABASE IF NOT EXISTS cartdb;
 
          
 ---
