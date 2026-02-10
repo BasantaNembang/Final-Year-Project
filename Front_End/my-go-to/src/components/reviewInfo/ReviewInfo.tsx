@@ -29,8 +29,9 @@ const ReviewInfo = ({ courseId }: reviewInfoProps) => {
     commentData?.map((each, _) => setStar(each.rating));
   }, [commentData]);
 
+  
   const calculateAvg = () => {
-    if (!commentData) return;
+    if (!commentData || commentData?.length === 0) return 0;
     let num = 0;
     commentData.forEach((each, _) => {
       num += each.rating;
@@ -46,7 +47,7 @@ const ReviewInfo = ({ courseId }: reviewInfoProps) => {
         <span id={style.avg}>{calculateAvg()}</span>
         <div className={style.averageRating}>
           <div style={{marginTop:'2rem'}}>
-            <StarRating rating={star} />
+           <StarRating rating={star} />
           </div>
         </div>
         <div style={{marginTop:'4rem'}}>

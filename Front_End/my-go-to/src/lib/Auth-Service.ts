@@ -15,7 +15,6 @@ export async function getTeacherDetails(userId: string) {
         } else {
             return [];
         }
-
     } catch (error) {
         if (error instanceof AxiosError) {
             console.error(error)

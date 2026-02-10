@@ -19,6 +19,10 @@ spec:
         ports:
         - containerPort: 8084
 
+        volumeMounts:
+          - name: videos-storage
+            mountPath: /videos           
+
         env:
           - name: MONGODB_URL
             valueFrom:
@@ -43,6 +47,11 @@ spec:
               configMapKeyRef:
                 key: spring_schema_registry_uri
                 name: kafka-cmap
+
+      volumes:
+        - name: videos-storage
+          persistentVolumeClaim:
+            claimName: videos-pvc     
 
 
 ---

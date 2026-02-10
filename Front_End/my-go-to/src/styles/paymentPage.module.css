@@ -4,6 +4,7 @@
   align-items: center;
   margin-top: 2rem;
   gap: 2rem;
+  position: relative;
 }
 
 .cardSection {
@@ -175,6 +176,8 @@
   width: 10rem;
   margin-top: 1rem;
   border-radius: .4rem;
+  height: 5rem;
+  object-fit: cover;
 }
 
 .left_orderDetails p {
@@ -239,7 +242,35 @@
   color: #888;
 }
 
+#backBTN {
+  position: absolute;
+  right: 9rem;
+  top: 0rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  color: blue;
+  font-weight: bold;
+  cursor: pointer;
+}
 
+.right_orderDetails {
+  margin-top: .4rem;
+}
+
+.outComes ul {
+  list-style: none;
+  margin-top: 2.7rem;
+}
+
+.outComes ul li {
+  padding: .6rem 0;
+}
+
+#tick {
+  color: green;
+}
 
 @media only screen and (max-width: 1300px) {
   .cardSection {
@@ -266,10 +297,3 @@
     width: 17rem;
   }
 }
-
-
-
-
-
-
-

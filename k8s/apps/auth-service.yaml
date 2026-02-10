@@ -19,12 +19,22 @@ spec:
         ports:
         - containerPort: 8081
 
+        # volumeMounts:
+        #   - name: image-storage
+        #     mountPath: /Images           
+
         env:
           - name: DB_Host
             valueFrom:
               configMapKeyRef:
                 key: db_host
                 name: common-db-cmap
+
+      # volumes:
+      #   - name: image-storage
+      #     persistentVolumeClaim:
+      #       claimName: user-image-pvc
+
 
 ---
 

@@ -12,7 +12,7 @@ export async function GET(req: NextRequest, context: any) {
   const { userId } = await context.params;
 
   try {
-    let response = await API.get(`/enroll/get-user/${userId}`,
+    const response = await API.get(`/enroll/get-user/${userId}`,
       {
         headers: {
           "Content-Type": "application/json",

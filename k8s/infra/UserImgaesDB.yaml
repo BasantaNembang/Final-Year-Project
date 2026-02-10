@@ -1,0 +1,36 @@
+
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: user-image-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: manual
+  hostPath:
+    path: "/run/desktop/mnt/host/d/FINAL_YEAR_PROJECT/Back_End/Auth-service/Images" 
+    type: DirectoryOrCreate
+
+---
+
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: user-image-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: manual
+
+
+
+
+
+

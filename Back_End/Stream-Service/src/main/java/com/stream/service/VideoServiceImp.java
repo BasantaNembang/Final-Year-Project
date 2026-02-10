@@ -187,8 +187,8 @@ public class VideoServiceImp implements VideoService{
     }
 
 
-    @Value("${video.dir}")
-    private String video_hsl;
+//    @Value("${video.dir}")
+//    private String video_hsl;
 
 
 

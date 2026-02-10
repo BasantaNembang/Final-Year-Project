@@ -6,7 +6,7 @@ kind: ConfigMap
 metadata:
   name: common-db-cmap
 data:
-  db_host: mysql-svc
+  db_host: mysql-svc:3306
 
 
 
@@ -33,7 +33,7 @@ kind: ConfigMap
 metadata:
   name: kafka-cmap
 data:
-  spring_bootstrap_servers: kafka:29092
+  spring_bootstrap_servers: kafka-svc:29092
   spring_schema_registry_uri: http://schema-registry-svc:8095
 
 

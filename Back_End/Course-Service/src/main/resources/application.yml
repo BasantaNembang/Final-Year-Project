@@ -7,6 +7,6 @@ stream:
 
 video:
   upload:
-    dir: ../videos/input
+    dir: /videos/input
 
 

@@ -22,5 +22,9 @@ spring:
     properties:
       schema.registry.url: ${SCHEMA_REGISTRY_URL:http://localhost:9091}
 
-video:
-  dir: ../videos/hls
+#video:
+#  dir: ../videos/hls
+
+
+
+

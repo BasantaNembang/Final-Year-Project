@@ -128,7 +128,7 @@ const DiscussionComponent = ({ SetshowReplyMessage, roomId }: discussionComponen
           <button onClick={askQuestion}>Ask a Questions</button>
         </div>
         
-        { showReplyComTXT && ( <ReplyText SetshowReplyComTXT={SetshowReplyComTXT} destination={destination} token={token!}/> )  }
+        { showReplyComTXT && token && ( <ReplyText SetshowReplyComTXT={SetshowReplyComTXT} destination={destination} token={token}/> )  }
         
         <div style={{ marginTop: "1rem" }}>
           {

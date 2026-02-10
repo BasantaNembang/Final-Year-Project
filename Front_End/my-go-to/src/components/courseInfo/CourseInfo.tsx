@@ -64,7 +64,7 @@ const CourseInfo = ({Setflag, selectedCourse}: courseInfoProps) => {
           flagInstructor && ( <InstructorInfo teacherID={teacherID}/> )
         }        
         {
-          flagRatings && ( <ReviewInfo courseId={courseId!}/> )
+          flagRatings && courseId && ( <ReviewInfo courseId={courseId}/> )
         }        
       </div>
     </>

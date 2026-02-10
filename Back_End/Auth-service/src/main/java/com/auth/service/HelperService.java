@@ -40,7 +40,9 @@ public class HelperService {
         Path path = userDir.resolve(imageName);
         try {
            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+           System.out.println("image saved.........");
         } catch (IOException e) {
+            System.out.println("Can`t save image ........");
             throw new RuntimeException(e);
         }
         return basePath+"Images/"+imageName;
