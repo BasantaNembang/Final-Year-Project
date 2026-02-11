@@ -20,8 +20,8 @@ spec:
         - containerPort: 3000
 
         env:
-        - name: NEXT_PUBLIC_BACKEND_URL
-          value: "http://api-gateway-svc:9090"
+        # - name: NEXT_PUBLIC_BACKEND_URL
+        #   value: "http://api-gateway-svc:9090"
 
         # - name: NEXT_PUBLIC_MY_SECRET_KEY
         #   value: "gwakjgbaUklsdw99/dhoiadWWW"
@@ -40,5 +40,8 @@ spec:
   selector:
     app: my-go-to
   ports:
-  - port: 3000
+  - protocol: TCP  
+    port: 3000
     targetPort: 3000
+
+

@@ -43,7 +43,8 @@ spec:
   selector:
     app: cart-service
   ports:
-  - port: 8092
+  - protocol: TCP
+    port: 8092
     targetPort: 8092
 
 

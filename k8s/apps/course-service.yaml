@@ -21,7 +21,10 @@ spec:
 
         volumeMounts:
           - name: videos-storage
-            mountPath: /videos           
+            mountPath: /videos     
+
+          - name: course-image
+            mountPath: /Images                     
 
         env:
           - name: MONGODB_URL
@@ -53,6 +56,9 @@ spec:
           persistentVolumeClaim:
             claimName: videos-pvc     
 
+        - name: course-image
+          persistentVolumeClaim:
+            claimName: course-image-pvc  
 
 ---
 
@@ -64,7 +70,8 @@ spec:
   selector:
     app: course-service
   ports:
-  - port: 8084
+  - protocol: TCP
+    port: 8084
     targetPort: 8084
 
     

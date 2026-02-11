@@ -5,15 +5,29 @@ spring:
   cloud:
     gateway:
       httpclient:
-        connect-timeout: 5000
-        response-timeout: 10s
+        connect-timeout: 15000
+        response-timeout: 35s
       globalcors:
-        corsConfigurations:
+      
+        # corsConfigurations:
+        #   '[/**]':
+        #     allowedOrigins: "*"
+        #     allowedMethods: "*"
+        #     allowedHeaders: "*"
+        #     allowCredentials: true
+
+
+        cors-configurations:
           '[/**]':
-            allowedOrigins: "http://localhost:3000"
-            allowedMethods: "*"
-            allowedHeaders: "*"
+            allowedOriginPatterns:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
             allowCredentials: true
+
+
 
       routes:
         - id: enroll-service
@@ -68,6 +82,8 @@ spring:
 
 server:
   port: 9090
+  address: 0.0.0.0
+
 
 jwt:
   secret: ThisIsMyJwtSecretKey123456789ABCDEF
@@ -76,3 +92,6 @@ logging:
   level:
     org.springframework.cloud.gateway: DEBUG
     org.springframework.retry: DEBUG
+
+
+

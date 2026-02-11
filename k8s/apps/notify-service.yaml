@@ -42,7 +42,8 @@ spec:
   selector:
     app: notify-service
   ports:
-  - port: 8089
+  - protocol: TCP
+    port: 8089
     targetPort: 8089
 
     

@@ -37,7 +37,8 @@ spec:
   selector:
     app: category-service
   ports:
-  - port: 8082
+  - protocol: TCP
+    port: 8082
     targetPort: 8082
 
 

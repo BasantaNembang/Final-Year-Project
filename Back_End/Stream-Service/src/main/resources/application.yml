@@ -8,7 +8,7 @@ spring:
       ack-mode: manual
       concurrency: 2
       observation-enabled: true
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
     consumer:
       group-id: stream-service
       key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
@@ -20,10 +20,8 @@ spring:
         spring.deserializer.value.delegate.class: io.confluent.kafka.serializers.KafkaAvroDeserializer
         specific.avro.reader: true
     properties:
-      schema.registry.url: ${SCHEMA_REGISTRY_URL:http://localhost:9091}
+      schema.registry.url: ${SCHEMA_REGISTRY_URL}
 
-#video:
-#  dir: ../videos/hls
 
 
 

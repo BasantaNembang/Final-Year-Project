@@ -43,7 +43,8 @@ spec:
   selector:
     app: review-service
   ports:
-  - port: 8091
+  - protocol: TCP
+    port: 8091
     targetPort: 8091
 
     
