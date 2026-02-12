@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import styles from "../../../styles/teacherAuthModel.module.css";
 import axios from "axios";
 import { useRouter } from 'next/navigation';
+import { toast } from "react-toastify";
 
 interface singUpProps{
   SetFlag: React.Dispatch<React.SetStateAction<Boolean>>
@@ -71,6 +72,7 @@ const SignUp = ({SetFlag, SetAuthFlag } : singUpProps) => {
     delete payload.conformPassword;
 
     formdata.append("userDto",new Blob([JSON.stringify(payload)], { type: "application/json" }));
+   
 
     try {
       const response = await axios.post("/api/auth/signup", formdata, {
@@ -78,8 +80,13 @@ const SignUp = ({SetFlag, SetAuthFlag } : singUpProps) => {
       });
       console.log("successfully");
       console.log(response)
-    } catch (error) {
-      console.error(error);
+      toast.success("login successfully")
+    } catch (error: any) {
+       if (axios.isAxiosError(error)) {
+         toast.error(error.response?.data?.message);
+       } else {
+        toast.error("Something went wrong");
+       }
     }
   };
 

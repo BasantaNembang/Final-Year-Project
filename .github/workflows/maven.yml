@@ -3,9 +3,7 @@ name: CI/CD for backend & frontend docker images
 
 on:
   push:
-    branches: [ "main", "adding_k8s" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ "adding_k8s" ]
 
 jobs:
   build:
