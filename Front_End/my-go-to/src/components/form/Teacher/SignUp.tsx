@@ -73,7 +73,9 @@ const SignUp = ({SetFlag, SetAuthFlag } : singUpProps) => {
     formdata.append("userDto",new Blob([JSON.stringify(payload)], { type: "application/json" }));
 
     try {
-      const response = await axios.post("/api/auth/signup", formdata);
+      const response = await axios.post("/api/auth/signup", formdata, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       console.log("successfully");
       console.log(response)
     } catch (error) {

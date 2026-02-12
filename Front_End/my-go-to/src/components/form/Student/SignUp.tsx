@@ -40,9 +40,11 @@ const SignUp = ({SetAuthFlag} : signUpProps) => {
 
   const signUpStudent = async() =>{
      let form = new FormData();
-     form.append("userDto", new Blob([JSON.stringify(stdForm)]))
+     form.append("userDto", new Blob([JSON.stringify(stdForm)], { type: "application/json" }))
      try{
-      let response = await axios.post('/api/auth/signup', form)
+      let response = await axios.post('/api/auth/signup', form, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       console.log("success")
       console.log(response)
      }catch(error){

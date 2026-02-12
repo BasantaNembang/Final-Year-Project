@@ -17,7 +17,8 @@ export async function POST(req: Request) {
     console.log('form')
     console.log(form)
     try {
-        let backendResponse = await API.post('/auth/signup', form)
+        const backendResponse = await API.post('/auth/signup', form, {
+      headers: { "Content-Type": "multipart/form-data" } })
 
         console.log('backendResponse')
         console.log(backendResponse)
@@ -83,6 +84,4 @@ export async function POST(req: Request) {
 
 
 }
-
-
 

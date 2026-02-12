@@ -9,23 +9,23 @@ spring:
         response-timeout: 35s
       globalcors:
       
-        # corsConfigurations:
-        #   '[/**]':
-        #     allowedOrigins: "*"
-        #     allowedMethods: "*"
-        #     allowedHeaders: "*"
-        #     allowCredentials: true
-
-
-        cors-configurations:
+        corsConfigurations:
           '[/**]':
-            allowedOriginPatterns:
-              - "*"
-            allowedMethods:
-              - "*"
-            allowedHeaders:
-              - "*"
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods: "*"
+            allowedHeaders: "*"
             allowCredentials: true
+
+
+        # cors-configurations:
+        #   '[/**]':
+        #     allowedOriginPatterns:
+        #       - "*"
+        #     allowedMethods:
+        #       - "*"
+        #     allowedHeaders:
+        #       - "*"
+        #     allowCredentials: true
 
 
 
