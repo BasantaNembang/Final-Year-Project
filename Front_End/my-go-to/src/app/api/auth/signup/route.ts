@@ -1,5 +1,5 @@
 import API from "@/lib/axiosClient";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { NextResponse } from "next/server";
 
 interface backendResponse {
@@ -9,7 +9,6 @@ interface backendResponse {
 }
 
 
-
 export async function POST(req: Request) {
 
     const form = await req.formData();
@@ -17,8 +16,9 @@ export async function POST(req: Request) {
     console.log('form')
     console.log(form)
     try {
-        let backendResponse = await API.post('/auth/signup', form)
-
+      const backendResponse = await API.post('/auth/signup', form, {
+       headers: { "Content-Type": "multipart/form-data" } })
+ 
         console.log('backendResponse')
         console.log(backendResponse)
 
@@ -57,7 +57,10 @@ export async function POST(req: Request) {
         console.log("error----------------")
         console.log(error)
 
-        if (error instanceof AxiosError) {
+       //if (error instanceof AxiosError) {
+        if (axios.isAxiosError(error)) {
+            console.log("inside of if......................")
+            console.log(error.response?.data)
             const response = error.response?.data as backendResponse;
             return NextResponse.json({
                 message: response.msg,
@@ -67,6 +70,7 @@ export async function POST(req: Request) {
                 status: response.httpStatus
             })
         } else {
+            console.log("inside of else.................")
             return NextResponse.json({
                 message: "some thing went wrong",
                 bool: false,
@@ -83,6 +87,4 @@ export async function POST(req: Request) {
 
 
 }
-
-
 

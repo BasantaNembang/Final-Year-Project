@@ -5,6 +5,8 @@ import styles from "../../../styles/authPage.module.css";
 import { StudentDetails } from "@/types/usersData";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 
 interface signUpProps{
@@ -13,9 +15,8 @@ interface signUpProps{
 
 const SignUp = ({SetAuthFlag} : signUpProps) => {
 
- // const { saveToken } = useAuthContexHook();
-
   const form = useForm();
+  const router = useRouter();
   
   const {register, handleSubmit} = form;
 
@@ -39,15 +40,22 @@ const SignUp = ({SetAuthFlag} : signUpProps) => {
 
 
   const signUpStudent = async() =>{
-     let form = new FormData();
-     form.append("userDto", new Blob([JSON.stringify(stdForm)]))
+     const form = new FormData();
+     form.append("userDto", new Blob([JSON.stringify(stdForm)], { type: "application/json" }))
      try{
-      let response = await axios.post('/api/auth/signup', form)
+      const response = await axios.post('/api/auth/signup', form, {
+          headers: { "Content-Type": "multipart/form-data" },
+      })
       console.log("success")
       console.log(response)
-     }catch(error){
-      console.error(error)
-     }
+      toast.success("login successfully")
+      router.push("/course")
+     }catch(error: any){
+       if (axios.isAxiosError(error)) {
+         toast.error(error.response?.data?.message);
+       } else {
+        toast.error("Something went wrong");
+       }     }
    
   }
 

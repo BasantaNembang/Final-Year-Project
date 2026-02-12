@@ -20,18 +20,18 @@ interface overViewProps {
 const OverViewInfo = ({Setflag, selectedCourse}: overViewProps) => {
 
   const router =  useRouter();
-  var CryptoJS = require("crypto-js");
+  //var CryptoJS = require("crypto-js");
 
   const [cartData, setCartData] = useState<CartRequest>({
     courseId:'',
     studentId:'',
   })
 
-  const secretKEY = process.env.NEXT_PUBLIC_MY_SECRECT_KEY;
+  //const secretKEY = process.env.NEXT_PUBLIC_MY_SECRECT_KEY;
 
     const goToPayment = (courseId : string | undefined) =>{
-      var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(courseId), secretKEY).toString();
-      router.push("/payment?courseId="+encodeURIComponent(ciphertext));
+      //var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(courseId), secretKEY).toString();
+      router.push("/payment?courseId="+courseId);
   }
 
   const saveCartData = () =>{

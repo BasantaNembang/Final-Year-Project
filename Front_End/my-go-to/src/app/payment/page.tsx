@@ -26,7 +26,7 @@ const PaymentPage = () => {
   //const [price, setPrice] = useState<string | null>(null);
   const { setIsPrivate } = useHelperContexHook();
 
-  var CryptoJS = require("crypto-js");
+  //var CryptoJS = require("crypto-js");
 
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const PaymentPage = () => {
 
   const[user_id, SetUser_id] = useState<string | null>(null);
 
-  const secretKEY = process.env.NEXT_PUBLIC_MY_SECRECT_KEY;
+  //const secretKEY = process.env.NEXT_PUBLIC_MY_SECRECT_KEY;
 
   const router = useRouter();
 
@@ -69,9 +69,9 @@ const PaymentPage = () => {
 
   const getCourseInfo = async() =>{
     if(!CourseId) return;
-    var bytes  = CryptoJS.AES.decrypt(CourseId, secretKEY);
-    var courseID = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-    const response = await getCourseById(courseID);
+    //var bytes  = CryptoJS.AES.decrypt(CourseId, secretKEY);
+    //var courseID = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    const response = await getCourseById(CourseId);
     setCourseDto(response)
   }
 
@@ -107,10 +107,10 @@ const PaymentPage = () => {
 
   const paymentForCourse = async() => {
     if(CourseId!==null){
-    var bytes  = CryptoJS.AES.decrypt(CourseId, secretKEY);
-    var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    //var bytes  = CryptoJS.AES.decrypt(CourseId, secretKEY);
+    //var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     paymentForm.userId=user_id!
-    paymentForm.courseId=decryptedData;
+    paymentForm.courseId=CourseId;
     //paymentForm.price=Number(price);
     paymentForm.countryName=countryName?.countryName
 
