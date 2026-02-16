@@ -1,7 +1,5 @@
 import API from "@/lib/axiosClient";
-import { AxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
-
 
 
 export async function POST(req: NextRequest) {

@@ -53,7 +53,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) //disable when using REST-API with session stateless
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers("/auth/signup", "/auth/refresh_token",
-                                "/auth/login","/auth/get-info/**", "/auth/Images/**",
+                                "/auth/login","/auth/get-info/**", "/auth/app/Images/**",
                                 "/auth/user/**")
                         .permitAll()
                         .anyRequest().authenticated()

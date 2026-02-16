@@ -108,7 +108,7 @@ public class MyController {
     }
 
     //get the image
-    @GetMapping("/Images/{name}")
+    @GetMapping("/app/Images/{name}")
     public ResponseEntity<UrlResource> getTeacherImage(@PathVariable("name") String name){
         UrlResource resource = helperService.getImage(name);
         return ResponseEntity.ok()

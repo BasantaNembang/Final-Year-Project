@@ -63,6 +63,9 @@ export async function saveCart(saveCart: CartRequest) {
         await axios.post(`/api/backend/cart/save`, saveCart);
         return true;
     } catch (err: any) {
+        console.log("broser")
+        console.log("--------------------")
+        console.log(err)
         const error = err as AxiosError;
         const errorResponse = error.response?.data as backendResponse;
         if (errorResponse.msg === "Already added to cart") {
@@ -72,6 +75,7 @@ export async function saveCart(saveCart: CartRequest) {
         }
     }
 }
+
 
 
 //for cart section

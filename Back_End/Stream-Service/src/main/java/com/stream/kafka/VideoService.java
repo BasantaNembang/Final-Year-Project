@@ -34,6 +34,10 @@ public class VideoService {
 
                 // Delete the original mp4
                 Path path = Paths.get(streamDTO.getFilePath().toString());
+                //..............
+                System.out.println("deleting the video..................................");
+                System.out.println(path);
+                System.out.println("------------------------------------------------");
                 Files.deleteIfExists(path);
 
                 System.out.println("Processing complete for video: " + streamDTO.getStreamId());

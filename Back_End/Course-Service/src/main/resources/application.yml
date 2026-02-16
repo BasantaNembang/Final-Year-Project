@@ -7,6 +7,11 @@ stream:
 
 video:
   upload:
-    dir: /videos/input
+    dir: ${VIDEOS_LOCATION}
+
+k8s:
+  Images: ${IMAGES_LOCATION}
+
+
 
 

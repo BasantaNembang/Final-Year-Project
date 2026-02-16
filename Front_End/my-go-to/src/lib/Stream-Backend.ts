@@ -52,9 +52,8 @@ export async function getVideo(vid: string) {
 //for the HSL stream
 export async function getStreamURL(streamId: string) {
 
-  let response = null;
   try {
-    response = await axios.get(`/api/backend/stream/${streamId}`);
+    const response = await axios.get(`/api/backend/stream/${streamId}`);
     return response.data;
   } catch (err) {
     console.log(err)

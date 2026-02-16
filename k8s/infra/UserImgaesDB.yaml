@@ -1,3 +1,4 @@
+# minikube mount D:\FINAL_YEAR_PROJECT:/mnt/project
 
 
 apiVersion: v1
@@ -11,7 +12,7 @@ spec:
     - ReadWriteMany
   storageClassName: manual
   hostPath:
-    path: "/run/desktop/mnt/host/d/FINAL_YEAR_PROJECT/Back_End/Auth-service/Images" 
+    path: "/mnt/project/Back_End/Auth-service/Images" 
     type: DirectoryOrCreate
 
 ---

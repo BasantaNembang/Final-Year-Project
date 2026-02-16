@@ -13,16 +13,10 @@ export async function POST(req: Request) {
 
     const form = await req.formData();
 
-    console.log('form')
-    console.log(form)
     try {
-      const backendResponse = await API.post('/auth/signup', form, {
-       headers: { "Content-Type": "multipart/form-data" } })
- 
-        console.log('backendResponse')
-        console.log(backendResponse)
-
-
+        const backendResponse = await API.post('/auth/signup', form, {
+            headers: { "Content-Type": "multipart/form-data" }
+        })
         const res = NextResponse.json({
             message: "SignUP successfully",
             bool: true,
@@ -51,40 +45,39 @@ export async function POST(req: Request) {
 
         return res;
 
-    } catch (error: any) {
-
-
-        console.log("error----------------")
-        console.log(error)
-
-       //if (error instanceof AxiosError) {
-        if (axios.isAxiosError(error)) {
-            console.log("inside of if......................")
-            console.log(error.response?.data)
-            const response = error.response?.data as backendResponse;
-            return NextResponse.json({
-                message: response.msg,
-                bool: response.flag,
-                httpStatus: response.httpStatus
-            }, {
-                status: response.httpStatus
-            })
-        } else {
-            console.log("inside of else.................")
-            return NextResponse.json({
-                message: "some thing went wrong",
-                bool: false,
-                httpStatus: 500
-            }, {
-                status: 500
-            })
-        }
-
-
-
     }
 
+    catch (error: any) {
+        console.log("error----------------", error);
 
+        if (axios.isAxiosError(error)) {
+            if (error.response) {
+                // Backend responded with error status
+                console.log("inside of if......................");
+                console.log(error.response?.data);
+                const responseData = error.response?.data as backendResponse || {};
+                return NextResponse.json({
+                    message: responseData.msg || "Backend error",
+                    bool: responseData.flag ?? false,
+                    httpStatus: responseData.httpStatus || 500
+                }, { status: error.response.status || 500 });
+            } else {
+                // No response — network/connection issue
+                console.log("No response from backend (e.g., ECONNREFUSED):", error.message);
+                return NextResponse.json({
+                    message: "Backend service unreachable - check connection",
+                    bool: false,
+                    httpStatus: 502
+                }, { status: 502 });
+            }
+        } else {
+            return NextResponse.json({
+                message: "Unexpected error",
+                bool: false,
+                httpStatus: 500
+            }, { status: 500 });
+        }
+    }
 
 }
 

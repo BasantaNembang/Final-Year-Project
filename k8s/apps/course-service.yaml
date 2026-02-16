@@ -24,7 +24,7 @@ spec:
             mountPath: /videos     
 
           - name: course-image
-            mountPath: /Images                     
+            mountPath: /app/Images                     
 
         env:
           - name: MONGODB_URL
@@ -50,6 +50,13 @@ spec:
               configMapKeyRef:
                 key: spring_schema_registry_uri
                 name: kafka-cmap
+
+          - name: IMAGES_LOCATION
+            value: /app/Images
+
+          - name: VIDEOS_LOCATION
+            value: /videos/input    
+
 
       volumes:
         - name: videos-storage

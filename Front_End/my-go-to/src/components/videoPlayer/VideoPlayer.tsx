@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Hls from "hls.js";
 
 interface VideoPlayerProps {
@@ -13,13 +13,12 @@ const VideoPlayer = ({ streamURL }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
 
-  //`http://localhost:9292/hls/c235aad4-daa8-43a2-9637-032cae54f8c3/1767078910266/master.m3u8`
 
   useEffect(() => {
     if (!videoRef.current) return;
 
     const video = videoRef.current;
-    //const src = `http://localhost:9292/hls/${stream_ID}/master.m3u8`;
+    
     const src = streamURL!;
 
     let hls: Hls | null = null;

@@ -20,13 +20,13 @@ spec:
         - containerPort: 8089
 
         env:
-          - name: SPRING_BOOTSTRAP_SERVERS
+          - name: KAFKA_BOOTSTRAP_SERVERS
             valueFrom:
               configMapKeyRef:
                 key: spring_bootstrap_servers
                 name: kafka-cmap
 
-          - name: SPRING_SCHEMA_REGISTRY_URL
+          - name: SCHEMA_REGISTRY_URL
             valueFrom:
               configMapKeyRef:
                 key: spring_schema_registry_uri

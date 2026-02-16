@@ -6,7 +6,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "COURSE-SERVICE", configuration = AuthFeignConfig.class)
+
+//@FeignClient(name = "COURSE-SERVICE", configuration = AuthFeignConfig.class)
+@FeignClient(name = "course-service", url = "${course-service.url}",
+        configuration = AuthFeignConfig.class)
 public interface CourseService {
 
     @GetMapping("/course/check/{courseId}")

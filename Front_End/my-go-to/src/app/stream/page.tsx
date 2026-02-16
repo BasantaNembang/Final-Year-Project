@@ -69,7 +69,7 @@ const StreamPage = () => {
     if (didRun.current) return;
     didRun.current = true;    
     createRoomDM()     // for dms
-    //checkForTheConnection();  //for the disscussion :: remove of now
+    checkForTheConnection();  //for the disscussion :: remove of now
     setIsPrivate(true)   //to remove the stuffs of navbar
   }, [ ]);
 
@@ -94,7 +94,7 @@ const StreamPage = () => {
   }
   
   useEffect(()=>{
-    //get_STREAM_URL(stream_ID);
+    get_STREAM_URL(stream_ID);
   }, [stream_ID]);
 
   
@@ -144,7 +144,7 @@ const StreamPage = () => {
 
         <Suspense fallback={<div>Loading...</div>}>
           <div className={styles.videoContainer}>
-            <VideoPlayer streamURL={streamURL} />
+            { <VideoPlayer  streamURL={streamURL} />}
             <h3>{streamData?.courseDto.categoryResponseDTO.subcategory}</h3>
             <p>by {streamData?.courseDto.author}</p>
             <div className={styles.videoMetaData}>

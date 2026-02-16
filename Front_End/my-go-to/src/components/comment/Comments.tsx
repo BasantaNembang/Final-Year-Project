@@ -19,7 +19,7 @@ const Comments = ({each}: CommenstProps) => {
           <div className={style.metaData}>
             <span id={style.profile}>{each?.userName.charAt(0).toUpperCase()}</span>
             <div className={style.info}>
-              <span>{each.userName}</span>
+              <span>{each.userName.charAt(0).toUpperCase() + each.userName.slice(1).toLowerCase()}</span>
               <StarRating rating={each.rating} />
             </div>
           </div>

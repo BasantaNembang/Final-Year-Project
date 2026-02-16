@@ -6,7 +6,7 @@ kind: ConfigMap
 metadata:
   name: common-db-cmap
 data:
-  db_host: mysql-svc:3306
+  db_host: mysql:3306
 
 
 

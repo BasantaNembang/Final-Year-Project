@@ -27,7 +27,7 @@ public class MyConfig {
     }
 
     @Bean
-    @LoadBalanced
+    //@LoadBalanced
     public RestTemplate restTemplate(){
        RestTemplate template = new RestTemplate();
 

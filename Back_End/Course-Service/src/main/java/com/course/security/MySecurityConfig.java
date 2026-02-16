@@ -40,7 +40,8 @@ public class MySecurityConfig {
         return http
                 .authorizeHttpRequests(auth->
                         auth
-                                .requestMatchers("/course/get-all", "/course/get/**", "/course/Images/**")
+                                .requestMatchers("/course/get-all", "/course/get/**",
+                                        "/course/app/Images/**")
                                 .permitAll()
                                 .anyRequest().authenticated())
                 .exceptionHandling(exc->exc

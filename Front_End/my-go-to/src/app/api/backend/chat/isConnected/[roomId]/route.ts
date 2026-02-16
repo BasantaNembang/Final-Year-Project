@@ -3,14 +3,14 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(req: NextRequest, context: any) {
 
-    const { dmRoomId } = await context.params;
+    const { roomId } = await context.params;
 
     const JWT = "jwtToken";
 
     const jwtToken = req.cookies.get(JWT)?.value;
 
     try {
-        await API.get(`/room/dm-join/${dmRoomId}`,
+        await API.get(`/room/join/${roomId}`,
             {
                 headers: {
                     Authorization: `Bearer ${jwtToken}`,
@@ -29,4 +29,5 @@ export async function GET(req: NextRequest, context: any) {
 
     }
 }
+
 

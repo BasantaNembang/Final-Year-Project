@@ -20,7 +20,9 @@ spec:
         - containerPort: 3000
 
         env:
-        
+        - name: BACKEND_URL
+          value: "http://api-gateway-svc:9090"  
+
         - name: JWT_SECRET_KEY
           value: "ThisIsMyJwtSecretKey123456789ABCDEF"
 

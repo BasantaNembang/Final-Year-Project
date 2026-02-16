@@ -5,6 +5,7 @@ import com.auth.entity.Account;
 import com.auth.error.AuthException;
 import com.auth.reposistory.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,13 +23,18 @@ public class HelperService {
     @Autowired
     private AccountRepository repository;
 
-    final String basePath = "http://localhost:9090/auth/";
+    final String basePath = "http://localhost:9090/auth";
+
+    @Value("${k8s.Images:/app/Images}")
+    private  String uploadDir;
+
 
     public String saveImage(MultipartFile file) {
 
         String imageName = file.getOriginalFilename() + "_" + System.currentTimeMillis();
 
-        Path userDir = Paths.get(System.getProperty("user.dir"), "Images");
+        Path userDir = Paths.get(uploadDir);
+
         if(!Files.exists(userDir)){
             try {
                 Files.createDirectories(userDir);
@@ -45,7 +51,7 @@ public class HelperService {
             System.out.println("Can`t save image ........");
             throw new RuntimeException(e);
         }
-        return basePath+"Images/"+imageName;
+        return basePath + uploadDir + "/" + imageName;
     }
 
 

@@ -42,6 +42,12 @@ public class VideoServiceImp implements VideoService{
         }
     }
 
+    @Value("${output.dir}")
+    private String out_dir;
+
+    @Value("${input.dir}")
+    private String input_dir;
+
     @Autowired
     private StreamServiceImp streamServiceImp;
 
@@ -168,7 +174,6 @@ public class VideoServiceImp implements VideoService{
     }
 
 
-
     @Override
     public Boolean deleteVideo(String stream_id) {
         Video video =  videoRepository.findById(stream_id)
@@ -187,11 +192,6 @@ public class VideoServiceImp implements VideoService{
     }
 
 
-//    @Value("${video.dir}")
-//    private String video_hsl;
-
-
-
     //call via kafka-service
     @Override
     public void uploadAndProcess(String id, Long secureDIR) {
@@ -204,12 +204,15 @@ public class VideoServiceImp implements VideoService{
     }
 
 
-
    private void processVideoToHLS(String videoId, Long secureDIR) throws IOException, InterruptedException {
 
-       String inputPath = "/data/input/" + videoId + ".mp4";
+       //videos
+       // String inputPath = "/videos/input/" + videoId + ".mp4";
+       String inputPath = input_dir + "/" + videoId + ".mp4";
+       //out_dir
+       //Path videoDir = Paths.get("/data/hls").resolve(videoId);
+       Path videoDir = Paths.get(out_dir).resolve(videoId);
 
-       Path videoDir = Paths.get("/data/hls").resolve(videoId);
        Files.createDirectories(videoDir);
        //create  :: data/hls/{videoId}
        Path outputDir = videoDir.resolve(String.valueOf(secureDIR));
@@ -218,10 +221,8 @@ public class VideoServiceImp implements VideoService{
        // in java \\ == \ so replace that
        String outputDirStr = outputDir.toString().replace("\\", "/");
 
-        List<String> command = new ArrayList<>();
-        command.add("docker");
-        command.add("exec");
-        command.add("ffmpeg-container");
+       List<String> command = new ArrayList<>();
+
         command.add("ffmpeg");
         command.add("-y");
         command.add("-i");

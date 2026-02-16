@@ -1,82 +1,5 @@
 
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mysql-pv
-spec:
-  capacity:
-    storage: 512Mi
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: manual
-  hostPath:
-    path: "/run/desktop/mnt/host/c/temp/testfiles"
-    type: DirectoryOrCreate    
-   
-  
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pvc
-spec:
-  resources:
-    requests:
-      storage: 512Mi
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: manual  
-
-
-
----
-
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: mysql
-spec:
-  selector:
-    matchLabels:
-      app: mysql
-  serviceName: mysql
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: mysql
-    spec:
-      containers:
-        - name: mysql
-          image: mysql:latest
-          ports:
-            - containerPort: 3306
-          env:
-            - name: MYSQL_ALLOW_EMPTY_PASSWORD
-              value: "yes"  
-
-          volumeMounts:
-            - name: mysql-script-cmap
-              mountPath: /docker-entrypoint-initdb.d
-
-            - name: mysql-p-storage
-              mountPath: /var/lib/mysql
-
-
-      volumes:
-        - name: mysql-p-storage
-          persistentVolumeClaim:
-            claimName: mysql-pvc
-
-        - name: mysql-script-cmap
-          configMap:
-            name: mysql-script
-
-
----
-
-apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mysql-script
@@ -90,17 +13,76 @@ data:
     CREATE DATABASE IF NOT EXISTS reviewdb;
     CREATE DATABASE IF NOT EXISTS cartdb;
 
-         
+---
+
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  serviceName: mysql   
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0
+        env:
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-script-cmap
+          mountPath: /docker-entrypoint-initdb.d
+        - name: mysql-p-storage
+          mountPath: /var/lib/mysql
+        resources:   
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+      volumes:
+      - name: mysql-script-cmap
+        configMap:
+          name: mysql-script
+
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-p-storage
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: standard   
+      resources:
+        requests:
+          storage: 2Gi   
+
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-svc
+  name: mysql   
 spec:
   clusterIP: None
   selector:
     app: mysql
   ports:
   - port: 3306
+    targetPort: 3306
+    name: mysql
+
+
+
+
 

@@ -34,10 +34,8 @@ export async function getAllEnrollCourse(userId: string) {
 
 //do ratings
 export async function doRatings(data: ReviewData) {
-
-    let response = null;
     try {
-        response = await axios.post("/api/backend/ratings/", data);
+       const response = await axios.post("/api/backend/ratings/", data);
         if (response.status === 200) {
             return true;
         }

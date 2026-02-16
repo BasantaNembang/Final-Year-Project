@@ -1,15 +1,17 @@
+# minikube mount D:\FINAL_YEAR_PROJECT:/mnt/project
+
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: videos-pv
 spec:
   capacity:
-    storage: 5Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteMany
   storageClassName: manual
   hostPath:
-    path: "/run/desktop/mnt/host/d/FINAL_YEAR_PROJECT/Back_End/videos" 
+    path: "/mnt/project/Back_End/videos" 
     type: DirectoryOrCreate
 
 ---
@@ -24,7 +26,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 5Gi
+      storage: 10Gi
   storageClassName: manual
 
 

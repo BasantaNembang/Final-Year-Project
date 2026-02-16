@@ -16,19 +16,6 @@ spring:
             allowedHeaders: "*"
             allowCredentials: true
 
-
-        # cors-configurations:
-        #   '[/**]':
-        #     allowedOriginPatterns:
-        #       - "*"
-        #     allowedMethods:
-        #       - "*"
-        #     allowedHeaders:
-        #       - "*"
-        #     allowCredentials: true
-
-
-
       routes:
         - id: enroll-service
           uri: http://enrollment-service-svc:8085
@@ -76,6 +63,14 @@ spring:
           uri: http://chat-service-svc:8090
           predicates:
             - Path=/room/**
+          filters:
+            - AuthenticationFilter
+
+
+        - id: cart-service
+          uri: http://cart-service-svc:8092
+          predicates:
+            - Path=/cart/**
           filters:
             - AuthenticationFilter
 

@@ -1,5 +1,6 @@
 package com.course.service;
 
+import com.course.dto.CartResponse;
 import com.course.dto.Difficulty;
 import com.course.dto.RequestCourseDTO;
 import com.course.dto.ResponseCourseDTO;
@@ -8,6 +9,7 @@ import com.course.event.StreamDTO;
 import com.course.external.client.CategoryServiceImp;
 import com.course.external.client.StreamServiceImp;
 import com.course.external.others.CategoryDTO;
+import com.course.external.others.CategoryResponseDTO;
 import com.course.external.others.TeacherDto;
 import com.course.model.Course;
 import com.course.reposistory.CourseRepo;
@@ -48,7 +50,7 @@ public class CourseServiceImp implements CourseService {
     @Autowired
     private RestTemplate restTemplate;
 
-    final String basePath = "http://localhost:9090/course/";
+    final String basePath = "http://localhost:9090/course";
 
     @Value("${auth-service.url}")
     private String authServiceURL;
@@ -59,8 +61,11 @@ public class CourseServiceImp implements CourseService {
     @Value("${stream.topic}")
     private String steamTopic;
 
-    @Value("${video.upload.dir}")
+    @Value("${video.upload.dir:/videos/input}")
     private String videoUploadDIR;
+
+    @Value("${k8s.Images:/app/Images}")
+    private  String uploadDir;
 
 
     public ResponseCourseDTO saveCourse(MultipartFile video, MultipartFile image, String dto) {
@@ -89,12 +94,12 @@ public class CourseServiceImp implements CourseService {
         }
 
         //process video
-        String StreamID =  sendToStreamAndProcessVideo(video);
+        String StreamID = sendToStreamAndProcessVideo(video);
 
         //save the image
         String imageName = image.getOriginalFilename() + "_" + System.currentTimeMillis();
 
-        Path dir = Paths.get(System.getProperty("user.dir"), "Images");
+        Path dir = Paths.get(uploadDir);
         if (!Files.exists(dir)) {
             try {
                 Files.createDirectories(dir);
@@ -116,7 +121,7 @@ public class CourseServiceImp implements CourseService {
                     .time(courseDTO.time())
                     .create_at(Instant.now())
                     .level(courseDTO.level())
-                    .thumbnail_url(basePath + "Images/" + imageName)
+                    .thumbnail_url(basePath + uploadDir + "/" + imageName)
                     .stream_id(StreamID)
                     .description(courseDTO.description())
                     .objectives(courseDTO.objectives())
@@ -154,10 +159,15 @@ public class CourseServiceImp implements CourseService {
         Files.createDirectories(uploadPath);
 
         Path filePath = uploadPath.resolve(sID + ".mp4");
+            System.out.println("The location hai Basnata Nembang");
+            System.out.println("-------------------------------");
+
 
         file_path =  String.valueOf(filePath);
         Files.copy(video.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
             System.out.println("video saved");
+            System.out.println(filePath);
+            System.out.println("-------------------------");
         }
         catch (IOException e) {
             throw new RuntimeException(e);
@@ -518,6 +528,28 @@ public class CourseServiceImp implements CourseService {
                 .filter(f->f.categoryResponseDTO().subcategory()
                         .toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
+    }
+
+
+
+    @Override
+    public CartResponse getCourseInfoCard(String courseId) {
+        Course course =  repo.findById(courseId)
+                .orElseThrow(()->new CourseException("no such course is present having the id  :: " + courseId));
+        TeacherDto dto;
+        try{
+            dto = restTemplate.getForObject(authServiceURL+"/get-info/"+course.getAuthor(), TeacherDto.class); }
+        catch (Exception e){
+            throw new CourseException(e.getMessage());
+        }
+        CategoryResponseDTO subCategoryInfo = categoryServiceImp.getSubCategoryInfo(course.getCategory());
+        return CartResponse.builder()
+                .courseName(subCategoryInfo.subcategory())
+                .duration(course.getTime())
+                .imageUrl(course.getThumbnail_url())
+                .teacherName(dto.username())
+                .price(course.getPrice())
+                .build();
     }
 
 

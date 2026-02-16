@@ -1,4 +1,6 @@
+# minikube mount D:\FINAL_YEAR_PROJECT:/mnt/project
 
+---
 
 apiVersion: v1
 kind: PersistentVolume
@@ -11,7 +13,7 @@ spec:
     - ReadWriteMany
   storageClassName: manual
   hostPath:
-    path: "/run/desktop/mnt/host/d/FINAL_YEAR_PROJECT/Back_End/Course-Service/Images" 
+    path: "/mnt/project/Back_End/Course-Service/Images" 
     type: DirectoryOrCreate
 
 ---

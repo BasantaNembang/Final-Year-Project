@@ -40,9 +40,8 @@ public class EnrollServiceImp implements EnrollService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${payment-service.url}")  // ONLY IN TESTING
-    private String paymentURL = "http://PAYMENT-SERVICE/payment";
-
+    @Value("${payment-service.url}")
+    private String paymentURL;
 
     //go inside the avro class go to package right-click -> marks as source dir
     // ->click root to get Avro class
@@ -89,7 +88,7 @@ public class EnrollServiceImp implements EnrollService {
                 );
         String paymentID = null;
         try{
-            paymentID = restTemplate.postForObject(paymentURL+"/process", requestDTO,  String.class);
+            paymentID = restTemplate.postForObject(paymentURL+"/payment/process", requestDTO,  String.class);
             enrollment.setEnrolled_at(Instant.now());
             enrollment.setPaymentId(paymentID);
             enrollment.setStatus(EnrollStatus.COMPLETED);
@@ -124,23 +123,50 @@ public class EnrollServiceImp implements EnrollService {
     public List<EnrollmentResponse> getEnrolledCourseByUSER(String userId) {
         Optional<List<Enrollment>> enrollment =  reposistory.findAllByUserId(userId);
         List<EnrollmentResponse> enrollmentResponseList = new java.util.ArrayList<>(List.of());
+//        if(enrollment.isPresent()){
+//           ResponseCourseDTO courseDTO = null;
+//           try{
+//             int i = 0;
+//             for (Enrollment e : enrollment.get()) {
+//                  String enrollID = enrollment.get().get(i).getEnroll_id();
+//                  String courseId = e.getCourseId();  //get each course details here
+//                  courseDTO = courseService.getCourseInfo(courseId);
+//                  //add to result
+//                  enrollmentResponseList.add(new EnrollmentResponse(enrollID, userId, courseDTO));
+//                  i++;
+//            }
+//           return enrollmentResponseList;
+//           }catch (RetryableException e){
+//               throw new EnrollmentException("course service is down");
+//           }
+//       }
+
+
         if(enrollment.isPresent()){
-           ResponseCourseDTO courseDTO = null;
-           try{
-             int i = 0;
-             for (Enrollment e : enrollment.get()) {
-                  String enrollID = enrollment.get().get(i).getEnroll_id();
-                  String courseId = e.getCourseId();  //get each course details here
-                  courseDTO = courseService.getCourseInfo(courseId);
-                  //add to result
-                  enrollmentResponseList.add(new EnrollmentResponse(enrollID, userId, courseDTO));
-                  i++;
+            ResponseCourseDTO courseDTO = null;
+            try{
+                int i = 0;
+                for (Enrollment e : enrollment.get()) {
+                    String enrollID = enrollment.get().get(i).getEnroll_id();
+                    String courseId = e.getCourseId();  //get each course details here
+
+                    if(e.getStatus().equals(EnrollStatus.COMPLETED)) { //only get the course whose status is completed
+                        courseDTO = courseService.getCourseInfo(courseId);
+                        //add to result
+                        enrollmentResponseList.add(new EnrollmentResponse(enrollID, userId, courseDTO));
+                        i++;
+                    }
+                }
+
+
+
+                return enrollmentResponseList;
+            }catch (RetryableException e){
+                throw new EnrollmentException("course service is down");
             }
-           return enrollmentResponseList;
-           }catch (RetryableException e){
-               throw new EnrollmentException("course service is down");
-           }
-       }else{
+        }
+
+        else{
            throw new EnrollmentException("no enroll courses");
        }
     }

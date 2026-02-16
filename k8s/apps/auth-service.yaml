@@ -21,7 +21,7 @@ spec:
 
         volumeMounts:
           - name: image-storage
-            mountPath: /Images           
+            mountPath: /app/Images           
 
         env:
           - name: DB_Host
@@ -29,6 +29,10 @@ spec:
               configMapKeyRef:
                 key: db_host
                 name: common-db-cmap
+
+          - name: IMAGES_LOCATION
+            value: /app/Images
+            
 
       volumes:
         - name: image-storage
@@ -51,4 +55,3 @@ spec:
     targetPort: 8081
 
       
-

@@ -38,6 +38,24 @@ spec:
                 key: spring_schema_registry_uri
                 name: kafka-cmap
 
+          - name: OUTPUT_DIR
+            value: /videos/hls    
+
+          - name: INPUT_DIR
+            value: /videos/input
+
+
+        volumeMounts:
+          - name: videos-storage
+            mountPath: /videos
+
+      volumes:
+        - name: videos-storage
+          persistentVolumeClaim:
+            claimName: videos-pvc     
+
+
+
 ---
 
 apiVersion: v1
