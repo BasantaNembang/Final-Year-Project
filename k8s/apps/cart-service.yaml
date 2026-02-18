@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: cart-service
-        image: basantanembang10/cart-service:7ed38bb
+        image: basantanembang10/cart-service:1677992
 
         ports:
         - containerPort: 8092
