@@ -79,7 +79,8 @@ jobs:
 
         SERVICE_NAME=$(basename "${{ matrix.service }}" | tr '[:upper:]' '[:lower:]')
         IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/$SERVICE_NAME
-        IMAGE_TAG=${{ GITHUB_SHA::7 }}
+        IMAGE_TAG=${GITHUB_SHA::7}
+        
 
         docker build -t $IMAGE_NAME:IMAGE_TAG .
         docker push $IMAGE_NAME:IMAGE_TAG
