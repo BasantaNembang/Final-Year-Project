@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: auth-service
-        image: basantanembang10/auth-service:6950d7b
+        image: basantanembang10/auth-service:1faf7ac
 
         ports:
         - containerPort: 8081
