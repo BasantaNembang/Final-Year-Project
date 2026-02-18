@@ -13,15 +13,10 @@ export async function POST(req: Request) {
 
     const form = await req.formData();
 
-    console.log('form')
-    console.log(form)
     try {
-      const backendResponse = await API.post('/auth/signup', form, {
-       headers: { "Content-Type": "multipart/form-data" } })
- 
-        console.log('backendResponse')
-        console.log(backendResponse)
-
+        const backendResponse = await API.post('/auth/signup', form, {
+            headers: { "Content-Type": "multipart/form-data" }
+        })
 
         const res = NextResponse.json({
             message: "SignUP successfully",
@@ -48,19 +43,12 @@ export async function POST(req: Request) {
             maxAge: 60 * 60 * 6,
         })
 
-
         return res;
 
     } catch (error: any) {
 
-
-        console.log("error----------------")
-        console.log(error)
-
-       //if (error instanceof AxiosError) {
+        //if (error instanceof AxiosError) {
         if (axios.isAxiosError(error)) {
-            console.log("inside of if......................")
-            console.log(error.response?.data)
             const response = error.response?.data as backendResponse;
             return NextResponse.json({
                 message: response.msg,
@@ -70,7 +58,6 @@ export async function POST(req: Request) {
                 status: response.httpStatus
             })
         } else {
-            console.log("inside of else.................")
             return NextResponse.json({
                 message: "some thing went wrong",
                 bool: false,
@@ -79,12 +66,7 @@ export async function POST(req: Request) {
                 status: 500
             })
         }
-
-
-
     }
-
-
 
 }
 
