@@ -44,7 +44,7 @@ jobs:
       if: startsWith(matrix.service, 'Back_End/')
       run: |
         cd ${{ matrix.service }}
-        mvn clean install -DskipTests
+        mvn clean install -DskipTests -Dspring-boot.repackage.skip=true
 
 
     # Frontend: set up Node.js
