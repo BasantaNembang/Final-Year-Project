@@ -9,7 +9,7 @@ import Instructor from "@/components/teacherInstructor/Instructor";
 import TeacherSignUpModel from "@/modal/TeacherAuthModel";
 
 const TeachingPage = () => {
-  let [flag, SetFlag] = useState<Boolean>(false);
+  const [flag, SetFlag] = useState<Boolean>(false);
 
   useEffect(() => {
     if (flag === true) {
@@ -17,21 +17,31 @@ const TeachingPage = () => {
     } else {
       document.body.style.overflow = "auto";
     }
+
+    return () => {
+      document.body.style.overflow = "auto"; // Always restore scroll
+    };
   }, [flag]);
 
   return (
     <>
       <div className={styles.teachingPageContainer}>
-        <TeacherHeroSec />
+        <TeacherHeroSec SetFlag={SetFlag} />
         <ReasonToStrat />
         <Begin />
         <Instructor SetFlag={SetFlag} />
 
         {/* model */}
-        {flag && <TeacherSignUpModel flag={flag} SetFlag={SetFlag} />}
+        {flag && <TeacherSignUpModel SetFlag={SetFlag} />}
+
       </div>
     </>
   );
 };
 
 export default TeachingPage;
+
+
+
+
+

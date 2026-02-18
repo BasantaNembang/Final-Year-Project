@@ -54,7 +54,9 @@ export async function middleware(req: NextRequest) {
     }
 
     const Role_Path_Map: Role_Path[] = [
-        { prefix: "/payment", role: "STUDENT" }
+        { prefix: "/payment", role: "STUDENT" },
+        { prefix: "/learnings", role: "STUDENT" },
+        { prefix: "/upload", role: "TEACHER" }
     ]
 
 
@@ -79,7 +81,7 @@ export async function middleware(req: NextRequest) {
 export async function handelReresh(req: NextRequest, refreshToken: string) {
 
     try {
-        let backendResponse = await API.post('/auth/refresh_token',
+        const backendResponse = await API.post('/auth/refresh_token',
             { refreshToken: refreshToken }, { headers: { "Content-Type": "application/json" } })
 
         const res = NextResponse.next();
@@ -102,8 +104,8 @@ export async function handelReresh(req: NextRequest, refreshToken: string) {
 
 export const config = {
     matcher: ["/payment/:path*",
-        "/learnings/:path*"
+        "/learnings/:path*",
+        "/upload/:path*"
     ]
 }
 
-//add role student in learnigs

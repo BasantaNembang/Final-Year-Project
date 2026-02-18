@@ -60,8 +60,7 @@ const ReplyText = ({SetshowReplyComTXT, destination, setMessage, token}: replyTe
 
 
   const postComment = () => {
-   // if(stompClient!==null && connected ){
-    if(stompClient!==null && connected && disscussData.content!==""){
+    if(stompClient!==null){
         stompClient.publish({
           destination: destination,
           body: JSON.stringify(disscussData)

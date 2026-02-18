@@ -31,7 +31,7 @@ const EachDiscussion = ({each, SetshowReplyMessage, fix, roomId }: eachDiscussio
         </div>
         <div className={style.containSection}>
           <div className={style.InfoContainer}>
-            <p style={{ display: "inline", fontWeight: "bold",fontSize: "1.2rem" }}> {each.sender.charAt(0).toUpperCase() + each.sender.slice(1).toLowerCase()} </p>
+            <p style={{ display: "inline", fontWeight: "bold",fontSize: "1.2rem" }}> {each.sender.charAt(0).toUpperCase() + each.sender.slice(1).toLowerCase()}</p>
             <span style={{color:" #8a7c7c", marginLeft:'.5rem'}}> <TimeStamp time={each.time}/> </span>
           </div>
           <div className={style.InfoContainer}>

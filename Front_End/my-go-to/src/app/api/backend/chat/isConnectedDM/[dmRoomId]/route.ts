@@ -1,4 +1,5 @@
 import API from "@/lib/axiosClient";
+import axios from "axios";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(req: NextRequest, context: any) {

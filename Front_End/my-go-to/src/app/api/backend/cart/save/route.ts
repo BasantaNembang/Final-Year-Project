@@ -16,8 +16,6 @@ export async function POST(req: NextRequest) {
 
   const jwtToken = req.cookies.get(JWT)?.value
 
-  console.log("in a save cart data")
-  console.log("================================================")
   try {
     await API.post(`/cart`, cartData,
       {
@@ -31,8 +29,6 @@ export async function POST(req: NextRequest) {
       msg: "success",
     })
   } catch (err: any) {
-    console.log("error---------------------------")
-    console.log(err)
     const error = err as AxiosError;
     const errorResposne = error.response?.data as backendResponse;
     return NextResponse.json({

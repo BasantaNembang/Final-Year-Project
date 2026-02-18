@@ -110,7 +110,7 @@ const ReplyDiscussion = ({ SetshowReplyMessage }: replyDiscussionProps) => {
               <div style={{fontSize:'1.3rem'}}>{message.subMessages.length} Replies</div>
               <div><button onClick={replyComment}> <FaRegComment /> Add Reply</button></div>
             </div>
-             { showReplyComTXT && token &&( <ReplyText SetshowReplyComTXT={SetshowReplyComTXT} destination={destination} setMessage={setMessage} token={token}/>  )   }
+             { showReplyComTXT && ( <ReplyText SetshowReplyComTXT={SetshowReplyComTXT} destination={destination} setMessage={setMessage}/>  )   }
              {/* list of all comments */}
              {
               message.subMessages.map((each, _)=>(

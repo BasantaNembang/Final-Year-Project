@@ -1,0 +1,37 @@
+.reasonContainerMain {}
+
+.reasonContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.reasonWhy figure img {
+    width: 4rem;
+    margin: 0 auto;
+    display: flex;
+}
+
+.reasonWhy {
+    /* border: 1px solid; */
+    width: 20rem;
+}
+
+.reasonWhy span {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.reasonContainerMain h3 {
+    display: flex;
+    justify-content: center;
+    font-size: 2.2rem;
+    margin: 3rem 0;
+}
+.border{
+ height: 6rem;
+  background-color: blue;
+  margin-top: 3rem;
+}

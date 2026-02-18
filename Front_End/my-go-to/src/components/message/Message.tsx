@@ -8,8 +8,8 @@ import {  DmSubMessages } from "@/types/chatData";
 import { getAllDmMessagesSTD, isConnectedDM } from "@/lib/Chat-Service";
 import { useHelperContexHook } from "@/context/helperContext";
 
-
 //used in teacher-------------------
+
 const Message = () => {
 
   const [dmMessage, setDmmessage] = useState<DmSubMessages[] | null>(null);

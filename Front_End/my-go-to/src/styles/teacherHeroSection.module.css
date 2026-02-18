@@ -1,0 +1,66 @@
+.teacherHeroSectionContainer {
+    display: flex;
+    justify-content: space-evenly;
+    background: #eee;
+}
+
+.teacherINFO {
+    /* border: 1px solid red; */
+    width: 18rem;
+    box-sizing: border-box;
+    padding: 8rem 0;
+    margin-left: 4rem;
+}
+
+.teacherINFO h2 {
+    font-size: 3rem;
+}
+
+.teacherINFO p {
+    font-size: 1.2rem;
+    padding: 1rem 0;
+}
+
+.teacherPICTURE {
+    width: 60rem;
+    padding-left: 5rem;
+}
+
+.teacherINFO button {
+    width: 100%;
+    height: 2.7rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: blue;
+    border: none;
+    outline: none;
+    border-radius: .4rem;
+    cursor: pointer;
+}
+
+.teacherPICTURE figure img {
+    width: 52rem;
+}
+
+/* imaeg 37 wotjd 43 */
+@media only screen and (max-width: 1390px) {
+    .teacherPICTURE {
+        width: 43rem;
+    }
+
+    .teacherPICTURE figure img {
+        width: 37rem;
+    }
+
+    .teacherINFO {
+        width: 15rem;
+        padding: 6rem 0;
+    }
+
+    .teacherINFO h2 {
+        font-size: 2rem;
+    }
+
+
+}

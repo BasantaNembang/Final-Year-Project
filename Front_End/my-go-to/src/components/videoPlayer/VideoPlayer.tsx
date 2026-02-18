@@ -13,12 +13,11 @@ const VideoPlayer = ({ streamURL }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
 
-
   useEffect(() => {
     if (!videoRef.current) return;
 
     const video = videoRef.current;
-    
+    //const src = `http://localhost:9292/hls/${stream_ID}/master.m3u8`;
     const src = streamURL!;
 
     let hls: Hls | null = null;

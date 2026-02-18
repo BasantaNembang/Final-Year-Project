@@ -1,0 +1,39 @@
+.instructorContainer {
+    background-color: whitesmoke;
+    height: 23rem;
+}
+
+.instructorContainer h3 {
+
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    padding: 3rem 0 1rem;
+
+}
+
+.instructorContainer p {
+    justify-content: center;
+    display: flex;
+    font-size: 1.2rem;
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.btnContainer button {
+    width: 16rem;
+    height: 2.5rem;
+    margin: 2rem 0;
+    background: blue;
+    border: none;
+    outline: none;
+    border-radius: .4rem;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;    
+}
+

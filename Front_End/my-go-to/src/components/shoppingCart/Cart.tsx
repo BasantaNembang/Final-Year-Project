@@ -19,7 +19,6 @@ const Cart = ({each, setRemoveItemIndex, index}: cartProps) => {
     //var CryptoJS = require("crypto-js");
 
     //const secretKEY = process.env.NEXT_PUBLIC_MY_SECRECT_KEY;
-
    
     const goToPayment = () =>{
        //var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(each.courseId), secretKEY).toString();
@@ -29,12 +28,14 @@ const Cart = ({each, setRemoveItemIndex, index}: cartProps) => {
     const deleteFromDB = (id: string) =>{
         deleteCartItem(id);
     }
+
     
 
     const removeCartItem = () =>{
         deleteFromDB(each.cartId);
         setRemoveItemIndex(index)
     }
+
 
 
     return (

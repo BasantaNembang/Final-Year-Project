@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import styles from "../../styles/navbar.module.css";
 import { PiGraduationCapLight } from "react-icons/pi";
 import Link from "next/link";
@@ -142,7 +142,7 @@ const Navbar = () => {
                   <li className={isPrivate ? styles.privateNavBar : ' '}><Link href="/course" className={pathName==="/course" ? styles.blue : ""}>Courses</Link></li>
                   <li className={isPrivate ? styles.privateNavBar : ' '}><Link href = { isLogged ? "/upload" : "/teaching" } className={pathName==="/teaching" ? styles.blue : ""}>Teach on MyGoTo</Link></li>
                   <li className={isPrivate ? styles.privateNavBar : ' '}><Link href="/learnings" className={pathName==="/learnings" ? styles.blue : ""}>My learning</Link></li> 
-                  <li className={isPrivate ? styles.privateNavBar : ' '}><Link href="/auth"><button onClick={logOUT}>{isLogged? 'LogOut' : 'LogIn' }   </button></Link></li>
+                  <li className={isPrivate ? styles.privateNavBar : ' '}><Link href="/auth"><button onClick={logOUT} style={{cursor:'pointer'}} >{isLogged? 'LogOut' : 'LogIn' }   </button></Link></li>
                   <li style={{marginLeft: isPrivate ? '92%' : ''}}><Link href="#"><span></span></Link></li>
                 </ul>
               </div>

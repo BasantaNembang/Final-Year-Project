@@ -1,0 +1,119 @@
+.stdSignUpConatiner,
+.stdLoginConatiner {
+    background-color: rgb(242, 242, 242);
+}
+
+.iconSection span {
+    font-size: 2rem;
+    color: blue;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.headingSection h3 {
+    font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+}
+
+.iconSection {
+    background-color: #d3d3fd;
+    width: 4rem;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    height: 4rem;
+    border-radius: 50%;
+    margin: 1rem auto;
+}
+
+.headingSection {
+    padding-top: 2rem;
+}
+
+.stdSignUpConatiner form,
+.stdLoginConatiner form {
+    width: 60%;
+    margin: 3rem auto;
+}
+
+.stdSignUpConatiner form label,
+.stdLoginConatiner form label {
+    font-size: 1.3rem;
+}
+
+.stdSignUpConatiner form input,
+.stdLoginConatiner form input {
+    width: 90%;
+    height: 2.5rem;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    padding: 1rem;
+    margin-top: .7rem;
+}
+
+.stdSignUpConatiner form div,
+.stdLoginConatiner form div {
+    margin: 1rem 0;
+}
+
+.stdSignUpConatiner button {
+    width: 14rem;
+    height: 2.7rem;
+    font-size: 1.2rem;
+    background-color: blue;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: .4rem;
+    cursor: pointer;
+}
+
+.gotoLogin span {
+    color: blue;
+    margin-left: 1rem;
+    cursor: pointer;
+    padding-bottom: 5rem;
+}
+
+.gotoLogin {
+    display: flex;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.errorContainer {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+}
+
+.stdLoginConatiner button {
+
+    width: 14rem;
+    height: 2.7rem;
+    font-size: 1.2rem;
+    background-color: blue;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: .4rem;
+    cursor: pointer;
+
+}
+
+.gotoSignUp {
+    display: flex;
+    justify-content: center;
+}
+
+.gotoSignUp span {
+    color: blue;
+    font-size: 1.3rem;
+    padding-bottom: 5rem;
+    cursor: pointer;
+}
+
+

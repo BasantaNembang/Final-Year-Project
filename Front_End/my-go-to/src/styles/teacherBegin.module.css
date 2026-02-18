@@ -1,0 +1,58 @@
+.beginContainer ul {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 3rem;
+
+}
+
+.beginContainer ul li {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.beginContainer h3 {
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.beginContainer ul li button span {
+    color: red;
+}
+
+.beginContainer ul li button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 1.3rem;
+    color: #7b7b7b;
+    cursor: pointer;
+}
+
+.beginContainer ul li span {
+
+    width: 100%;
+    background-color: black;
+    height: .15rem;
+    margin-top: 5px;
+
+}
+
+.planContainer {
+    width: 40rem;
+    margin: 4rem auto;
+
+}
+
+.planContainer p {
+    font-size: 1.1rem;
+    color: #7b7b7b;
+}
+
+.planContainer h4 {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+}
