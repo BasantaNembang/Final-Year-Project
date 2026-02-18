@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: review-service
-        image: basantanembang10/review-service:47d73c4
+        image: basantanembang10/review-service:19e347b
 
         ports:
         - containerPort: 8091
