@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    
+
     strategy:
       matrix:
         service:
@@ -45,7 +45,7 @@ jobs:
       if: startsWith(matrix.service, 'Back_End/')
       run: |
         cd ${{ matrix.service }}
-        mvn clean install -DskipTests -Dspring-boot.repackage.skip=true
+        mvn clean install -DskipTests 
 
 
     # Frontend: set up Node.js
