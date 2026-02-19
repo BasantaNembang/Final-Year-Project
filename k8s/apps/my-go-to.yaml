@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: my-go-to
-        image: basantanembang10/my-go-to:7293886
+        image: basantanembang10/my-go-to:5e7619d
 
         ports:
         - containerPort: 3000
