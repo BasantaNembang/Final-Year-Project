@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: category-service
-        image: basantanembang10/category-service:38368e3
+        image: basantanembang10/category-service:262a6e5
 
         ports:
         - containerPort: 8082
