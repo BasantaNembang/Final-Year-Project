@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: stream-service
-        image: basantanembang10/stream-service:414c72e
+        image: basantanembang10/stream-service:55cdb3d
 
         ports:
         - containerPort: 8080
