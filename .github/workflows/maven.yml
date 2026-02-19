@@ -10,7 +10,8 @@ jobs:
   build-and-push:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    
     strategy:
       matrix:
         service:
@@ -132,7 +133,7 @@ jobs:
 
         git diff --quiet || (
           git add .
-          git commit -m "Update all service images to ${GITHUB_SHA::7}"
+          git commit -m "Update all service images to ${GITHUB_SHA::7} [skip ci]"
           git push origin adding_k8s
         )
 
