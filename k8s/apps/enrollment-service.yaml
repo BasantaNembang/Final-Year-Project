@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: enrollment-service
-        image: basantanembang10/enrollment-service:41711e6
+        image: basantanembang10/enrollment-service:fbf9d69
 
         ports:
         - containerPort: 8085
