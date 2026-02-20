@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: basantanembang10/api-gateway:55cdb3d
+        image: basantanembang10/api-gateway:fe1bff5
 
         ports:
         - containerPort: 9090
