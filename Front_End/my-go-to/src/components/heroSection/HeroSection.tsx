@@ -7,7 +7,7 @@ const HeroSection = () => {
       <div className={styles.heroContainer}>
         <div className={styles.info}>
           <div className={styles.headingSection}>
-            <h1>Learn Without Limits  WOW.......................................</h1>
+            <h1>Learn Without Limits</h1>
           </div>
           <div className={styles.infoSection}>
             <p>
