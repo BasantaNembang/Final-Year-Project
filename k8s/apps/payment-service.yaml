@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: payment-service
-        image: basantanembang10/payment-service:36f5aa9
+        image: basantanembang10/payment-service:5b16c9c
 
         ports:
         - containerPort: 8088
