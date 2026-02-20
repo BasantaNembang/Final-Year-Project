@@ -1,11 +1,14 @@
+
 import axios from "axios";
 
+const backendUrl = process.env.BACKEND_URL || "http://localhost:9090";
+
 const API = axios.create({
-    //baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
-    baseURL: "http://localhost:9090",
-    // baseURL: "http://api-gateway-svc:9090",
-    withCredentials: true //for cookies
+    baseURL: backendUrl,
+    withCredentials: true,
+    timeout: 300000  // to prevent early failures
 });
 
 export default API;
+
 
