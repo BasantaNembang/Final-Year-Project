@@ -1,7 +1,6 @@
 .courseContainer {
   width: 23rem;
   height: 22rem;
-  /* border: 1px solid rgb(137, 137, 137); */
   border: 1px solid rgb(200, 200, 200);
   border-radius: 0.6rem;
   cursor: pointer;

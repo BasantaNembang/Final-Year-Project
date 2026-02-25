@@ -110,15 +110,8 @@
   }
 }
 @media only screen and (max-width: 1050px) {
-  .videoContainer {
-    /* width: 52rem;
-    margin: 2rem 4rem; */
-  }
   .courseMetaData {
     width: 65rem;
-  }
-  .topSection {
-    /* margin-left: 4.5rem; */
   }
 }
 @media only screen and (max-width: 990px) {
@@ -128,9 +121,6 @@
   .courseMetaData {
     width: 56rem;
   }
-  .topSection {
-    /* margin-left: 4.5rem; */
-  }
 }
 
 @media only screen and (max-width: 850px) {
@@ -139,8 +129,5 @@
   }
   .courseMetaData {
     width: 50rem;
-  }
-  .topSection {
-    /* margin-left: 4.5rem; */
   }
 }

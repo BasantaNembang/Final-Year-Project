@@ -22,8 +22,7 @@
   padding-top: 1.2rem;
   color: white;
 }
-.btnSection {
-}
+
 .btnSection button {
   margin-top: 1.4rem;
 }
@@ -57,9 +56,3 @@
     margin-left: 2rem;
   }
 }
-/* 
-@media only screen and (max-width: 38px) {
-  .info {
-    width: 35rem;
-  }
-} */

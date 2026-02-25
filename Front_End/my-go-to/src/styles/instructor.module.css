@@ -1,5 +1,4 @@
-.instructorContainer {
-}
+
 .instuctorBOX {
   display: flex;
   box-sizing: border-box;
@@ -12,24 +11,16 @@
 }
 .imageSectoin {
   width: 10rem;
-  /* border: 1px solid; */
 }
-.imageSectoin figure {
-  /* height: 8rem;
-  border: 1px solid;
-  border-radius: 50%;
-  width: 8rem; */
-}
+
 .imageSectoin figure img {
   height: 8rem;
-  /* border: 1px solid; */
   border-radius: 50%;
   width: 8rem;
   object-fit: cover;
 }
 .informationSection {
   width: 57rem;
-  /* border: 1px solid; */
 }
 .instructorContainer h3 {
   font-size: 1.7rem;

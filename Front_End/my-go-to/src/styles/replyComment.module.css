@@ -1,5 +1,4 @@
 .replyCommentContainer {
-  /* border: 1px solid blue; */
   display: flex;
   justify-content: space-evenly;
   position: relative;

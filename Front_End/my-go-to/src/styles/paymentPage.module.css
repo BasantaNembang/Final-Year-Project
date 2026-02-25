@@ -63,7 +63,6 @@
 }
 
 .paymentInfo {
-  /* border: 1px solid rgb(67, 23, 179); */
   display: flex;
   justify-content: space-between;
   margin: 0 1.3rem;
@@ -71,7 +70,6 @@
 
 .left_paymentInfo,
 .rigth_paymentInfo {
-  /* border: 1px solid; */
   padding: 1rem 0;
 }
 

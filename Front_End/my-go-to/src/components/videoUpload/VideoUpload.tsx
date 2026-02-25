@@ -18,7 +18,7 @@ interface videoUploadPros {
 const VideoUpload = ({ selectedFile, setSelectedFile, progress, setProgress, uploading, setUploading} 
   : videoUploadPros) => {
 
-  let [videoURL, SetvideoURL] = useState<string | null>(null);
+  const [videoURL, SetvideoURL] = useState<string | null>(null);
 
 
   useEffect(()=>{
@@ -93,7 +93,6 @@ const VideoUpload = ({ selectedFile, setSelectedFile, progress, setProgress, upl
               <progress
                 value={progress}
                 max="100"
-                // id={styles.progressBar}
               ></progress>
             </div>
           )}

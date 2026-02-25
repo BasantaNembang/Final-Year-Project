@@ -10,7 +10,6 @@
   z-index: 1000;
 }
 .leftNavbar {
-  /* border: 1px solid; */
   display: flex;
   align-items: center;
   gap: 0.8rem;

@@ -103,7 +103,7 @@
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
-  display: inline-block; /* Allows padding and other box model properties */
+  display: inline-block;
 }
 
 .custom_button:hover {
@@ -206,7 +206,6 @@
 }
 .objectiveInfo {
   margin-top: 2rem;
-  /* border: 1px solid blue; */
 }
 .requirementInfo {
   margin-top: 2rem;
@@ -214,7 +213,6 @@
 }
 .lastSection {
   margin-top: 2rem;
-  /* position: relative; */
 }
 .btnSection {
   margin-left: 69rem;
@@ -242,9 +240,7 @@
 .btnSection button{
   cursor: pointer;
 }
-/* .videoSection {
-  border: 1px solid;
-} */
+
 
 /* Responive */
 @media only screen and (max-width: 1500px) {

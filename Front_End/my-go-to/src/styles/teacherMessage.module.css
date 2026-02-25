@@ -45,33 +45,6 @@
   background-color: whitesmoke;
   color: black;
 }
-/* .profileContainer {
-  display: flex;
-  align-items: center;
-  height: 5rem;
-  gap: 1rem;
-  padding: 0 2rem;
-  cursor: pointer;
-}
-
-.profileContainer:hover {
-  background-color: #c7c7ff;
-}
-
-.profileContainer:hover .profileP {
-  background-color: whitesmoke;
-  color: black;
-}
-
-.profileContainer.active {
-  background-color: #c7c7ff;
-}
-
-.profileContainer.active .profileP {
-  background-color: whitesmoke;
-  color: black;
-} */
-
 
 .profileP {
   height: 3rem;
@@ -82,7 +55,6 @@
   justify-content: center;
   align-items: center;
   color: white;
-  /* font-size: 1.5rem; */
   font-size: 1rem;
 }
 

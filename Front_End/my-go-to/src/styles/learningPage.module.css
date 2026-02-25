@@ -12,7 +12,6 @@
 .dashBoardMetaData,
 .dashBoardBTN {
   width: 42%;
-  /* border: 1px solid; */
 }
 
 .dashBoardMetaData {
@@ -61,9 +60,7 @@
 .metaData ul li {
   height: 6rem;
   width: 10rem;
-  /* border: 1px solid; */
   border-radius: 0.5rem;
-
   display: flex;
   margin-right: 4rem;
   justify-content: center;
@@ -74,7 +71,6 @@
 
 .courses {
   width: 100%;
-  /* border: 1px solid; */
   margin: auto;
   padding-bottom: 3rem;
   background-color: #efefef;
@@ -82,29 +78,20 @@
 
 .titleINFO {
   width: 92%;
-  /* border: 1px solid; */
   margin: auto;
-
   background-color: #efefef;
-
   padding-top: 2rem;
 }
 
 .titleINFO ul {
   display: flex;
-
   width: 100%;
-  /* border: 1px solid; */
-
   background-color: white;
 }
-
 .titleINFO ul li {
   list-style: none;
   cursor: pointer;
-
   width: 10rem;
-  /* border: 1px solid; */
   height: 2.5rem;
   display: flex;
   position: relative;
@@ -117,7 +104,6 @@
   outline: none;
   border: none;
   cursor: pointer;
-
   background: transparent;
 }
 

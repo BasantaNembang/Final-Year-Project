@@ -1,5 +1,4 @@
 .discussionContainer {
-  /* border: 1px solid red; */
   margin: 2rem 0;
   width: 77%;
 }
@@ -70,7 +69,6 @@
 }
 
 .replyContainerDIV {
-  /* border: 1px solid rgb(185, 185, 185); */
   display: flex;
   box-sizing: border-box;
   padding: 0.9rem 0;
@@ -111,9 +109,7 @@
   font-size: 1.7rem;
   color: black;
 }
-.replyMainCommentContainer {
-  /* border: 2px solid yellow; */
-}
+
 .hearder {
   display: flex;
   justify-content: space-between;
@@ -121,14 +117,12 @@
   margin-bottom: 2rem;
 }
 .hearder div {
-  /* border: 1px solid; */
   width: 9rem;
   height: 2rem;
   margin: 0 1.8rem;
 }
 .hearder button {
   background: blue;
-  /* width: 100%; */
   color: white;
   font-weight: bold;
   box-sizing: border-box;

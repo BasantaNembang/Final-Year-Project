@@ -11,11 +11,9 @@ import { useDraftContexHook } from "@/context/DraftContext";
 import axios from "axios";
 
 
-
 interface userIdType {
   userId: string
 }
-
 
 const AddCourse = () => {
 
@@ -32,7 +30,7 @@ const AddCourse = () => {
   const {dispatch} = useDraftContexHook();
   
   
-  let [inputValue, setinputValue] = useState<dto>({
+  const [inputValue, setinputValue] = useState<dto>({
         course_id: "",
         author: "",
         description: "",

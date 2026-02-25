@@ -15,13 +15,13 @@ interface EditCourseProps {
 }
 
 const EditCourse = ({ draftCourse, SetDraftCourse , courseIndex }: EditCourseProps) => {
-  let [flag, Setflag] = useState<boolean>(false);
+  const [flag, Setflag] = useState<boolean>(false);
 
-  let [editableData, SeteditableData] = useState<number | string | File | string[] | null>(null);
+  const [editableData, SeteditableData] = useState<number | string | File | string[] | null>(null);
 
-  let [payLoad, SetpayLoad] = useState<string | null>(null);
+  const [payLoad, SetpayLoad] = useState<string | null>(null);
 
-  let [category, Setcategory] = useState<string [] | null>(null);
+  const [category, Setcategory] = useState<string [] | null>(null);
   
   const { dispatch } = useDraftContexHook();
 

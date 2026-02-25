@@ -1,12 +1,9 @@
 .filterContainer {
   width: 14%;
   height: 56rem;
-  /* border: 1px solid; */
   margin-left: 4rem;
 }
-.categorySection {
-  /* border: 1px solid; */
-}
+
 .categorySection button {
   display: block;
   cursor: pointer;
@@ -44,7 +41,6 @@
     justify-content: center;
     align-items: center;
     width: 8rem;
-    /* border: 1px solid; */
     cursor: pointer;
     position: absolute;
     right: 1rem;

@@ -7,13 +7,11 @@
   background: rgba(0, 0, 0, 0.6);
   z-index: 999;
 
-  /* allow scrolling if modal is taller than viewport */
   overflow-y: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem 0;
-  /* some space top/bottom */
 }
 
 .editModal_conatiner {
@@ -38,11 +36,6 @@
   width: 0px;
   background: transparent;
 }
-
-
-
-.signupSection {}
-
 
 .iconSection {
   background-color: #d3d3fd;
@@ -79,10 +72,6 @@
   margin-top: 3rem;
 }
 
-.fristRow {
-  /* margin-top: 2rem; */
-}
-
 .fristRow,
 .secondRow,
 .passwordRow {
@@ -112,8 +101,6 @@
   flex-direction: column;
 }
 
-
-.metaInfo {}
 
 .metaInfoAddress {
   margin-top: 1rem;
