@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: enotify-service
-        image: basantanembang10/notify-service:dcdd9c8
+        image: basantanembang10/notify-service:9ec3df8
 
         ports:
         - containerPort: 8089
