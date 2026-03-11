@@ -21,7 +21,7 @@ public class RedisConfig {
     @Bean
     public RedisCacheManager manager(RedisConnectionFactory redisConnectionFactory){
 
-        //cache for singel object
+        //cache for single object
         RedisCacheConfiguration singleCache  =   RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofMinutes(10))
                 .disableCachingNullValues()
@@ -46,6 +46,7 @@ public class RedisConfig {
                 .withCacheConfiguration("courses", listConfiguration)
                 .withCacheConfiguration("coursesByCategory", listConfiguration)
                 .withCacheConfiguration("coursesByLevel", listConfiguration)
+                .withCacheConfiguration("coursesByPrice", listConfiguration)
                 .withCacheConfiguration("course", singleCache)
                 .cacheDefaults(singleCache)
                 .build();
