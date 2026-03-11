@@ -17,15 +17,15 @@ interface userIdType {
 
 const AddCourse = () => {
 
-  let [imageUrl, SetimageUrl] =useState<string | null>(null);
-  let [objectives, setObjectives] = useState<string[]>(['','','']);
-  let [requirements, setRequirements] = useState<string[]>(['', '']);
+  const [imageUrl, SetimageUrl] =useState<string | null>(null);
+  const [objectives, setObjectives] = useState<string[]>(['','','']);
+  const [requirements, setRequirements] = useState<string[]>(['', '']);
 
   //for VideoUpload
-  let [selectedFile, setSelectedFile] = useState<File | null>(null);
-  let [imageFile, setimageFile] = useState<File | null>(null);
-  let [progress, setProgress] = useState<number>(0);
-  let [uploading, setUploading] = useState<boolean>(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [imageFile, setimageFile] = useState<File | null>(null);
+  const [progress, setProgress] = useState<number>(0);
+  const [uploading, setUploading] = useState<boolean>(false);
 
   const {dispatch} = useDraftContexHook();
   
