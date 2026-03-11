@@ -51,6 +51,12 @@ spec:
                 key: spring_schema_registry_uri
                 name: kafka-cmap
 
+          - name: SPRING_REDIS_HOST
+            value: "redis"
+
+          - name: SPRING_REDIS_PORT
+            value: "6379"
+
           - name: IMAGES_LOCATION
             value: /app/Images
 
