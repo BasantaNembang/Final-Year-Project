@@ -17,6 +17,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.RetryableException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.UrlResource;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -65,6 +68,7 @@ public class CourseServiceImp implements CourseService {
     private String videoUploadDIR;
 
 
+    @CachePut(value = "courses", key="#result.course_id")
     public ResponseCourseDTO saveCourse(MultipartFile video, MultipartFile image, String dto) {
 
         String courseID = UUID.randomUUID().toString().substring(0, 8);
@@ -183,6 +187,7 @@ public class CourseServiceImp implements CourseService {
 
 
     @Override
+    @Cacheable("courses")
     public List<ResponseCourseDTO> getAllCourses() {
         List<Course> courses = repo.findAll();
         return courses.stream()
@@ -330,6 +335,7 @@ public class CourseServiceImp implements CourseService {
 
 
     @Override
+    @CacheEvict(value="courses", allEntries=true)
     public String deleteCourse(String cid, String uid) {
         Optional<Course> course = repo.findByAuthor(uid);
         Optional<Course> course_one =repo.findById(cid);
@@ -383,6 +389,7 @@ public class CourseServiceImp implements CourseService {
 
 
     @Override
+    @Cacheable(value = "course", key = "#courseId")
     public ResponseCourseDTO getCourseInfo(String courseId) {
         Course course =  repo.findById(courseId)
                 .orElseThrow(()->new CourseException("no such course is present having the id  :: " + courseId));
@@ -411,6 +418,7 @@ public class CourseServiceImp implements CourseService {
 
 
     @Override
+    @Cacheable(value = "coursesByCategory", key = "#category")
     public List<ResponseCourseDTO> getAllCourseByCategory(String category) {
 
         List<ResponseCourseDTO>  resposneData = repo.findAll()
@@ -436,6 +444,7 @@ public class CourseServiceImp implements CourseService {
 
 
     @Override
+    @Cacheable(value = "coursesByLevel", key = "#level")
     public List<ResponseCourseDTO> getAllCourseByLevel(String level) {
 
         Difficulty difficulty = Difficulty.valueOf(level.toUpperCase());
@@ -462,6 +471,7 @@ public class CourseServiceImp implements CourseService {
     }
 
     @Override
+    @Cacheable(value = "coursesByPrice", key = "#range")
     public List<ResponseCourseDTO> getAllCourseByPriceRange(int range) {
 
         List<Course> allData = repo.findAll();
@@ -522,7 +532,6 @@ public class CourseServiceImp implements CourseService {
                         .toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
     }
-
 
 
     @Override
