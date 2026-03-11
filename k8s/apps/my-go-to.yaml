@@ -34,14 +34,11 @@ kind: Service
 metadata:
   name: my-go-to
 spec:
-  type: NodePort
   selector:
     app: my-go-to
   ports:
   - protocol: TCP  
     port: 3000
     targetPort: 3000
-    nodePort: 30007
 
     
-

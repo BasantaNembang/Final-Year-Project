@@ -162,15 +162,10 @@ public class CourseServiceImp implements CourseService {
         Files.createDirectories(uploadPath);
 
         Path filePath = uploadPath.resolve(sID + ".mp4");
-            System.out.println("The location hai Basnata Nembang");
-            System.out.println("-------------------------------");
-
 
         file_path =  String.valueOf(filePath);
         Files.copy(video.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("video saved");
-            System.out.println(filePath);
-            System.out.println("-------------------------");
+
         }
         catch (IOException e) {
             throw new RuntimeException(e);
@@ -513,6 +508,7 @@ public class CourseServiceImp implements CourseService {
                 ))
                 .toList();
     }
+
 
 
     @Override
