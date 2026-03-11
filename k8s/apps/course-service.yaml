@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: course-service
-        image: basantanembang10/course-service:aa4bbbc
+        image: basantanembang10/course-service:1c5a3ae
 
         ports:
         - containerPort: 8084
