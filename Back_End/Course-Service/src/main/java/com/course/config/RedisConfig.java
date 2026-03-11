@@ -20,7 +20,6 @@ import java.util.List;
 @Configuration
 public class RedisConfig {
 
-
         @Bean
         public RedisCacheManager manager(RedisConnectionFactory redisConnectionFactory) {
 
@@ -58,8 +57,6 @@ public class RedisConfig {
                     .cacheDefaults(singleCache)
                     .build();
         }
-
-
-
 }
+
 
