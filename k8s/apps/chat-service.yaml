@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: chat-service
-        image: basantanembang10/chat-service:13e38cf
+        image: basantanembang10/chat-service:eac2b12
 
         ports:
         - containerPort: 8090
