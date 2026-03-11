@@ -118,6 +118,16 @@ This is a fully cloud-native, microservices-based system, using Docker, Kubernet
 ---
 ## Application Glimpse
 
+![image_alt](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course.png)
+
+![image_alt](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course1.png)
+
+![image_alt](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course2.png)
+
+![image_alt](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course3.png)
+
+![image_alt](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course4.png)
+
 
 ##  How to run the services
 Make sure you have the following installed on your machine:
