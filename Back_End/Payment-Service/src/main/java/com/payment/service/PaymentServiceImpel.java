@@ -6,6 +6,7 @@ import com.payment.dto.PaymentStatus;
 import com.payment.entity.PaymentEntity;
 import com.payment.error.PaymentException;
 import com.payment.reposistory.PaymentRepo;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class PaymentServiceImpel implements PaymentService {
     PaymentRepo repo;
 
     @Override
+    @Observed
     public String processPayment(PaymentRequestDto dto){
 
         PaymentEntity payment = new PaymentEntity();
@@ -49,6 +51,7 @@ public class PaymentServiceImpel implements PaymentService {
 
 
     @Override
+    @Observed
     public PaymentDto getPaymentInfo(String pid) {
         return repo.findById(pid).
                 map(m->new PaymentDto(m.getPid(), m.getAmount(), m.getPaymentDate(),
@@ -59,6 +62,7 @@ public class PaymentServiceImpel implements PaymentService {
 
 
     @Override
+    @Observed
     public List<PaymentDto> getALlPayment() {
         return repo.findAll()
                 .stream()

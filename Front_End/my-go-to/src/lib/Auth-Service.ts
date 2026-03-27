@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 export const Api = axios.create({
-    baseURL: "http://localhost:9090/auth",
+    baseURL: "http://localhost:9999/auth",
 });
 
 

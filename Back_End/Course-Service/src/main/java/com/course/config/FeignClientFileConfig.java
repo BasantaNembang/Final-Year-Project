@@ -4,6 +4,8 @@ package com.course.config;
 import feign.RequestInterceptor;
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
+import feign.micrometer.MicrometerCapability;
+import io.micrometer.core.instrument.MeterRegistry;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -31,6 +33,11 @@ public class FeignClientFileConfig {
                 }
             }
         };
+    }
+
+    @Bean
+    public MicrometerCapability micrometerCapability(MeterRegistry registry) {
+        return new MicrometerCapability(registry);
     }
 
 }

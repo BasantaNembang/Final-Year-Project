@@ -10,7 +10,11 @@ import com.enroll.external.others.PaymentRequestDto;
 import com.enroll.external.others.ResponseCourseDTO;
 import com.enroll.reposistory.EnrollReposistory;
 import feign.RetryableException;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.observation.annotation.Observed;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -22,6 +26,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class EnrollServiceImp implements EnrollService {
 
@@ -49,30 +54,39 @@ public class EnrollServiceImp implements EnrollService {
     @Autowired
     private KafkaTemplate<String,  com.enroll.event.SendNotify> kafkaTemplate;
 
+    private final Counter successEnroll;
+    private final Counter failEnroll;
+
+    public EnrollServiceImp(@Qualifier("successCounter") Counter successEnroll,
+                            @Qualifier("failCounter") Counter failEnroll) {
+        this.successEnroll = successEnroll;
+        this.failEnroll = failEnroll;
+    }
 
 
     @Override
     @Transactional
+    @Observed
     public EnrollResponseDTO enrollCourse(RequestDTO dto) {
         //verify the course first ---- Course-Service
         try {
              courseService.checkCourse(dto.courseId());
         }catch (RetryableException e){
+            failEnroll.increment();
             throw new EnrollmentException("Course-Service is down");
         }
 
         //check if previously purchase or not!!
         reposistory.findByUserIdAndCourseId(dto.userId(), dto.courseId())
                 .filter(f->f.stream().anyMatch(a->a.getStatus().equals(EnrollStatus.COMPLETED)))
-                .ifPresent(f->{
-                    throw new EnrollmentException("Course already purchased...");
-                });
+                .ifPresent(f->{throw new EnrollmentException("Course already purchased...");});
 
          //call the auth-> Service to get Customer INFO
          String userMail = null;
             try {
                  userMail = authService.isPresent(dto.userId());
             }catch (RetryableException e){
+                failEnroll.increment();
                throw new EnrollmentException("Auth-Service is down  ::" + e.getMessage());
            }
 
@@ -99,17 +113,18 @@ public class EnrollServiceImp implements EnrollService {
             notify.setEmail(userMail);
             notify.setSubject("Course Purchase");
             notify.setMsg("you have successfully purchase the course..Have a good day.");
+            log.info("kafka-msg send");
+            successEnroll.increment();
             kafkaTemplate.send("sendMsg", notify);
 
         } catch (Exception e) {
             enrollment.setStatus(EnrollStatus.CANCEL);
             enrollment.setEnrolled_at(Instant.now());
+            failEnroll.increment();;
             e.printStackTrace();
         }
-
-        System.out.println("saved data  "+ enrollment);
+        log.info("saved data  {} " +  enrollment);
         reposistory.save(enrollment);
-
         return EnrollResponseDTO.builder()
                  .enrollID(enrollment.getEnroll_id())
                  .msg(enrollment.getStatus().equals(EnrollStatus.COMPLETED) ?

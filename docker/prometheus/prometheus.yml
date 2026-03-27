@@ -1,0 +1,70 @@
+global:
+  scrape_interval: 2s
+  evaluation_interval: 2s
+
+scrape_configs:
+  - job_name: 'api-gateway'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:9000'] 
+
+  - job_name: 'API-GATEWAY'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:9999'] 
+        labels:
+          application: 'API-GATEWAY'      
+  - job_name: 'AUTH-SERVICE'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8081'] 
+        labels:
+          application: 'AUTH-SERVICE'
+  - job_name: 'CATEGORY-SERVICE'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8082'] 
+        labels:
+          application: 'CATEGORY-SERVICE'
+  - job_name: 'CHAT-SERVICE'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8090'] 
+        labels:
+          application: 'CHAT-SERVICE'
+  - job_name: 'COURSE-SERVICE'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8084'] 
+        labels:
+          application: 'COURSE-SERVICE'
+  - job_name: 'ENROLLMENT-SERVICE'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8085'] 
+        labels:
+          application: 'ENROLLMENT-SERVICE'
+  - job_name: 'REVIEW-SERVICE'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8091'] 
+        labels:
+          application: 'REVIEW-SERVICE'
+  - job_name: 'PAYMENT-SERVICE'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8088'] 
+        labels:
+          application: 'PAYMENT-SERVICE'
+  - job_name: 'Notify-Service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8089'] 
+        labels:
+          application: 'Notify-Service'
+  - job_name: 'STREAM-SERVICE'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8080'] 
+        labels:
+          application: 'STREAM-SERVICE'

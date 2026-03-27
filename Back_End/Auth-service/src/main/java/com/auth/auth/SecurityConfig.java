@@ -54,7 +54,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers("/auth/signup", "/auth/refresh_token",
                                 "/auth/login","/auth/get-info/**", "/auth/Images/**",
-                                "/auth/user/**")
+                                "/auth/user/**", "/actuator/prometheus")
                         .permitAll()
                         .anyRequest().authenticated()
                 )

@@ -38,6 +38,8 @@ public class MySecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth->auth
+                        .requestMatchers("/actuator/prometheus")
+                        .permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(ex->
                         ex.accessDeniedHandler(accessDenied))

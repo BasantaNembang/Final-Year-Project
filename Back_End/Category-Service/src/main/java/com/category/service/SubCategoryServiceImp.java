@@ -6,6 +6,7 @@ import com.category.entity.Category;
 import com.category.entity.SubCategory;
 import com.category.reposistory.CategoryRepo;
 import com.category.reposistory.SubCategoryRepo;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ public class SubCategoryServiceImp implements SubCategoryService {
 
     @Override
     @Transactional
+    @Observed
     public String saveCategoryInfo(CategoryDTO dto) {
        Category category =  categoryRepo.findByName(dto.category())
                .orElseGet(()-> Category.builder()
@@ -45,6 +47,7 @@ public class SubCategoryServiceImp implements SubCategoryService {
 
 
     @Override
+    @Observed
     public CategoryResponseDTO getSubCategoryInfo(String subCId) {
         Optional<SubCategory> subCategory = subCategoryRepo.findById(subCId);
         if(subCategory.isEmpty()){
@@ -57,6 +60,7 @@ public class SubCategoryServiceImp implements SubCategoryService {
 
 
     @Override
+    @Observed
     public Boolean deleteSUBCategory(String cid) {
         Optional<SubCategory> subCategory =  subCategoryRepo.findById(cid);
         if(subCategory.isPresent()){

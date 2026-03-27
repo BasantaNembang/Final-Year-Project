@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -33,9 +34,10 @@ public class MyConfigSecurity {
    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(c->c.disable())
-                .authorizeHttpRequests(auth->
-                        auth.anyRequest().authenticated())
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth-> auth
+                                .requestMatchers("/actuator/prometheus").permitAll()
+                                 .anyRequest().authenticated())
                 .oauth2ResourceServer(server->server
                         .jwt(jwt-> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
         return http.build();

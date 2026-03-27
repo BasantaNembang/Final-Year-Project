@@ -34,13 +34,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http
               .authorizeHttpRequests(auth->auth
-                      .requestMatchers("/ws/**").permitAll()
+                      .requestMatchers("/ws/**", "/actuator/prometheus").permitAll()
                 .anyRequest().authenticated())
                     .oauth2ResourceServer(server->server
                             .jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter())));
         return http.build();
-
     }
+
 
     @Bean
     public JwtDecoder jwtDecoder(){

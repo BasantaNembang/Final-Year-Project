@@ -33,9 +33,9 @@ public class MySecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(auth->
-                        auth
-                             .anyRequest().authenticated())
+                .authorizeHttpRequests(auth-> auth
+                        .requestMatchers("/actuator/prometheus").permitAll()
+                        .anyRequest().authenticated())
                 .oauth2ResourceServer(server->
                         server.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter())))
          .build();

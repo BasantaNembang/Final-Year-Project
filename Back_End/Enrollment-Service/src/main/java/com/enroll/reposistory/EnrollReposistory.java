@@ -13,7 +13,6 @@ public interface EnrollReposistory extends JpaRepository<Enrollment, String> {
 
     Optional<List<Enrollment>> findByUserIdAndCourseId(String userID, String courseID);
 
-    //Optional<Enrollment> findByUserId(String userId);
-
     Optional<List<Enrollment>> findAllByUserId(String userId);
 }
+

@@ -27,3 +27,4 @@ spring:
     renewal-threshold-update-interval-ms: 900000
 
     enable-self-preservation: true
+

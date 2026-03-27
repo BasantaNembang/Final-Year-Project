@@ -25,6 +25,7 @@ public class RouteValidator {
             "/auth/user/**",
             "/room/create/**",
             "/review/get/**",
+            "/actuator/prometheus",
             "/eureka");
 
     public Predicate<ServerHttpRequest> isSecured =

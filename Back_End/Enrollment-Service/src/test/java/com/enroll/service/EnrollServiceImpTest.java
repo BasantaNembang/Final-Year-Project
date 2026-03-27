@@ -55,7 +55,7 @@ public class EnrollServiceImpTest {
 
 
     @InjectMocks
-    EnrollService enrollService = new EnrollServiceImp();
+    private EnrollService enrollService;
 
 
     //Steps for junit testing-> 1.Mocking 2.Actual Method-Call 3.Verification 4.Assertation

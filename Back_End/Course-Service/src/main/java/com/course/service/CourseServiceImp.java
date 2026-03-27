@@ -15,7 +15,10 @@ import com.course.model.Course;
 import com.course.reposistory.CourseRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.RetryableException;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -53,7 +56,7 @@ public class CourseServiceImp implements CourseService {
     @Autowired
     private RestTemplate restTemplate;
 
-    final String basePath = "http://localhost:9090/course/";
+    final String basePath = "http://localhost:9999/course/";
 
     @Value("${auth-service.url}")
     private String authServiceURL;
@@ -67,8 +70,15 @@ public class CourseServiceImp implements CourseService {
     @Value("${video.upload.dir}")
     private String videoUploadDIR;
 
+    private final Counter checkCourse;
+
+    public CourseServiceImp(@Qualifier("checkCourse") Counter checkCourse) {
+        this.checkCourse = checkCourse;
+    }
+
 
     @CachePut(value = "courses", key="#result.course_id")
+    @Observed
     public ResponseCourseDTO saveCourse(MultipartFile video, MultipartFile image, String dto) {
 
         String courseID = UUID.randomUUID().toString().substring(0, 8);
@@ -188,6 +198,7 @@ public class CourseServiceImp implements CourseService {
 
     @Override
     @Cacheable("courses")
+    @Observed
     public List<ResponseCourseDTO> getAllCourses() {
         List<Course> courses = repo.findAll();
         return courses.stream()
@@ -335,6 +346,7 @@ public class CourseServiceImp implements CourseService {
 
 
     @Override
+    @Observed
     @CacheEvict(value="courses", allEntries=true)
     public String deleteCourse(String cid, String uid) {
         Optional<Course> course = repo.findByAuthor(uid);
@@ -399,6 +411,7 @@ public class CourseServiceImp implements CourseService {
               catch (Exception e){
                 throw new CourseException(e.getMessage());
               }
+          checkCourse.increment();
           return ResponseCourseDTO.builder()
                         .course_id(course.getCourse_id())
                         .author(dto.username())

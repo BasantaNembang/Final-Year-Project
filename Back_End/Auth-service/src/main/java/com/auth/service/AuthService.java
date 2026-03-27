@@ -11,6 +11,8 @@ import com.auth.reposistory.AccountRepository;
 import com.auth.reposistory.TeacherRepository;
 import com.auth.reposistory.UserRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.micrometer.observation.annotation.Observed;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
+@Slf4j
 @Service
 public class AuthService {
 
@@ -48,6 +51,7 @@ public class AuthService {
 
 
     @Transactional
+    @Observed(name = "singUp-User")
     public String signupUser(MultipartFile file, String userDto){
         ObjectMapper mapper = new ObjectMapper();
         UserRequest userRequest = null;
@@ -85,7 +89,7 @@ public class AuthService {
         account.setRole(userRequest.role());
         accountRepository.save(account);
 
-        System.out.println("user created successfully  " + account);
+        log.info("user created successfully  {} ",  account);
         return account.getEmail();
 
     }

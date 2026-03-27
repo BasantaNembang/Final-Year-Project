@@ -34,7 +34,7 @@ public class MySecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth->auth
-                        .requestMatchers("/review/get/**").permitAll()
+                        .requestMatchers("/review/get/**", "/actuator/prometheus").permitAll()
                         .anyRequest().permitAll())
                 .oauth2ResourceServer(server->server
                         .jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter())))

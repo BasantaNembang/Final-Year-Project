@@ -1,7 +1,6 @@
-#  E-Learning Platform — Spring Boot Microservices + Next.js
+# E-Learning Platform — Spring Boot Microservices + Next.js
 
-
-This is a fully cloud-native, microservices-based system, using Docker, Kubernetes, Kafka, Redis, FFmpeg, and Nginx to provide scalable, resilient, and fast video learning experiences with real-time communication and notifications. Where student can stream the video content, while teacher can upload it. Having a features of real-time communication and sending notification to your mail once`s you booked course using Kafka, caching using Redis and many more.
+A fully cloud-native, microservices-based e-learning system built with Docker, Kubernetes, Kafka, Redis, FFmpeg, and Nginx. Students can stream video content while teachers upload it. Features include real-time chat, email notifications on course booking via Kafka, Redis caching, custom Prometheus metrics, and a full observability stack with Grafana, Loki, Prometheus, and Tempo.
 
 ---
 
@@ -11,80 +10,77 @@ This is a fully cloud-native, microservices-based system, using Docker, Kubernet
                        ────────────────────────┐
                       │    Next.js (UI)        │
                       │   my-go-to (Frontend)  │
-                      └───────────┬──────── ───┘
+                      └───────────┬────────────┘
                                   │  HTTP Request
                                   ▼
                       ┌────────────────────────┐
                       │      API Gateway       │
-                      └───────────┬───────── ──┘
+                      └───────────┬────────────┘
                                   │
                                   ▼
                       ┌────────────────────────┐
                       │     Auth-Service       │
                       │ JWT + Role Validation  │
-                      └───────────┬────────── ─┘
+                      └───────────┬────────────┘
                                   │
                       ┌────────────────────────┐
                       │      API Gateway       │
-                      └───────────┬───────── ──┘
+                      └───────────┬────────────┘
           ┌───────────────────────┼───────────────────────┐
           │                       │                       │
   ┌───────▼──────┐         ┌──────▼────────┐       ┌──────▼──────┐
   │ Course-      │         │ Stream-       │       │ Chat-       │
   │ Service      │         │ Service       │       │ Service     │
-  │              │         │               │       │ │
-  └──────────────┘         └───────────────┘       └─────────── ─┘
+  └──────────────┘         └───────────────┘       └─────────────┘
           │                       │                       │
   ┌───────▼──────┐         ┌──────▼──────┐       ┌────────▼───────┐
   │ Cart-Service │         │ Enrollment  │       │Category-Service│
   │              │         │ Service     │       │                │
-  └─────────── ──┘          ─────────────┘       └────────────────┘
+  └──────────────┘         └─────────────┘       └────────────────┘
           │                       │                       │
   ┌───────▼──────┐         ┌──────▼──────┐       ┌────────▼──────┐
   │ Review-      │         │ Notify-     │       │ Payment-      │
   │ Service      │         │ Service     │       │ Service       │
-  └──────────────┘         └─────────────┘       └────────────── ┘
+  └──────────────┘         └─────────────┘       └───────────────┘
 ```
 
----
-# Check branch(adding_k8s) for k8s
+> **Note:** See the `adding_k8s` branch for full Kubernetes manifests.
 
-##  Services Overview
+---
+
+## Services Overview
 
 | Service | Description |
 
+| **api-gateway** | Routes HTTP requests from Next.js to all microservices 
 
-|  **api-gateway** | Routes HTTP requests from Next.js to all microservices |
+| **auth-service** | Manages user registration, login, JWT & Refresh Token generation 
 
-|  **auth-service** | Manages user registration, login, JWT & Refresh Token generation |
+| **cart-service** | Stores add-to-cart data for students 
 
-| **cart-service** | Stores Add-to-Cart data for students |
+| **category-service** | Acts as a helper/reference for the Course Service 
 
-| **category-service** | Acts as a helper/reference for the Course Service |
+| **chat-service** | Real-time communication via WebSocket (group & direct messages) 
 
-| **chat-service** | Real-time communication via WebSocket (group & direct messages) |
+| **course-service** | Stores and manages all course-related information 
 
+| **enrollment-service** | Tracks which student is enrolled in which course 
 
-|  **course-service** | Stores and manages all course-related information |
+| **notify-service** | Sends email notifications to students after course booking 
 
-|  **enrollment-service** | Tracks which student is enrolled in which course |
+| **payment-service** | Handles course purchase and payment processing
 
-|  **notify-service** | Sends email notifications to students after course booking |
+| **review-service** | Stores course reviews and ratings |
 
-|  **payment-service** | Handles course purchase and payment processing |
+| **stream-service** | Processes and serves video content via FFmpeg + Nginx 
 
-|  **review-service** | Stores course reviews and ratings |
-
-| **stream-service** | Processes and serves video content via FFmpeg + Nginx |
-
-|  **my-go-to** | Next.js frontend (TypeScript) |
-
+| **my-go-to** | Next.js frontend (TypeScript) |
 
 ---
 
-##  Key Features
+## Key Features
 
-###  Security & Authentication
+### Security & Authentication
 - **Role-based security** (`STUDENT` / `TEACHER`) enforced across all microservices, including inter-service communication
 - **JWT Token** — valid for **1 hour**
 - **Refresh Token** — valid for **5 hours**
@@ -96,7 +92,7 @@ This is a fully cloud-native, microservices-based system, using Docker, Kubernet
 - **Comment Liking** — real-time like/unlike on discussion threads
 - **Direct Messaging** — private WebSocket-based DMs between users
 
-###  Video Streaming
+### Video Streaming
 - Videos processed using **FFmpeg** for adaptive streaming
 - Served efficiently via **Nginx** in the Stream Service
 
@@ -104,10 +100,10 @@ This is a fully cloud-native, microservices-based system, using Docker, Kubernet
 - **Apache Kafka** with Schema Registry handles asynchronous events
 - Students receive **email notifications** upon successful course enrollment
 
-###  Caching
+### Caching
 - **Redis** used for high-performance caching to reduce database load
 
-###  Testing
+### Testing
 - **Unit and Integration Tests** implemented in `enrollment-service` and `payment-service`
 
 ### CI/CD & Deployment
@@ -116,17 +112,55 @@ This is a fully cloud-native, microservices-based system, using Docker, Kubernet
 - Deployed and orchestrated with **Kubernetes (K8s)**
 
 ---
+
+## Observability Stack
+
+The platform includes a full observability stack integrated with **Grafana**, giving you metrics, logs, and traces in a single pane of glass.
+
+### Prometheus — Metrics
+- All microservices expose a `/actuator/prometheus` endpoint
+- Prometheus scrapes metrics from every service at configurable intervals
+- **Custom counters** have been added to track:
+  - Total number of users who **viewed a course**
+  - Total number of users who **enrolled in a course**
+- These custom metrics are registered as Prometheus `Counter` beans and incremented on each relevant API call
+
+Example custom metric names:
+```
+course_count_total          # incremented each time a course detail page is fetched
+enroll_count_total          # incremented each time a student successfully enrolls
+```
+
+### Loki — Log Aggregation
+- **Grafana Loki** collects structured logs from all services
+
+### Tempo — Distributed Tracing
+- **Grafana Tempo** receives traces from all microservices via **OpenTelemetry**
+
+### Grafana — Unified Dashboard
+- **Grafana** serves as the single observability UI
+
+Access Grafana :
+```bash
+# http://localhost:3000
+```
+
+
+---
+
 ## Application Glimpse
 
-![image_alt](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course.png)
+![Course Listing](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course.png)
 
-![image_alt](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course1.png)
+![Course Detail](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course1.png)
 
-![image_alt](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course2.png)
+![Enrollment Flow](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course2.png)
 
-![image_alt](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course3.png)
+![Video Streaming](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course3.png)
 
-![image_alt](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course4.png)
+![Chat Interface](https://github.com/BasantaNembang/Final-Year-Project/blob/cd74fd480a3715c5a3a65734a8cbba2aca2ce32e/course4.png)
+
+---
 
 
 ##  How to run the services
@@ -189,10 +223,11 @@ kubectl port-forward svc/nginx-svc 9292:9292
 ## To run Frontend
 
 ```bash
-kubectl port-forward svc/my-go-to 3000:3000
+kubectl port-forward svc/my-go-to 3001:3000
 ```
 After port-forwarding go to this URL, your all services and frontend is ready now....
 ```bash
-http://localhost:3000/
+http://localhost:3001/
 ```
+
 

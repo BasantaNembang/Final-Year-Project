@@ -5,6 +5,7 @@ import com.review.dto.ReviewDTO;
 import com.review.dto.ReviewResponse;
 import com.review.entity.Review;
 import com.review.repo.ReviewRepo;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class ReviewServiceImple implements ReviewService{
 
 
     @Override
+    @Observed
     public List<ReviewResponse> getALLReviews(String courseId) {
        return  repo.findALlByCourseId(courseId)
                .stream()
@@ -39,6 +41,7 @@ public class ReviewServiceImple implements ReviewService{
 
 
     @Override
+    @Observed
     public String doRatings(ReviewDTO dto) {
         Review review = new Review();
 

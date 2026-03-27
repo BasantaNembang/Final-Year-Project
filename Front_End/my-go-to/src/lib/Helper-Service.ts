@@ -1,4 +1,3 @@
-import { CartRequest } from "@/types/cartData";
 import { ReviewData } from "@/types/reviewData";
 import axios from "axios";
 
